@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api';
 
-const CourseList = () => {
+const ItemList = () => {
   const [course, setCourse] = useState({});
 
   const [showDelegates, setShowDelegates] = useState(false);
@@ -68,4 +68,4 @@ const CourseList = () => {
   );
 };
 
-export default CourseList;
+export default ItemList;
