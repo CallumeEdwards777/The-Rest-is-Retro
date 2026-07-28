@@ -1,0 +1,17 @@
+[
+  {
+    "username": "vintage_vera",
+    "email": "vera@retro.test",
+    "password": "password123"
+  },
+  {
+    "username": "disco_dan",
+    "email": "dan@retro.test",
+    "password": "password123"
+  },
+  {
+    "username": "y2k_yasmin",
+    "email": "yasmin@retro.test",
+    "password": "password123"
+  }
+]

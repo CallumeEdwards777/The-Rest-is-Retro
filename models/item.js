@@ -27,7 +27,7 @@ Item.init(
       allowNull: false,
       defaultValue: Sequelize.NOW,
     },
-   categoryId: {
+   itemId: {
       type: DataTypes.INTEGER,
       references: {
         model: "category",
