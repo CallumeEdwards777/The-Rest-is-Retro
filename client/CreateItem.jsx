@@ -11,7 +11,7 @@ const CreateCourse = () => {
   const [categoryId, setCategoryId] = useState('');
 
   const getUserEmail = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
 
     if (!token) {
       return '';
