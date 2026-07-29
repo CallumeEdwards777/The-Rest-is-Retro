@@ -4,14 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
 
-const defaultUser = {
-  email: 'jennie@example.com',
-  password: 'password123',
-};
-
 const Login = () => {
-  const [email, setEmail] = useState(defaultUser.email);
-  const [password, setPassword] = useState(defaultUser.password);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const navigate = useNavigate();
 
   const { setUser } = useSession();
