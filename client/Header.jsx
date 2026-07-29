@@ -25,17 +25,23 @@ const Header = () => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
+  // getInitials was being called but never existed — added it here so the avatar doesn't crash on login
+  const getInitials = (username) => {
+    if (!username) return '';
+    return username.slice(0, 2).toUpperCase();
+  };
+
   return (
     <header className="site-header">
-      <img src={headerImg} alt="LMS3000" />
+      <img src={headerImg} alt="The Rest Is Retro" />
 
       <nav>
-        <Link to="/">All Courses</Link>
+        <Link to="/">Shop</Link>
         {token ? (
           <>
             <span className="avatar" title={user.username}>{getInitials(user.username)}</span>
-            <Link to="/profile">{wordCase(user.username)}'s Courses</Link>
-            <Link to="/create-course">Create Course</Link>
+            <Link to="/profile">{wordCase(user.username)}'s Saved Items</Link>
+            <Link to="/create-item">List an Item</Link>
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
