@@ -1,0 +1,482 @@
+[
+  {
+    "item_id": "TRR-70S-CLO-1001",
+    "seller_id": 1,
+    "category_id": 1,
+    "title": "Bell-Bottom Corduroy Pants",
+    "description": "Rust-orange corduroy flares, iconic 70s silhouette, size M.",
+    "era": "1970s",
+    "price_cents": 3800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-ELE-1002",
+    "seller_id": 2,
+    "category_id": 2,
+    "title": "Sony Walkman TPS-L2",
+    "description": "Original 1979 Sony Walkman, fully functional, includes headphones.",
+    "era": "1970s",
+    "price_cents": 12000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-FUR-1003",
+    "seller_id": 3,
+    "category_id": 3,
+    "title": "Wicker Peacock Chair",
+    "description": "Classic 70s statement piece, natural rattan, great condition.",
+    "era": "1970s",
+    "price_cents": 22000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-VIN-1004",
+    "seller_id": 1,
+    "category_id": 4,
+    "title": "Fleetwood Mac - Rumours LP",
+    "description": "1977 original pressing, sleeve shows light wear, vinyl plays clean.",
+    "era": "1970s",
+    "price_cents": 5500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-TOY-1005",
+    "seller_id": 2,
+    "category_id": 5,
+    "title": "Stretch Armstrong Figure",
+    "description": "1976 original release, still stretches, no tears.",
+    "era": "1970s",
+    "price_cents": 6200,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-70S-CLO-1006",
+    "seller_id": 3,
+    "category_id": 1,
+    "title": "Suede Fringe Vest",
+    "description": "Boho fringe vest, tan suede, unisex fit.",
+    "era": "1970s",
+    "price_cents": 4200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-ELE-1007",
+    "seller_id": 1,
+    "category_id": 2,
+    "title": "Kodak Instamatic Camera",
+    "description": "Working 126 film camera, tested with a fresh cartridge.",
+    "era": "1970s",
+    "price_cents": 3500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-FUR-1008",
+    "seller_id": 2,
+    "category_id": 3,
+    "title": "Chrome & Glass Coffee Table",
+    "description": "Mid-70s chrome frame coffee table, smoked glass top.",
+    "era": "1970s",
+    "price_cents": 17500,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-70S-VIN-1009",
+    "seller_id": 3,
+    "category_id": 4,
+    "title": "Pink Floyd - Dark Side of the Moon LP",
+    "description": "1973 pressing with original poster and stickers included.",
+    "era": "1970s",
+    "price_cents": 8000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-TOY-1010",
+    "seller_id": 1,
+    "category_id": 5,
+    "title": "Evel Knievel Stunt Cycle",
+    "description": "Complete with launcher, wind-up mechanism still strong.",
+    "era": "1970s",
+    "price_cents": 5400,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-CLO-1011",
+    "seller_id": 2,
+    "category_id": 1,
+    "title": "Platform Shoes",
+    "description": "Faux-leather platform shoes, size 9, disco-era classic.",
+    "era": "1970s",
+    "price_cents": 4600,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-70S-ELE-1012",
+    "seller_id": 3,
+    "category_id": 2,
+    "title": "Panasonic Toot-A-Loop Radio",
+    "description": "Bendable donut-shaped AM radio, working, bright orange.",
+    "era": "1970s",
+    "price_cents": 4800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-CLO-2001",
+    "seller_id": 1,
+    "category_id": 1,
+    "title": "Levi's Denim Jacket",
+    "description": "Authentic 1980s Levi's trucker jacket, great condition.",
+    "era": "1980s",
+    "price_cents": 4500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-ELE-2002",
+    "seller_id": 2,
+    "category_id": 2,
+    "title": "Nintendo Entertainment System",
+    "description": "1985 NES console with two controllers, tested and working.",
+    "era": "1980s",
+    "price_cents": 14000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-FUR-2003",
+    "seller_id": 3,
+    "category_id": 3,
+    "title": "Memphis-Style Postmodern Shelf",
+    "description": "Bold geometric shelving unit, primary colors, minor scuffs.",
+    "era": "1980s",
+    "price_cents": 26000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-VIN-2004",
+    "seller_id": 1,
+    "category_id": 4,
+    "title": "Michael Jackson - Thriller LP",
+    "description": "1982 original pressing, sleeve in excellent shape.",
+    "era": "1980s",
+    "price_cents": 6500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-TOY-2005",
+    "seller_id": 2,
+    "category_id": 5,
+    "title": "Rubik's Cube - Original 1980 Release",
+    "description": "Ideal Toy Corp original, all stickers intact.",
+    "era": "1980s",
+    "price_cents": 3200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-CLO-2006",
+    "seller_id": 3,
+    "category_id": 1,
+    "title": "Members Only Jacket",
+    "description": "Classic black satin jacket, size L, zips smoothly.",
+    "era": "1980s",
+    "price_cents": 4800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-ELE-2007",
+    "seller_id": 1,
+    "category_id": 2,
+    "title": "Casio CZ-101 Synthesizer",
+    "description": "Compact 80s synth, powers on, all keys responsive.",
+    "era": "1980s",
+    "price_cents": 19500,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-FUR-2008",
+    "seller_id": 2,
+    "category_id": 3,
+    "title": "Neon Bar Stool Set",
+    "description": "Pair of chrome-and-neon vinyl stools, diner-style.",
+    "era": "1980s",
+    "price_cents": 15000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-VIN-2009",
+    "seller_id": 3,
+    "category_id": 4,
+    "title": "Madonna - Like a Virgin LP",
+    "description": "1984 pressing, light surface noise, cover near-mint.",
+    "era": "1980s",
+    "price_cents": 5200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-TOY-2010",
+    "seller_id": 1,
+    "category_id": 5,
+    "title": "Optimus Prime Transformer",
+    "description": "1984 G1 original, all transformations intact, box included.",
+    "era": "1980s",
+    "price_cents": 21000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-CLO-2011",
+    "seller_id": 2,
+    "category_id": 1,
+    "title": "Neon Windbreaker",
+    "description": "Color-blocked 80s windbreaker, size M, unworn condition.",
+    "era": "1980s",
+    "price_cents": 3900,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-ELE-2012",
+    "seller_id": 3,
+    "category_id": 2,
+    "title": "Commodore 64 Computer",
+    "description": "1982 home computer, powers on, includes power supply and cables.",
+    "era": "1980s",
+    "price_cents": 17000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-CLO-3001",
+    "seller_id": 2,
+    "category_id": 1,
+    "title": "Flannel Grunge Shirt",
+    "description": "Classic 90s plaid flannel, oversized fit, size XL.",
+    "era": "1990s",
+    "price_cents": 2800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-ELE-3002",
+    "seller_id": 3,
+    "category_id": 2,
+    "title": "Sega Genesis Console",
+    "description": "1990 model with two controllers and Sonic cartridge.",
+    "era": "1990s",
+    "price_cents": 9500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-FUR-3003",
+    "seller_id": 1,
+    "category_id": 3,
+    "title": "Inflatable Papasan-Style Chair",
+    "description": "Translucent 90s inflatable lounge chair, no leaks.",
+    "era": "1990s",
+    "price_cents": 6000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-90S-VIN-3004",
+    "seller_id": 2,
+    "category_id": 4,
+    "title": "Nirvana - Nevermind CD",
+    "description": "1991 original pressing, jewel case intact, booklet included.",
+    "era": "1990s",
+    "price_cents": 3000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-TOY-3005",
+    "seller_id": 3,
+    "category_id": 5,
+    "title": "Tamagotchi Original",
+    "description": "1997 release, functional, includes instruction booklet.",
+    "era": "1990s",
+    "price_cents": 3500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-CLO-3006",
+    "seller_id": 1,
+    "category_id": 1,
+    "title": "JNCO Wide-Leg Jeans",
+    "description": "Baggy embroidered jeans, size 34, iconic 90s cut.",
+    "era": "1990s",
+    "price_cents": 5500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-ELE-3007",
+    "seller_id": 2,
+    "category_id": 2,
+    "title": "Apple iMac G3 (Bondi Blue)",
+    "description": "1998 original iMac, boots to desktop, includes keyboard/mouse.",
+    "era": "1990s",
+    "price_cents": 22000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-90S-FUR-3008",
+    "seller_id": 3,
+    "category_id": 3,
+    "title": "Lava Lamp - Original Lava Lite",
+    "description": "Classic orange-in-blue lava lamp, heats and flows properly.",
+    "era": "1990s",
+    "price_cents": 4200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-VIN-3009",
+    "seller_id": 1,
+    "category_id": 4,
+    "title": "Spice Girls - Spice CD",
+    "description": "1996 debut album, disc plays with no skips.",
+    "era": "1990s",
+    "price_cents": 2500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-TOY-3010",
+    "seller_id": 2,
+    "category_id": 5,
+    "title": "Beanie Babies Complete Set (10)",
+    "description": "Retired 1990s Beanie Babies, tags attached, mint condition.",
+    "era": "1990s",
+    "price_cents": 8800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-CLO-3011",
+    "seller_id": 3,
+    "category_id": 1,
+    "title": "Windbreaker Track Jacket",
+    "description": "Color-block 90s track jacket, size L, classic sport cut.",
+    "era": "1990s",
+    "price_cents": 3600,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-ELE-3012",
+    "seller_id": 1,
+    "category_id": 2,
+    "title": "Game Boy Color",
+    "description": "1998 Game Boy Color, teal shell, tested with Tetris cartridge.",
+    "era": "1990s",
+    "price_cents": 7500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-CLO-4001",
+    "seller_id": 3,
+    "category_id": 1,
+    "title": "Low-Rise Cargo Pants",
+    "description": "Y2K-era cargo pants with side pockets, size 30.",
+    "era": "2000s",
+    "price_cents": 3300,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-ELE-4002",
+    "seller_id": 1,
+    "category_id": 2,
+    "title": "Apple iPod Classic (1st Gen)",
+    "description": "2001 original iPod, click wheel, holds charge, 5GB.",
+    "era": "2000s",
+    "price_cents": 16000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-FUR-4003",
+    "seller_id": 2,
+    "category_id": 3,
+    "title": "Bubble Chair (Clear Acrylic)",
+    "description": "Hanging bubble chair, early-2000s reissue, includes stand.",
+    "era": "2000s",
+    "price_cents": 32000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-Y2K-VIN-4004",
+    "seller_id": 3,
+    "category_id": 4,
+    "title": "Eminem - The Marshall Mathers LP CD",
+    "description": "2000 original pressing, case has light wear, disc pristine.",
+    "era": "2000s",
+    "price_cents": 2200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-TOY-4005",
+    "seller_id": 1,
+    "category_id": 5,
+    "title": "Tamagotchi Connexion",
+    "description": "2004 Y2K-era Tamagotchi, unopened box.",
+    "era": "2000s",
+    "price_cents": 3000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-Y2K-CLO-4006",
+    "seller_id": 2,
+    "category_id": 1,
+    "title": "Juicy Couture Velour Tracksuit",
+    "description": "Pink velour set, size S, classic early-2000s piece.",
+    "era": "2000s",
+    "price_cents": 6500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-ELE-4007",
+    "seller_id": 3,
+    "category_id": 2,
+    "title": "Nokia 3310",
+    "description": "Working 2000 model, includes charger, indestructible as ever.",
+    "era": "2000s",
+    "price_cents": 4500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-FUR-4008",
+    "seller_id": 1,
+    "category_id": 3,
+    "title": "Frosted Glass & Steel TV Stand",
+    "description": "Early-2000s minimalist media console, holds CRT or flatscreen.",
+    "era": "2000s",
+    "price_cents": 9000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-VIN-4009",
+    "seller_id": 2,
+    "category_id": 4,
+    "title": "Destiny's Child - Survivor CD",
+    "description": "2001 pressing, jewel case cracked but disc plays perfectly.",
+    "era": "2000s",
+    "price_cents": 1800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-TOY-4010",
+    "seller_id": 3,
+    "category_id": 5,
+    "title": "Bratz Doll - Original Four",
+    "description": "2001 first-edition set of four Bratz dolls, boxed.",
+    "era": "2000s",
+    "price_cents": 7200,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-CLO-4011",
+    "seller_id": 1,
+    "category_id": 1,
+    "title": "Trucker Hat",
+    "description": "Mesh-back trucker hat, embroidered logo, classic Y2K accessory.",
+    "era": "2000s",
+    "price_cents": 1800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-Y2K-ELE-4012",
+    "seller_id": 2,
+    "category_id": 2,
+    "title": "Motorola RAZR V3",
+    "description": "2004 flip phone, silver, powers on, no charger included.",
+    "era": "2000s",
+    "price_cents": 5200,
+    "status": "pending_verification"
+  }
+]
