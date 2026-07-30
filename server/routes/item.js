@@ -6,11 +6,13 @@ const { Item } = require("../models/index");
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
-    const { title, content, postedBy } = req.body;
-    const item = await Item.create({ title, content, postedBy });
+    console.log("Adding new post:", req.body);
+    const { title, content, description, postedBy } = req.body;
+    const item = await Item.create({ title, content, description, postedBy });
 
     res.status(201).json(item);
   } catch (error) {
+    console.error("Error adding post:", error);
     res.status(500).json({ error: "Error adding post" });
   }
 });
@@ -41,7 +43,7 @@ app.put("/:id", async (req, res) => {
     const { title, content, postedBy } = req.body;
     const item = await Item.update(
       { title, content, postedBy },
-      { where: { id: req.params.id } }
+      { where: { id: req.params.id } },
     );
     res.json(item);
   } catch (error) {
