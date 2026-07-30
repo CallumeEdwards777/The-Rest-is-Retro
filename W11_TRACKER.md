@@ -10,7 +10,7 @@ Note: **Concept** needs to be settled first in practice, even though it sits wit
 other 10% categories below (categories are ordered by mark weight, not build order).
 
 ## Technical acceptance criteria — 25%
-- [ ] Scaffold the React app (Vite/CRA) and component structure — no static HTML/CSS phase — *Ollie*
+- [-] Scaffold the React app (Vite/CRA) and component structure — no static HTML/CSS phase — *Ollie*
 - [ ] Express + Sequelize: models, migrations, RESTful CRUD routes — *Callum*
 - [ ] JWT auth: server issue/verify, client login/register/logout, protected routes — *Callum + Ollie*
 - [ ] Pick and integrate one library or tool not covered in class — *Whole team*
