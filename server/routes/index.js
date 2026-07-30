@@ -14,4 +14,4 @@ router.use("/api/categories", categoryRoutes);
 router.use("/api/items", itemRoutes);
 router.use("/api/users", userRoutes);
 
-module.exports = { router, Item };
+module.exports = router;

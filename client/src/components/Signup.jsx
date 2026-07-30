@@ -5,8 +5,8 @@ import { useSession } from '../contexts/SessionContext';
 
 const Signup = () => {
   const [email, setEmail] = useState();
-  const [userName, setUserName] = useState(');
-  const [password, setPassword] = useState(');
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState();
 
   const { setUser } = useSession();

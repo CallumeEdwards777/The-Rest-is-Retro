@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -7,15 +7,15 @@ import { useTheme } from '../contexts/ThemeContext';
 import headerImg from '../assets/header.png';
 
 const Header = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
 
   const { user } = useSession();
-  const { theme, toggleTheme } = useTheme();
+  //const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    navigate('/login');
+    //navigate('/login');
   };
 
   const wordCase = (word) => {
@@ -52,11 +52,7 @@ const Header = () => {
         )}
       </nav>
 
-      <button
-        className="theme-toggle" onClick={toggleTheme}
-        aria-label="Toggle dark mode">
-       {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
-</button>
+      
     </header>
   );
 };
