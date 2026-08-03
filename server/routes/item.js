@@ -2,7 +2,27 @@ const app = require("express").Router();
 
 // import the models
 const { Item } = require("../models/index");
+const {Op} = require("sequelize");
 
+app.get("/search", async (req, res) => {
+  try {
+    const search = req.query.search;
+
+const items = await Item.findAll({
+  where: {
+    [Op.or]: [
+      { title: { [Op.like]: `%${search}%` } },
+      { description: { [Op.like]: `%${search}%` } },
+    ],
+  },
+});
+
+  res.json({ items });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error searching items" });
+  }
+});
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
@@ -61,18 +81,7 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-const {Op} = require("sequelize");
 
-const search = req.query.search;
-
-const items = await Item.findAll({
-  where: {
-    [Op.or]: [
-      { title: { [Op.like]: `%${search}%` } },
-      { description: { [Op.like]: `%${search}%` } },
-    ],
-  },
-});
 
 // export the router
 module.exports = app;
