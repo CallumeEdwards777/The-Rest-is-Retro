@@ -2,8 +2,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
 
-import headerImg from '../assets/header.png';
-
 const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
@@ -23,7 +21,7 @@ const Header = () => {
 
   return (
     <header className="site-header">
-      <img src={headerImg} alt="The Rest Is Retro" />
+      <Link to="/" className="brand">The Rest Is Retro</Link>
 
       <nav>
         <Link to="/">Shop</Link>
