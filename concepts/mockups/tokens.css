@@ -1,0 +1,140 @@
+/* The Rest is Retro — design tokens + shared components (mockups only)
+   Palette source: presentation deck (Canva RetroDeck). */
+
+:root {
+  --cream: #FFFBED;
+  --ink: #211B12;
+  --teal: #3C7F72;
+  --amber: #FFC107;
+  --orange: #D34A24;
+  --orange-deep: #992800;
+  --card: #FFFFFF;
+  --line: rgba(33, 27, 18, 0.12);
+  --muted: rgba(33, 27, 18, 0.62);
+
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(33, 27, 18, 0.06), 0 8px 24px rgba(33, 27, 18, 0.07);
+}
+
+/* Direction B swaps the display font to a 70s soft-serif */
+.dir-cooper {
+  --font-display: "Fraunces", "Cooper Black", Georgia, serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  background: color-mix(in srgb, var(--cream) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex; align-items: center; gap: 20px;
+  height: 68px;
+}
+.logo {
+  font-family: var(--font-display);
+  font-size: 19px; letter-spacing: -0.01em; white-space: nowrap;
+}
+.logo .rest { color: var(--teal); }
+.logo .retro { color: var(--orange); }
+.search {
+  flex: 1; max-width: 460px;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 18px;
+  color: var(--muted); font-size: 14px;
+}
+.nav { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 14.5px; font-weight: 500; white-space: nowrap; }
+.nav a:hover { color: var(--orange); }
+@media (max-width: 900px) { .search { display: none; } }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font: 600 15px/1 var(--font-body);
+  border: none; border-radius: 999px; cursor: pointer;
+  padding: 13px 26px; transition: transform 0.06s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--orange); color: var(--cream); }
+.btn-primary:hover { background: var(--orange-deep); }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+.btn-big { padding: 17px 34px; font-size: 17px; width: 100%; }
+
+/* ---------- era chips ---------- */
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip {
+  font: 600 14px/1 var(--font-body);
+  padding: 10px 18px; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--card);
+  cursor: pointer; transition: all 0.12s ease;
+}
+.chip:hover { border-color: var(--ink); }
+.chip.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.chip .count { color: var(--muted); font-weight: 500; margin-left: 5px; }
+.chip.active .count { color: rgba(255, 251, 237, 0.65); }
+
+/* ---------- product grid ---------- */
+.grid {
+  display: grid; gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.card .imgbox { position: relative; aspect-ratio: 1; background: #EFE9DA; }
+.card .imgbox img { width: 100%; height: 100%; object-fit: cover; }
+.era-badge {
+  position: absolute; top: 10px; left: 10px;
+  font: 700 11.5px/1 var(--font-body); letter-spacing: 0.04em;
+  padding: 6px 11px; border-radius: 999px; color: var(--cream);
+}
+.era-1970s { background: var(--orange); }
+.era-1980s { background: var(--amber); color: var(--ink); }
+.era-1990s { background: var(--teal); }
+.era-2000s { background: var(--ink); }
+.verified-dot {
+  position: absolute; top: 10px; right: 10px;
+  background: var(--teal); color: var(--cream);
+  font: 700 11px/1 var(--font-body);
+  padding: 6px 10px; border-radius: 999px;
+}
+.card .meta { padding: 13px 15px 15px; }
+.card .title { font-size: 14.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card .price { font-size: 16.5px; font-weight: 700; margin-top: 3px; }
+
+/* ---------- page footer ---------- */
+.site-footer {
+  margin-top: 90px; padding: 34px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 13.5px;
+  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}

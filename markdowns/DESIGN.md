@@ -7,10 +7,33 @@ Claude Design (claude.ai/design) from Martim's new palette and style reference.
 
 ## Palette & typography
 
-> **PLACEHOLDER — new palette and website style reference not yet uploaded.**
-> When Martim shares them, record here: colour names + hex values, heading font,
-> body font, and a link to the Claude Design project. Until then, do not reuse any
-> colours from the deleted docs.
+Palette confirmed by Martim 2026-08-05 (taken from the presentation deck, so slides
+and app match). Mockups applying all of this live in `concepts/mockups/` — open
+`concepts/mockups/index.html` for the gallery.
+
+| Name | Hex | Use |
+| --- | --- | --- |
+| Cream | `#FFFBED` | Page background |
+| Ink | `#211B12` | Text, dark chips |
+| Burnt Orange | `#D34A24` | Primary buttons, headline accent, 70s era badge |
+| Deep Orange | `#992800` | Button hover state |
+| Teal | `#3C7F72` | Verified badges, secondary accent, 90s era badge |
+| Amber | `#FFC107` | Highlights, stamps, avatars, 80s era badge |
+| White | `#FFFFFF` | Cards |
+
+Era badge colours: 1970s orange · 1980s amber · 1990s teal · 2000s/Y2K ink.
+
+**Typography** (Google Fonts): body is **Inter**. Headline font is the ONE open
+decision, two directions mocked up:
+
+- **Direction A "Poster"** — Archivo Black: THR!FT-style bold poster energy
+  (`concepts/mockups/browse-a-poster.html`).
+- **Direction B "Cooper"** — Fraunces 900: softer 70s Cooper-Black warmth
+  (`concepts/mockups/browse-b-cooper.html`).
+
+Default if unstated: Direction A. Components (rounded cards, pill chips/buttons,
+1px warm borders, sticky cream header) are shared across both and defined in
+`concepts/mockups/tokens.css`.
 
 ## Ground truth data (what the seeded database actually contains)
 

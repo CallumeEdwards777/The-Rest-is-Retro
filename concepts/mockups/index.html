@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup gallery · The Rest is Retro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { padding: 60px 24px; }
+  .wrap { max-width: 900px; }
+  h1 { font-family: var(--font-display); font-size: 42px; color: var(--orange); }
+  .sub { color: var(--muted); margin: 10px 0 36px; max-width: 560px; }
+  .list { display: grid; gap: 14px; }
+  .row {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 18px 22px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .row:hover { transform: translateX(4px); box-shadow: var(--shadow); }
+  .row .n { font-family: var(--font-display); color: var(--teal); width: 30px; }
+  .row .t { font-weight: 600; }
+  .row .d { font-size: 13.5px; color: var(--muted); }
+  .row .go { margin-left: auto; color: var(--orange); font-weight: 700; }
+  .pick { margin-top: 30px; padding: 16px 20px; background: rgba(255,193,7,0.18); border-radius: var(--radius); font-size: 14.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Morning, Martim.</h1>
+  <div class="sub">Five mockups from the nightshift, built from the deck palette and the real 48 seeded items. Open each, pick a direction, then take the winner into Claude Design.</div>
+
+  <div class="list">
+    <a class="row" href="browse-a-poster.html"><span class="n">A</span><span><span class="t">Browse — Direction A “Poster”</span><br><span class="d">THR!FT energy: huge Archivo Black headline, era filter chips (they work), 16 real items</span></span><span class="go">→</span></a>
+    <a class="row" href="browse-b-cooper.html"><span class="n">B</span><span><span class="t">Browse — Direction B “Cooper”</span><br><span class="d">Same page, 70s soft-serif headline (Fraunces 900) — warmer, more vintage-shop</span></span><span class="go">→</span></a>
+    <a class="row" href="item-detail.html"><span class="n">1</span><span><span class="t">Item detail</span><br><span class="d">Walkman TPS-L2 · sticky buy panel, seller card, story section, fact table</span></span><span class="go">→</span></a>
+    <a class="row" href="login.html"><span class="n">2</span><span><span class="t">Log in / Sign up</span><br><span class="d">Centered card, demo credentials hint (vintage_vera)</span></span><span class="go">→</span></a>
+    <a class="row" href="confirm.html"><span class="n">3</span><span><span class="t">Buy confirmation</span><br><span class="d">“It’s yours!” · order summary card, ref number, keep-digging CTA</span></span><span class="go">→</span></a>
+  </div>
+
+  <div class="pick"><strong>The one decision:</strong> Direction A or B for the headline font. Everything else (palette, cards, chips, buttons) is shared and already recorded in markdowns/DESIGN.md.</div>
+</div>
+</body>
+</html>
