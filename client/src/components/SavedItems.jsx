@@ -21,7 +21,7 @@ const SavedItems = () => {
     <div>
       <h2>My saved items</h2>
       <ul>
-        {savedItems.map((course) => (
+        {savedItems.map((item) => (
           <li key={item.id}>{item.title}</li>
         ))}
       </ul>
