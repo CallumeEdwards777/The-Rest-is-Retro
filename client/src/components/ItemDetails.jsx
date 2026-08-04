@@ -1,71 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api';
 
-const ItemList = () => {
-  const [course, setCourse] = useState({});
-
-  const [showDelegates, setShowDelegates] = useState(false);
+const ItemDetails = () => {
+  const [item, setItem] = useState(null);
 
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchItem = async () => {
       try {
-        const response = await api.get(`/api/courses/${id}`);
-        console.log(response.data);
-        setCourse(response.data.course);
+        const response = await api.get(`/api/items/${id}`);
+        setItem(response.data);
       } catch (error) {
-        console.error(`Failed to fetch course with id ${id}`, error);
+        console.error(`Failed to fetch item with id ${id}`, error);
       }
     };
 
-    fetchCourses();
-  }, []);
+    fetchItem();
+  }, [id]);
 
-  const toggleDelegates = () => {
-    setShowDelegates(!showDelegates);
-  }
+  const handleBuy = () => {
+    // Buy flow is not built yet — placeholder until the order feature exists.
+    console.log('Buy clicked for item', item?.id);
+  };
 
-  const handleEnroll = () => {
-    console.log('Enroll');
+  if (!item) {
+    return <p>Loading item…</p>;
   }
 
   return (
-    <div>
-      <h2>Course Details {course.id}ID</h2>
-      {course.id && (
-        <>
-        <div className="card">
-          <div>Course Number: {course.id}</div>
-          <div>Course Title: {course.title}</div>
-          <div>Course Description: {course.description}</div>
-          <div>Course Category: {course.category.category_name}</div>
-          <div>Students Enrolled: {course.users?.length}</div>
-          <div className="card-options">
-            <button className="button" onClick={() => toggleDelegates()}>View Delegates</button>
-            <button className="button" onClick={() => handleEnroll()}>Enroll</button>
-          </div>
+    <div className="item-details">
+      <div className="card">
+        <img
+          className="card-image"
+          src={`/item-images/${item.item_id}.jpg`}
+          alt={item.title}
+        />
+        <h2>{item.title}</h2>
+        <p>{item.description}</p>
+        <div className="item-meta">
+          <div>Era: {item.era}</div>
+          <div>Price: {item.price} {item.currency}</div>
+          <div>Status: {item.status}</div>
         </div>
-
-        {showDelegates && (
-
-          <div className="card mt-5">
-            <h3>Delegates</h3>
-            <div className="delegate-list">
-              {course.users.map((user) => (
-                <div key={user.id} className="delegate">
-                  <div>{user.username}</div>
-                  <div>{user.email}</div>
-                </div>
-              ))}
-            </div>
-          </div> )
-        }
-      </>   
-      )}
+        <div className="card-options">
+          <button className="button" onClick={handleBuy}>Buy</button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ItemList;
+export default ItemDetails;

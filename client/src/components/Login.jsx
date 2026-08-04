@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,15 +17,15 @@ const Login = () => {
       const response = await api.post('/api/users/login', { email: email, password: password });
       const data = response.data;
 
-    
+      // server responds with { token, userData }
+      localStorage.setItem('authToken', data.token);
+
       // Update the user in the context
       setUser({
-        username: data.user.username,
-        id: data.user.id,
+        username: data.userData.username,
+        id: data.userData.id,
       });
 
-
-      localStorage.setItem('authToken', data.token);
       navigate('/');
     } catch (error) {
       console.error('Login failed', error);

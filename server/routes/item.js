@@ -26,9 +26,9 @@ const items = await Item.findAll({
 // Route to add a new post
 app.post("/", async (req, res) => {
   try {
-    console.log("Adding new post:", req.body);
-    const { itemId, sellerId, categoryId, title, description, era, price, currency, status } = req.body;
-    const item = await Item.create({ itemId, sellerId, categoryId, title, description, era, price, currency, status });
+    console.log("Adding new item:", req.body);
+    const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
+    const item = await Item.create({ item_id, seller_id, category_id, title, description, era, price, currency, status });
 
     res.status(201).json(item);
   } catch (error) {
@@ -60,10 +60,10 @@ app.get("/:id", async (req, res) => {
 // Route to update a post
 app.put("/:id", async (req, res) => {
   try {
-    const { itemId, sellerId, categoryId, title, description, era, price, currency, status } = req.body;
+    const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
     const item = await Item.update(
-      { itemId, sellerId, categoryId, title, description, era, price, currency, status },
-      { where: { itemId: req.params.id } },
+      { item_id, seller_id, category_id, title, description, era, price, currency, status },
+      { where: { id: req.params.id } },
     );
     res.json(item);
   } catch (error) {
@@ -74,7 +74,7 @@ app.put("/:id", async (req, res) => {
 // Route to delete a post
 app.delete("/:id", async (req, res) => {
   try {
-    const item = await Item.destroy({ where: { itemId: req.params.id } });
+    const item = await Item.destroy({ where: { id: req.params.id } });
     res.json(item);
   } catch (error) {
     res.status(500).json({ error: "Error deleting post" });

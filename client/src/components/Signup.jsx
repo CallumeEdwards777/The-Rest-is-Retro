@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
 import { useSession } from '../contexts/SessionContext';
@@ -40,10 +40,14 @@ const Signup = () => {
     try {
       const response = await api.post('/api/users', { username: userName, email: email, password: password, password2: password2 });
       const data = response.data;
+
+      // server responds with { token, userData }
+      localStorage.setItem('authToken', data.token);
+
       // Update the user in the context
       setUser({
-        username: data.user.username,
-        id: data.user.id,
+        username: data.userData.username,
+        id: data.userData.id,
       });
 
       navigate('/');
