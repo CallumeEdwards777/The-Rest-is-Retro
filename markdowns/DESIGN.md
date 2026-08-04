@@ -1,0 +1,49 @@
+# The Rest Is Retro — Design source of truth
+
+This file is the single canonical design reference for the app. The old brand docs
+(two READMEs, Retro Brand Kit, wireframes) and the AI-generated logos in `concepts/`
+were placeholder work and have been deleted. The real design system is being built in
+Claude Design (claude.ai/design) from Martim's new palette and style reference.
+
+## Palette & typography
+
+> **PLACEHOLDER — new palette and website style reference not yet uploaded.**
+> When Martim shares them, record here: colour names + hex values, heading font,
+> body font, and a link to the Claude Design project. Until then, do not reuse any
+> colours from the deleted docs.
+
+## Ground truth data (what the seeded database actually contains)
+
+These are facts from `server/seeds/` — designs must match them, not the other way round.
+
+- **Eras (4):** 1970s, 1980s, 1990s, 2000s — 12 items each, 48 items total.
+- **Categories (5):** Clothing, Electronics, Furniture, Vinyl & Music, Toys & Games.
+- **Item fields:** `item_id` (e.g. `TRR-70S-CLO-1001`), `title`, `description`, `era`,
+  `price`, `currency` (GBP), `status`, `seller_id`, `category_id`.
+- **Item images:** `client/public/item-images/<item_id>.jpg` — one per item, 1:1 match.
+  In the client, reference them as `/item-images/${item.item_id}.jpg`.
+- **Seeded users (3):** `vintage_vera`, `disco_dan`, `y2k_yasmin` — password `password123`
+  (emails are in `server/seeds/user.json`).
+
+## Screens (build in this order)
+
+1. **Login / Signup** — working; needs styling.
+2. **Browse** (`/`) — grid of item cards with image, title, era, price.
+3. **Item detail** (`/item/:id`) — image, description, price, Buy button.
+4. **Buy flow** — does not exist yet (no order model/route on the server). This is the
+   headline feature to build. Simplest acceptable version: Buy sets the item's `status`
+   to `sold` and confirms to the user.
+5. **List an item** (`/create-item`) — working basic form; needs styling.
+
+## Deferred / known gaps (punch list)
+
+- No order/purchase model or route — Buy button currently only logs to console.
+- `SavedItems.jsx` has no backing endpoint and is not routed.
+- `User.getOne` doesn't exist on the User model (`GET /api/users/me` and `/:id` 500).
+- Sequelize associations in `server/models/index.js` use camelCase foreign keys
+  (`categoryId`, `userId`) while models declare snake_case columns — works, but creates
+  confusing duplicate-ish columns; tidy if it causes trouble.
+- JWT secret is hardcoded in `server/utils/auth.js` — move to `.env` before deploy.
+- `server/.env` was removed from git tracking but its password remains in git history —
+  rotate or purge history before the repo is submitted publicly.
+- No CSS framework chosen; styling comes from the Claude Design system.
