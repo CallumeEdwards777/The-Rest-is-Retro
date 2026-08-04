@@ -20,8 +20,8 @@ const Login = () => {
     
       // Update the user in the context
       setUser({
-        username: data.user.username,
-        id: data.user.id,
+        username: data.userData.username,
+        id: data.userData.id,
       });
 
 
