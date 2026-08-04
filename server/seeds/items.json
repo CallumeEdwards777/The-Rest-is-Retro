@@ -6,7 +6,8 @@
     "title": "Bell-Bottom Corduroy Pants",
     "description": "Rust-orange corduroy flares, iconic 70s silhouette, size M.",
     "era": "1970s",
-    "price_cents": 3800,
+    "price": 38.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -16,7 +17,8 @@
     "title": "Sony Walkman TPS-L2",
     "description": "Original 1979 Sony Walkman, fully functional, includes headphones.",
     "era": "1970s",
-    "price_cents": 12000,
+    "price": 220.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -26,7 +28,8 @@
     "title": "Wicker Peacock Chair",
     "description": "Classic 70s statement piece, natural rattan, great condition.",
     "era": "1970s",
-    "price_cents": 22000,
+    "price": 285.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -36,7 +39,8 @@
     "title": "Fleetwood Mac - Rumours LP",
     "description": "1977 original pressing, sleeve shows light wear, vinyl plays clean.",
     "era": "1970s",
-    "price_cents": 5500,
+    "price": 28.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -46,7 +50,8 @@
     "title": "Stretch Armstrong Figure",
     "description": "1976 original release, still stretches, no tears.",
     "era": "1970s",
-    "price_cents": 6200,
+    "price": 45.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -56,7 +61,8 @@
     "title": "Suede Fringe Vest",
     "description": "Boho fringe vest, tan suede, unisex fit.",
     "era": "1970s",
-    "price_cents": 4200,
+    "price": 42.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -66,7 +72,8 @@
     "title": "Kodak Instamatic Camera",
     "description": "Working 126 film camera, tested with a fresh cartridge.",
     "era": "1970s",
-    "price_cents": 3500,
+    "price": 32.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -76,7 +83,8 @@
     "title": "Chrome & Glass Coffee Table",
     "description": "Mid-70s chrome frame coffee table, smoked glass top.",
     "era": "1970s",
-    "price_cents": 17500,
+    "price": 175.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -86,7 +94,8 @@
     "title": "Pink Floyd - Dark Side of the Moon LP",
     "description": "1973 pressing with original poster and stickers included.",
     "era": "1970s",
-    "price_cents": 8000,
+    "price": 65.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -96,7 +105,8 @@
     "title": "Evel Knievel Stunt Cycle",
     "description": "Complete with launcher, wind-up mechanism still strong.",
     "era": "1970s",
-    "price_cents": 5400,
+    "price": 55.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -106,7 +116,8 @@
     "title": "Platform Shoes",
     "description": "Faux-leather platform shoes, size 9, disco-era classic.",
     "era": "1970s",
-    "price_cents": 4600,
+    "price": 48.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -116,7 +127,8 @@
     "title": "Panasonic Toot-A-Loop Radio",
     "description": "Bendable donut-shaped AM radio, working, bright orange.",
     "era": "1970s",
-    "price_cents": 4800,
+    "price": 60.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -126,7 +138,8 @@
     "title": "Levi's Denim Jacket",
     "description": "Authentic 1980s Levi's trucker jacket, great condition.",
     "era": "1980s",
-    "price_cents": 4500,
+    "price": 55.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -136,7 +149,8 @@
     "title": "Nintendo Entertainment System",
     "description": "1985 NES console with two controllers, tested and working.",
     "era": "1980s",
-    "price_cents": 14000,
+    "price": 145.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -146,7 +160,8 @@
     "title": "Memphis-Style Postmodern Shelf",
     "description": "Bold geometric shelving unit, primary colors, minor scuffs.",
     "era": "1980s",
-    "price_cents": 26000,
+    "price": 320.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -156,7 +171,8 @@
     "title": "Michael Jackson - Thriller LP",
     "description": "1982 original pressing, sleeve in excellent shape.",
     "era": "1980s",
-    "price_cents": 6500,
+    "price": 35.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -166,7 +182,8 @@
     "title": "Rubik's Cube - Original 1980 Release",
     "description": "Ideal Toy Corp original, all stickers intact.",
     "era": "1980s",
-    "price_cents": 3200,
+    "price": 25.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -176,7 +193,8 @@
     "title": "Members Only Jacket",
     "description": "Classic black satin jacket, size L, zips smoothly.",
     "era": "1980s",
-    "price_cents": 4800,
+    "price": 58.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -186,7 +204,8 @@
     "title": "Casio CZ-101 Synthesizer",
     "description": "Compact 80s synth, powers on, all keys responsive.",
     "era": "1980s",
-    "price_cents": 19500,
+    "price": 210.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -196,7 +215,8 @@
     "title": "Neon Bar Stool Set",
     "description": "Pair of chrome-and-neon vinyl stools, diner-style.",
     "era": "1980s",
-    "price_cents": 15000,
+    "price": 165.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -206,7 +226,8 @@
     "title": "Madonna - Like a Virgin LP",
     "description": "1984 pressing, light surface noise, cover near-mint.",
     "era": "1980s",
-    "price_cents": 5200,
+    "price": 30.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -216,7 +237,8 @@
     "title": "Optimus Prime Transformer",
     "description": "1984 G1 original, all transformations intact, box included.",
     "era": "1980s",
-    "price_cents": 21000,
+    "price": 240.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -226,7 +248,8 @@
     "title": "Neon Windbreaker",
     "description": "Color-blocked 80s windbreaker, size M, unworn condition.",
     "era": "1980s",
-    "price_cents": 3900,
+    "price": 40.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -236,7 +259,8 @@
     "title": "Commodore 64 Computer",
     "description": "1982 home computer, powers on, includes power supply and cables.",
     "era": "1980s",
-    "price_cents": 17000,
+    "price": 190.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -246,7 +270,8 @@
     "title": "Flannel Grunge Shirt",
     "description": "Classic 90s plaid flannel, oversized fit, size XL.",
     "era": "1990s",
-    "price_cents": 2800,
+    "price": 26.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -256,7 +281,8 @@
     "title": "Sega Genesis Console",
     "description": "1990 model with two controllers and Sonic cartridge.",
     "era": "1990s",
-    "price_cents": 9500,
+    "price": 95.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -266,7 +292,8 @@
     "title": "Inflatable Papasan-Style Chair",
     "description": "Translucent 90s inflatable lounge chair, no leaks.",
     "era": "1990s",
-    "price_cents": 6000,
+    "price": 48.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -276,7 +303,8 @@
     "title": "Nirvana - Nevermind CD",
     "description": "1991 original pressing, jewel case intact, booklet included.",
     "era": "1990s",
-    "price_cents": 3000,
+    "price": 18.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -286,7 +314,8 @@
     "title": "Tamagotchi Original",
     "description": "1997 release, functional, includes instruction booklet.",
     "era": "1990s",
-    "price_cents": 3500,
+    "price": 32.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -296,7 +325,8 @@
     "title": "JNCO Wide-Leg Jeans",
     "description": "Baggy embroidered jeans, size 34, iconic 90s cut.",
     "era": "1990s",
-    "price_cents": 5500,
+    "price": 65.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -306,7 +336,8 @@
     "title": "Apple iMac G3 (Bondi Blue)",
     "description": "1998 original iMac, boots to desktop, includes keyboard/mouse.",
     "era": "1990s",
-    "price_cents": 22000,
+    "price": 175.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -316,7 +347,8 @@
     "title": "Lava Lamp - Original Lava Lite",
     "description": "Classic orange-in-blue lava lamp, heats and flows properly.",
     "era": "1990s",
-    "price_cents": 4200,
+    "price": 35.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -326,7 +358,8 @@
     "title": "Spice Girls - Spice CD",
     "description": "1996 debut album, disc plays with no skips.",
     "era": "1990s",
-    "price_cents": 2500,
+    "price": 15.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -336,7 +369,8 @@
     "title": "Beanie Babies Complete Set (10)",
     "description": "Retired 1990s Beanie Babies, tags attached, mint condition.",
     "era": "1990s",
-    "price_cents": 8800,
+    "price": 75.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -346,7 +380,8 @@
     "title": "Windbreaker Track Jacket",
     "description": "Color-block 90s track jacket, size L, classic sport cut.",
     "era": "1990s",
-    "price_cents": 3600,
+    "price": 34.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -356,7 +391,8 @@
     "title": "Game Boy Color",
     "description": "1998 Game Boy Color, teal shell, tested with Tetris cartridge.",
     "era": "1990s",
-    "price_cents": 7500,
+    "price": 58.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -366,7 +402,8 @@
     "title": "Low-Rise Cargo Pants",
     "description": "Y2K-era cargo pants with side pockets, size 30.",
     "era": "2000s",
-    "price_cents": 3300,
+    "price": 28.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -376,7 +413,8 @@
     "title": "Apple iPod Classic (1st Gen)",
     "description": "2001 original iPod, click wheel, holds charge, 5GB.",
     "era": "2000s",
-    "price_cents": 16000,
+    "price": 135.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -386,7 +424,8 @@
     "title": "Bubble Chair (Clear Acrylic)",
     "description": "Hanging bubble chair, early-2000s reissue, includes stand.",
     "era": "2000s",
-    "price_cents": 32000,
+    "price": 380.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -396,7 +435,8 @@
     "title": "Eminem - The Marshall Mathers LP CD",
     "description": "2000 original pressing, case has light wear, disc pristine.",
     "era": "2000s",
-    "price_cents": 2200,
+    "price": 12.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -406,7 +446,8 @@
     "title": "Tamagotchi Connexion",
     "description": "2004 Y2K-era Tamagotchi, unopened box.",
     "era": "2000s",
-    "price_cents": 3000,
+    "price": 40.00,
+    "currency": "GBP",
     "status": "pending_verification"
   },
   {
@@ -416,7 +457,8 @@
     "title": "Juicy Couture Velour Tracksuit",
     "description": "Pink velour set, size S, classic early-2000s piece.",
     "era": "2000s",
-    "price_cents": 6500,
+    "price": 85.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -426,7 +468,8 @@
     "title": "Nokia 3310",
     "description": "Working 2000 model, includes charger, indestructible as ever.",
     "era": "2000s",
-    "price_cents": 4500,
+    "price": 45.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -436,7 +479,8 @@
     "title": "Frosted Glass & Steel TV Stand",
     "description": "Early-2000s minimalist media console, holds CRT or flatscreen.",
     "era": "2000s",
-    "price_cents": 9000,
+    "price": 65.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -446,7 +490,8 @@
     "title": "Destiny's Child - Survivor CD",
     "description": "2001 pressing, jewel case cracked but disc plays perfectly.",
     "era": "2000s",
-    "price_cents": 1800,
+    "price": 9.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -456,7 +501,8 @@
     "title": "Bratz Doll - Original Four",
     "description": "2001 first-edition set of four Bratz dolls, boxed.",
     "era": "2000s",
-    "price_cents": 7200,
+    "price": 60.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -466,7 +512,8 @@
     "title": "Trucker Hat",
     "description": "Mesh-back trucker hat, embroidered logo, classic Y2K accessory.",
     "era": "2000s",
-    "price_cents": 1800,
+    "price": 15.00,
+    "currency": "GBP",
     "status": "verified"
   },
   {
@@ -476,7 +523,8 @@
     "title": "Motorola RAZR V3",
     "description": "2004 flip phone, silver, powers on, no charger included.",
     "era": "2000s",
-    "price_cents": 5200,
+    "price": 55.00,
+    "currency": "GBP",
     "status": "pending_verification"
   }
 ]
