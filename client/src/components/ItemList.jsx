@@ -39,7 +39,7 @@ const ItemList = () => {
       ) : (
         <div className="item-list">
           {items.map((item) => (
-            <ItemCard key={item.id} course={item} />
+            <ItemCard key={item.id} item={item} />
           ))}
         </div>
       )}
