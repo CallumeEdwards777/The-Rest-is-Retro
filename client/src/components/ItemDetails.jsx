@@ -1,71 +1,126 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
-const ItemList = () => {
-  const [course, setCourse] = useState({});
+import { eraLabel, formatPrice, itemImage } from './ItemCard';
 
-  const [showDelegates, setShowDelegates] = useState(false);
+const ItemDetails = () => {
+  const [item, setItem] = useState(null);
+  const [categoryName, setCategoryName] = useState('');
+  const [seller, setSeller] = useState(null);
 
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [buyError, setBuyError] = useState('');
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchItem = async () => {
       try {
-        const response = await api.get(`/api/courses/${id}`);
-        console.log(response.data);
-        setCourse(response.data.course);
+        const response = await api.get(`/api/items/${id}`);
+        setItem(response.data);
+
+        const [categoryRes, sellerRes] = await Promise.allSettled([
+          api.get(`/api/categories/${response.data.category_id}`),
+          api.get(`/api/users/${response.data.seller_id}`),
+        ]);
+        if (categoryRes.status === 'fulfilled') setCategoryName(categoryRes.value.data?.category_name || '');
+        if (sellerRes.status === 'fulfilled') setSeller(sellerRes.value.data);
       } catch (error) {
-        console.error(`Failed to fetch course with id ${id}`, error);
+        console.error(`Failed to fetch item with id ${id}`, error);
       }
     };
 
-    fetchCourses();
-  }, []);
+    fetchItem();
+  }, [id]);
 
-  const toggleDelegates = () => {
-    setShowDelegates(!showDelegates);
+  const handleBuy = async () => {
+    if (!localStorage.getItem('authToken')) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+      const response = await api.post(`/api/items/${id}/buy`);
+      navigate('/confirm', {
+        state: {
+          item: response.data.item,
+          orderRef: response.data.order.ref,
+          categoryName,
+          seller,
+        },
+      });
+    } catch (error) {
+      console.error('Buy failed', error);
+      setBuyError(error.response?.data?.message || 'Purchase failed — please try again.');
+    }
+  };
+
+  const getInitials = (username) => (username ? username.slice(0, 2).toUpperCase() : '?');
+
+  if (!item) {
+    return <main className="wrap"><p className="empty-note">Loading relic…</p></main>;
   }
 
-  const handleEnroll = () => {
-    console.log('Enroll');
-  }
+  const isSold = item.status === 'sold';
 
   return (
-    <div>
-      <h2>Course Details {course.id}ID</h2>
-      {course.id && (
-        <>
-        <div className="card">
-          <div>Course Number: {course.id}</div>
-          <div>Course Title: {course.title}</div>
-          <div>Course Description: {course.description}</div>
-          <div>Course Category: {course.category.category_name}</div>
-          <div>Students Enrolled: {course.users?.length}</div>
-          <div className="card-options">
-            <button className="button" onClick={() => toggleDelegates()}>View Delegates</button>
-            <button className="button" onClick={() => handleEnroll()}>Enroll</button>
-          </div>
+    <main className="wrap">
+      <div className="crumbs">
+        <Link to="/">Browse</Link> &nbsp;/&nbsp; {eraLabel(item.era)} &nbsp;/&nbsp; {item.title}
+      </div>
+
+      <div className="layout">
+        <div className="photo">
+          <img src={itemImage(item)} alt={item.title} />
         </div>
 
-        {showDelegates && (
+        <div className="panel">
+          <div className="tags">
+            <span className={`tag era era-${item.era}`}>{eraLabel(item.era)}</span>
+            {categoryName && <span className="tag cat">{categoryName}</span>}
+            {item.status === 'verified' && <span className="tag check">✓ Verified listing</span>}
+            {isSold && <span className="tag sold">Sold</span>}
+          </div>
 
-          <div className="card mt-5">
-            <h3>Delegates</h3>
-            <div className="delegate-list">
-              {course.users.map((user) => (
-                <div key={user.id} className="delegate">
-                  <div>{user.username}</div>
-                  <div>{user.email}</div>
-                </div>
-              ))}
+          <h1>{item.title}</h1>
+          <div className="price">{formatPrice(item.price)}</div>
+          <div className="vat">Free UK delivery · 14-day returns</div>
+
+          <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={isSold}>
+            {isSold ? 'Sold' : 'Buy now'}
+          </button>
+          {buyError && <div className="form-error">{buyError}</div>}
+
+          {seller && (
+            <div className="seller">
+              <div className="avatar">{getInitials(seller.username)}</div>
+              <div>
+                <div className="who">{seller.username}</div>
+                <div className="sub">Seller on The Rest is Retro since 2026</div>
+              </div>
             </div>
-          </div> )
-        }
-      </>   
-      )}
-    </div>
+          )}
+
+          <div className="desc">
+            <h2>The story</h2>
+            <p>{item.description}</p>
+          </div>
+
+          <div className="facts">
+            <div><span>Item ID</span><span>{item.item_id}</span></div>
+            <div><span>Era</span><span>{item.era}</span></div>
+            {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
+            <div><span>Status</span><span>{item.status}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <footer className="site-footer">
+        <span>The Rest is Retro — curated vintage, sold by era.</span>
+        <span>The rest is history.</span>
+      </footer>
+    </main>
   );
 };
 
-export default ItemList;
+export default ItemDetails;

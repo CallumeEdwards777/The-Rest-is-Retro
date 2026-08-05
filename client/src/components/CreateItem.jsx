@@ -1,92 +1,34 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import api from '../api';
+import ItemForm from './ItemForm';
 
-const CreateCourse = () => {
+const CreateItem = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [categoryId, setCategoryId] = useState('');
-
-  const getUserEmail = () => {
-    const token = localStorage.getItem('authToken');
-
-    if (!token) {
-      return '';
-    }
-
-    try {
-      const tokenWithoutPrefix = token.replace('token ', '');
-      const payload = tokenWithoutPrefix.split('.')[1];
-      const decodedPayload = JSON.parse(atob(payload));
-
-      return decodedPayload.data.email;
-    } catch (error) {
-      console.log('Unable to read user email from token:', error);
-      return '';
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const newCourse = {
-      title,
-      description,
-      created_by: getUserEmail(),
-      categoryId: Number(categoryId),
-    };
-
-    console.log('Sending:', newCourse);
+  const handleSubmit = (formData) => {
+    setError('');
+    formData.append('currency', 'GBP');
 
     api
-      .post('/api/courses', newCourse)
+      .post('/api/items', formData)
       .then(() => {
-        navigate('/');
+        navigate('/my-listings');
       })
-      .catch((error) => {
-        console.log('Error:', error);
-
-        if (error.response) {
-          console.log('Response:', error.response.data);
-        }
+      .catch((err) => {
+        console.log('Error:', err.response?.data || err);
+        setError(err.response?.data?.message || 'Listing failed — please try again.');
       });
   };
 
   return (
-    <div>
-      <h1>Create Course</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Course title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          required
-        />
-
-        <textarea
-          placeholder="Course description"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-          required
-        />
-
-        <input
-          type="number"
-          placeholder="Category ID"
-          value={categoryId}
-          onChange={(event) => setCategoryId(event.target.value)}
-          required
-        />
-
-        <button type="submit">Create Course</button>
-      </form>
+    <div className="plain-page">
+      <h1>List an Item</h1>
+      <ItemForm submitLabel="List Item" onSubmit={handleSubmit} error={error} />
     </div>
   );
 };
 
-export default CreateCourse;
+export default CreateItem;

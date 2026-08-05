@@ -12,8 +12,11 @@ class User extends Model {
 User.init(
   {
     username: {
+      // unique: login accepts a username OR an email, so duplicates would
+      // make it ambiguous which account is being signed into
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -27,8 +30,16 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8],
+        len: {
+          args: [8],
+          msg: "Password must be at least 8 characters",
+        },
       },
+    },
+    // onboarding quiz answers as JSON, so picks follow the account across devices
+    preferences: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
   },
   {

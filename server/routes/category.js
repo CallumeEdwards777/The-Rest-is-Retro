@@ -17,7 +17,7 @@ app.post("/", authMiddleware, async (req, res) => {
 });
 
 // Route to get all posts
-app.get("/", authMiddleware, async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     console.log("Getting all categories");
     const categories = await Category.findAll();
@@ -28,7 +28,7 @@ app.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-app.get("/:id", authMiddleware, async (req, res) => {
+app.get("/:id", async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.id);
     res.json(category);

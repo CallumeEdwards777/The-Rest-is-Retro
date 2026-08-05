@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../api';
 
 const SavedItems = () => {
@@ -7,7 +7,9 @@ const SavedItems = () => {
   useEffect(() => {
     const fetchSavedItems = async () => {
       try {
-        const response = await api.get('/api/subscribed-courses'); // TODO: confirm real endpoint with Callum!!
+        // TODO: no saved-items endpoint exists on the server yet — this page is
+        // not routed anywhere until that feature is built.
+        const response = await api.get('/api/saved-items');
         setSavedItems(response.data);
       } catch (error) {
         console.error('Failed to fetch saved items', error);
@@ -21,7 +23,7 @@ const SavedItems = () => {
     <div>
       <h2>My saved items</h2>
       <ul>
-        {savedItems.map((course) => (
+        {savedItems.map((item) => (
           <li key={item.id}>{item.title}</li>
         ))}
       </ul>

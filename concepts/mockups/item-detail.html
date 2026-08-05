@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Item — Sony Walkman TPS-L2 · The Rest is Retro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .crumbs { padding: 26px 0 18px; font-size: 13.5px; color: var(--muted); }
+  .crumbs a:hover { color: var(--orange); }
+  .layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px; align-items: start; }
+  @media (max-width: 860px) { .layout { grid-template-columns: 1fr; } }
+  .photo { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #EFE9DA; }
+  .photo img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .panel { position: sticky; top: 92px; }
+  .panel .tags { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tag { font: 700 12px/1 var(--font-body); letter-spacing: 0.04em; padding: 7px 12px; border-radius: 999px; }
+  .tag.era { background: var(--orange); color: var(--cream); }
+  .tag.cat { background: var(--card); border: 1.5px solid var(--line); }
+  .tag.check { background: var(--teal); color: var(--cream); }
+  .panel h1 { font-family: var(--font-display); font-size: clamp(30px, 4vw, 44px); line-height: 1.05; letter-spacing: -0.01em; }
+  .panel .price { font-size: 34px; font-weight: 700; margin: 16px 0 4px; }
+  .panel .vat { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .seller {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 13px 16px; margin: 22px 0;
+  }
+  .seller .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--amber); color: var(--ink);
+    display: grid; place-items: center; font-weight: 700;
+  }
+  .seller .who { font-size: 14.5px; font-weight: 600; }
+  .seller .sub { font-size: 12.5px; color: var(--muted); }
+  .desc { margin-top: 26px; color: var(--ink); }
+  .desc h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+  .facts { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; font-size: 14px; }
+  .facts div { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--line); padding-bottom: 8px; }
+  .facts span:first-child { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="browse-a-poster.html">The <span class="rest">Rest</span> is <span class="retro">Retro</span></a>
+    <div class="search">⌕&nbsp; Search 48 verified relics…</div>
+    <nav class="nav">
+      <a href="#">Sell an item</a>
+      <a href="#">Saved</a>
+      <a class="btn btn-ghost" style="padding:9px 20px" href="login.html">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="crumbs"><a href="browse-a-poster.html">Browse</a> &nbsp;/&nbsp; <a href="#">1970s</a> &nbsp;/&nbsp; Sony Walkman TPS-L2</div>
+
+  <div class="layout">
+    <div class="photo">
+      <img src="../../client/public/item-images/TRR-70S-ELE-1002.jpg" alt="Sony Walkman TPS-L2">
+    </div>
+
+    <div class="panel">
+      <div class="tags">
+        <span class="tag era">1970s</span>
+        <span class="tag cat">Electronics</span>
+        <span class="tag check">✓ Verified listing</span>
+      </div>
+      <h1>Sony Walkman TPS-L2</h1>
+      <div class="price">£220</div>
+      <div class="vat">Free UK delivery · 14-day returns</div>
+
+      <button class="btn btn-primary btn-big" onclick="location.href='confirm.html'">Buy now</button>
+      <button class="btn btn-ghost btn-big" style="margin-top:10px">♡ Save for later</button>
+
+      <div class="seller">
+        <div class="avatar">DD</div>
+        <div>
+          <div class="who">disco_dan</div>
+          <div class="sub">Seller since 2026 · 12 relics listed</div>
+        </div>
+      </div>
+
+      <div class="desc">
+        <h2>The story</h2>
+        <p>The original 1979 blue-and-silver Walkman — the machine that made music portable. Tested and working, plays warm and true. This is the exact model that started every mixtape romance of the decade.</p>
+      </div>
+
+      <div class="facts">
+        <div><span>Item ID</span><span>TRR-70S-ELE-1002</span></div>
+        <div><span>Era</span><span>1970s</span></div>
+        <div><span>Category</span><span>Electronics</span></div>
+        <div><span>Status</span><span>Verified</span></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>The Rest is Retro — curated vintage, sold by era.</span>
+    <span>Mockup · Item detail</span>
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It’s yours · The Rest is Retro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  body { display: grid; place-items: center; min-height: 100vh; padding: 24px; }
+  .done { width: 100%; max-width: 470px; text-align: center; }
+  .medal {
+    width: 92px; height: 92px; margin: 0 auto 24px;
+    border-radius: 50%; background: var(--amber);
+    display: grid; place-items: center;
+    font-size: 40px; color: var(--ink);
+    box-shadow: 0 0 0 10px rgba(255, 193, 7, 0.25);
+  }
+  h1 { font-family: var(--font-display); font-size: clamp(40px, 6vw, 56px); color: var(--orange); letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 10px 0 28px; }
+  .order {
+    display: flex; gap: 16px; align-items: center; text-align: left;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow);
+  }
+  .order img { width: 74px; height: 74px; object-fit: cover; border-radius: 10px; }
+  .order .t { font-weight: 600; font-size: 15px; }
+  .order .s { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .order .p { margin-left: auto; font-weight: 700; font-size: 17px; }
+  .ref { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  .actions { display: grid; gap: 10px; margin-top: 26px; }
+  .tagline { margin-top: 30px; font-family: var(--font-display); font-size: 15px; color: var(--teal); }
+</style>
+</head>
+<body>
+  <div class="done">
+    <div class="medal">✓</div>
+    <h1>It’s yours!</h1>
+    <div class="sub">Payment confirmed. disco_dan has been notified and your relic ships within 2 working days.</div>
+
+    <div class="order">
+      <img src="../../client/public/item-images/TRR-70S-ELE-1002.jpg" alt="">
+      <div>
+        <div class="t">Sony Walkman TPS-L2</div>
+        <div class="s">1970s · Electronics · sold by disco_dan</div>
+      </div>
+      <div class="p">£220</div>
+    </div>
+    <div class="ref">Order ref: TRR-ORD-0001 · vintage_vera</div>
+
+    <div class="actions">
+      <button class="btn btn-primary btn-big" onclick="location.href='browse-a-poster.html'">Keep digging</button>
+      <button class="btn btn-ghost btn-big">View my relics</button>
+    </div>
+
+    <div class="tagline">The rest is history.</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse — Direction A (Poster) · The Rest is Retro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .hero { padding: 72px 0 48px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8.5vw, 108px);
+    line-height: 0.98; letter-spacing: -0.015em;
+    color: var(--orange); text-transform: none;
+  }
+  .hero h1 .alt { color: var(--teal); }
+  .hero p { margin-top: 22px; font-size: 18px; color: var(--muted); max-width: 460px; }
+  .hero .row { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .hero .stamp {
+    font: 700 13px/1.4 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); background: var(--amber);
+    padding: 14px 18px; border-radius: 12px; rotate: 3deg;
+  }
+  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin: 34px 0 26px; }
+  .toolbar .sort { font-size: 14px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#">The <span class="rest">Rest</span> is <span class="retro">Retro</span></a>
+    <div class="search">⌕&nbsp; Search 48 verified relics…</div>
+    <nav class="nav">
+      <a href="#">Sell an item</a>
+      <a href="#">Saved</a>
+      <a class="btn btn-ghost" style="padding:9px 20px" href="login.html">Log in</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap row">
+    <div>
+      <h1>Dig it.<br><span class="alt">Buy it.</span><br>Relive it.</h1>
+      <p>Curated vintage sold by decade, not by drawer. Every listing checked and verified before it goes live.</p>
+    </div>
+    <div class="stamp">Est. 2026 · London<br>48 relics in stock</div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="toolbar">
+    <div class="chips" id="chips">
+      <button class="chip active" data-era="all">All decades <span class="count">48</span></button>
+      <button class="chip" data-era="1970s">’70s <span class="count">12</span></button>
+      <button class="chip" data-era="1980s">’80s <span class="count">12</span></button>
+      <button class="chip" data-era="1990s">’90s <span class="count">12</span></button>
+      <button class="chip" data-era="2000s">Y2K <span class="count">12</span></button>
+    </div>
+    <div class="sort">Sort: Newest ▾</div>
+  </div>
+
+  <div class="grid" id="grid">
+    <!-- 1970s -->
+    <a class="card" data-era="1970s" href="item-detail.html">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-70S-ELE-1002.jpg" alt=""><span class="era-badge era-1970s">1970s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Sony Walkman TPS-L2</div><div class="price">£220</div></div>
+    </a>
+    <a class="card" data-era="1970s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-70S-VIN-1004.jpg" alt=""><span class="era-badge era-1970s">1970s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Fleetwood Mac — Rumours LP</div><div class="price">£28</div></div>
+    </a>
+    <a class="card" data-era="1970s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-70S-FUR-1003.jpg" alt=""><span class="era-badge era-1970s">1970s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Wicker Peacock Chair</div><div class="price">£285</div></div>
+    </a>
+    <a class="card" data-era="1970s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-70S-CLO-1011.jpg" alt=""><span class="era-badge era-1970s">1970s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Platform Shoes</div><div class="price">£48</div></div>
+    </a>
+    <!-- 1980s -->
+    <a class="card" data-era="1980s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-80S-ELE-2002.jpg" alt=""><span class="era-badge era-1980s">1980s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Nintendo Entertainment System</div><div class="price">£145</div></div>
+    </a>
+    <a class="card" data-era="1980s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-80S-TOY-2010.jpg" alt=""><span class="era-badge era-1980s">1980s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Optimus Prime Transformer</div><div class="price">£240</div></div>
+    </a>
+    <a class="card" data-era="1980s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-80S-CLO-2001.jpg" alt=""><span class="era-badge era-1980s">1980s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Levi’s Denim Jacket</div><div class="price">£55</div></div>
+    </a>
+    <a class="card" data-era="1980s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-80S-VIN-2004.jpg" alt=""><span class="era-badge era-1980s">1980s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Michael Jackson — Thriller LP</div><div class="price">£35</div></div>
+    </a>
+    <!-- 1990s -->
+    <a class="card" data-era="1990s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-90S-ELE-3007.jpg" alt=""><span class="era-badge era-1990s">1990s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Apple iMac G3 (Bondi Blue)</div><div class="price">£175</div></div>
+    </a>
+    <a class="card" data-era="1990s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-90S-TOY-3005.jpg" alt=""><span class="era-badge era-1990s">1990s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Tamagotchi Original</div><div class="price">£32</div></div>
+    </a>
+    <a class="card" data-era="1990s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-90S-FUR-3008.jpg" alt=""><span class="era-badge era-1990s">1990s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Lava Lamp — Original Lava Lite</div><div class="price">£35</div></div>
+    </a>
+    <a class="card" data-era="1990s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-90S-CLO-3006.jpg" alt=""><span class="era-badge era-1990s">1990s</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">JNCO Wide-Leg Jeans</div><div class="price">£65</div></div>
+    </a>
+    <!-- 2000s -->
+    <a class="card" data-era="2000s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-Y2K-ELE-4002.jpg" alt=""><span class="era-badge era-2000s">Y2K</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Apple iPod Classic (1st Gen)</div><div class="price">£135</div></div>
+    </a>
+    <a class="card" data-era="2000s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-Y2K-ELE-4007.jpg" alt=""><span class="era-badge era-2000s">Y2K</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Nokia 3310</div><div class="price">£45</div></div>
+    </a>
+    <a class="card" data-era="2000s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-Y2K-CLO-4006.jpg" alt=""><span class="era-badge era-2000s">Y2K</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Juicy Couture Velour Tracksuit</div><div class="price">£85</div></div>
+    </a>
+    <a class="card" data-era="2000s" href="#">
+      <div class="imgbox"><img src="../../client/public/item-images/TRR-Y2K-FUR-4003.jpg" alt=""><span class="era-badge era-2000s">Y2K</span><span class="verified-dot">✓ Verified</span></div>
+      <div class="meta"><div class="title">Bubble Chair (Clear Acrylic)</div><div class="price">£380</div></div>
+    </a>
+  </div>
+
+  <footer class="site-footer">
+    <span>The Rest is Retro — curated vintage, sold by era.</span>
+    <span>Mockup · Direction A “Poster”</span>
+  </footer>
+</main>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.card');
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const era = chip.dataset.era;
+    cards.forEach(card => {
+      card.style.display = (era === 'all' || card.dataset.era === era) ? '' : 'none';
+    });
+  }));
+</script>
+</body>
+</html>

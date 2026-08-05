@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'mysecretssshhhhhhh';
+// Set JWT_SECRET in the server environment file. The fallback keeps local dev
+// working, but anyone reading this repo can forge tokens signed with it.
+const secret = process.env.JWT_SECRET || 'mysecretssshhhhhhh';
 const expiration = '2h';
 
 const authMiddleware = (req, res, next) => {
