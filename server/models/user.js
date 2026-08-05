@@ -12,8 +12,11 @@ class User extends Model {
 User.init(
   {
     username: {
+      // unique: login accepts a username OR an email, so duplicates would
+      // make it ambiguous which account is being signed into
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING,
