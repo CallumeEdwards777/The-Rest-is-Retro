@@ -291,9 +291,12 @@ img { display: block; max-width: 100%; }
   border-radius: var(--radius); color: var(--muted); font-size: 14px; font-weight: 500; }
 .more-more:hover { border-color: var(--orange); color: var(--orange); }
 
+.buyrow { display: flex; align-items: center; gap: 12px; }
+.buyrow .btn-big { flex: 1; }
+.buyrow .heart, .buybar .heart { position: static; width: 46px; height: 46px; flex: none; }
 .buybar { display: none; }
 @media (max-width: 860px) {
-  .panel .btn-big, .panel .btn-ghost { display: none; }
+  .panel .buyrow { display: none; }
   .buybar { position: fixed; inset: auto 0 0 0; display: flex; align-items: center;
     gap: 14px; background: var(--cream); border-top: 2px solid var(--ink);
     padding: 12px 20px calc(20px + env(safe-area-inset-bottom)); z-index: 20; }

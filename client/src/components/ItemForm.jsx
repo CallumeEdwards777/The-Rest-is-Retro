@@ -18,7 +18,7 @@ const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }
   const [era, setEra] = useState(initial?.era || ERAS[0]);
   const [categoryId, setCategoryId] = useState(initial?.category_id || '');
   const [categories, setCategories] = useState([]);
-  const [condition, setCondition] = useState(initial?.condition || 'tested_working');
+  const [condition, setCondition] = useState(initial?.condition || '');
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }
     formData.append('era', era);
     formData.append('price', Number(price));
     formData.append('category_id', Number(categoryId));
-    formData.append('condition', condition);
+    if (condition) formData.append('condition', condition);
     if (imageFile) {
       formData.append('image', imageFile);
     }

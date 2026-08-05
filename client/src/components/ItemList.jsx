@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import api from '../api';
 
 import ItemCard from './ItemCard';
@@ -24,18 +24,19 @@ const ItemList = () => {
   const [requiresLogin, setRequiresLogin] = useState(false);
 
   // The component stays mounted between footer-driven era navigations, so the
-  // initial-state computation above only fires once — this keeps it in sync.
-  // Skip the very first run: that's the initial mount, already handled by the
-  // useState initialiser above, and re-running it there would stomp onboarding
-  // prefs on a plain "/" visit.
-  const isFirstRender = useRef(true);
+  // initial-state computation above only fires once. Every NAVIGATION gets a
+  // fresh location.key (even to the same URL), so keying the sync on it means
+  // re-clicking the same footer link still applies. The initial key is skipped:
+  // the useState initialiser already handled it, and skipping by key (not by a
+  // boolean ref) keeps StrictMode's double effect-run from stomping the
+  // onboarding prefs on a plain "/" visit.
+  const { key: locationKey } = useLocation();
+  const initialLocationKey = useRef(locationKey);
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    if (locationKey === initialLocationKey.current) return;
     setPickedEras(validEraParam ? [validEraParam] : []);
-  }, [validEraParam]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locationKey]);
 
   useEffect(() => {
     const fetchItems = async () => {

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Navigate, Route, Routes, useSearchParams } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Welcome from './components/Welcome';
@@ -19,8 +19,13 @@ import { SessionProvider } from './contexts/SessionContext';
 import { SavedProvider } from './contexts/SavedContext';
 import { needsOnboarding } from './onboarding';
 
-// First-time visitors meet the quiz before the shop.
-const Home = () => (needsOnboarding() ? <Navigate to="/welcome" replace /> : <ItemList />);
+// First-time visitors meet the quiz before the shop — but a deep link to a
+// specific decade or search is an explicit destination, not a first hello.
+const Home = () => {
+  const [params] = useSearchParams();
+  const deepLink = params.get('era') || params.get('q');
+  return needsOnboarding() && !deepLink ? <Navigate to="/welcome" replace /> : <ItemList />;
+};
 
 const App = () => {
   return (

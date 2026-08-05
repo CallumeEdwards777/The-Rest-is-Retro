@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Faq = () => {
-  // React Router doesn't scroll to #anchors — do it on mount
+  // React Router doesn't scroll to #anchors — track the hash across navigations
+  const { hash, key } = useLocation();
   useEffect(() => {
-    if (window.location.hash === '#contact') {
+    if (hash === '#contact') {
       document.getElementById('contact')?.scrollIntoView({ block: 'start' });
     }
-  }, []);
+  }, [hash, key]);
 
   return (
     <main className="wrap listings-page">

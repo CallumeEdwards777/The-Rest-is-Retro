@@ -23,9 +23,20 @@ const ItemDetails = () => {
   const { savedIds, toggleSaved } = useSaved();
 
   useEffect(() => {
+    // Navigating card → card keeps this component mounted: clear the old
+    // item so a slow fetch can't leave the previous item's Buy button live
+    // under the new URL, and start the new page at the top.
+    let cancelled = false;
+    setItem(null);
+    setCategoryName('');
+    setSeller(null);
+    setBuyError('');
+    window.scrollTo(0, 0);
+
     const fetchItem = async () => {
       try {
         const response = await api.get(`/api/items/${id}`);
+        if (cancelled) return;
         setItem(response.data);
 
         const [categoryRes, sellerRes, itemsRes] = await Promise.allSettled([
@@ -33,6 +44,7 @@ const ItemDetails = () => {
           api.get(`/api/users/${response.data.seller_id}`),
           api.get('/api/items'),
         ]);
+        if (cancelled) return;
         if (categoryRes.status === 'fulfilled') setCategoryName(categoryRes.value.data?.category_name || '');
         if (sellerRes.status === 'fulfilled') setSeller(sellerRes.value.data);
         if (itemsRes.status === 'fulfilled') setAllItems(itemsRes.value.data);
@@ -42,6 +54,7 @@ const ItemDetails = () => {
     };
 
     fetchItem();
+    return () => { cancelled = true; };
   }, [id]);
 
   const handleBuy = async () => {
@@ -73,6 +86,9 @@ const ItemDetails = () => {
   }
 
   const isSold = item.status === 'sold';
+  // FAQ promise: only verified items can be bought — pending ones wait.
+  const buyable = item.status === 'verified';
+  const buyLabel = isSold ? 'Sold' : buyable ? 'Buy now' : 'Pending verification';
   const saved = savedIds.includes(item.id);
 
   // "More from this decade": reuses the already-fetched item list — same era, not self, first 3.
@@ -102,9 +118,18 @@ const ItemDetails = () => {
             {item.condition && <span className="tag cat">{CONDITION_LABELS[item.condition]}</span>}
           </div>
 
-          <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={isSold}>
-            {isSold ? 'Sold' : 'Buy now'}
-          </button>
+          <div className="buyrow">
+            <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={!buyable}>
+              {buyLabel}
+            </button>
+            <button
+              className={`heart ${saved ? 'on' : ''}`}
+              onClick={() => toggleSaved(item.id)}
+              aria-label="Save item"
+            >
+              {saved ? '♥' : '♡'}
+            </button>
+          </div>
           {buyError && <div className="form-error">{buyError}</div>}
 
           {seller && (
@@ -173,8 +198,8 @@ const ItemDetails = () => {
         >
           {saved ? '♥' : '♡'}
         </button>
-        <button className="btn btn-primary" onClick={handleBuy} disabled={isSold}>
-          {isSold ? 'Sold' : 'Buy now'}
+        <button className="btn btn-primary" onClick={handleBuy} disabled={!buyable}>
+          {buyLabel}
         </button>
       </div>
     </main>

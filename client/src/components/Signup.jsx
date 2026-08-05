@@ -2,6 +2,7 @@ import { useState } from 'react';
 import api from '../api';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSession } from '../contexts/SessionContext';
+import { useSaved } from '../contexts/SavedContext';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const Signup = () => {
   const [password2, setPassword2] = useState('');
 
   const { setUser } = useSession();
+  const { refreshSaved } = useSaved();
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -47,6 +49,7 @@ const Signup = () => {
         id: data.userData.id,
       });
 
+      refreshSaved();
       navigate('/');
     } catch (err) {
       console.error('Signup failed', err);

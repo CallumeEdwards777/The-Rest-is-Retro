@@ -95,16 +95,22 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
     if (item.status === "sold") {
       return res.status(400).json({ message: "This item has already been sold" });
     }
+    if (item.status !== "verified") {
+      // FAQ promise: pending items can be browsed and saved, not bought
+      return res.status(400).json({ message: "This item is still pending verification" });
+    }
     if (String(item.seller_id) === String(req.user.id)) {
       return res.status(400).json({ message: "You can't buy your own listing" });
     }
 
+    // atomic: only a currently-verified item can flip to sold, so two
+    // simultaneous buyers (or a buy racing a status change) can't both win
     const [affected] = await Item.update(
       { status: "sold" },
-      { where: { id: req.params.id, status: { [Op.ne]: "sold" } } }
+      { where: { id: req.params.id, status: "verified" } }
     );
     if (affected === 0) {
-      return res.status(400).json({ message: "This item has already been sold" });
+      return res.status(400).json({ message: "This item can't be bought right now" });
     }
 
     const updatedItem = await Item.findByPk(req.params.id);
