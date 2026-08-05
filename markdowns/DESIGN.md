@@ -31,7 +31,7 @@ decision, two directions mocked up:
 - **Direction B "Cooper"** — Fraunces 900: softer 70s Cooper-Black warmth
   (`concepts/mockups/browse-b-cooper.html`).
 
-Default if unstated: Direction A. Components (rounded cards, pill chips/buttons,
+**DECIDED (Martim, 2026-08-05): Direction B — Fraunces 900 headlines.** Components (rounded cards, pill chips/buttons,
 1px warm borders, sticky cream header) are shared across both and defined in
 `concepts/mockups/tokens.css`.
 
