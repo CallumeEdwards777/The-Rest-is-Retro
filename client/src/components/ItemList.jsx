@@ -9,7 +9,9 @@ const ERAS = ['1970s', '1980s', '1990s', '2000s'];
 
 const ItemList = () => {
   const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [era, setEra] = useState('all');
+  const [category, setCategory] = useState('all');
   const [requiresLogin, setRequiresLogin] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -38,8 +40,18 @@ const ItemList = () => {
     fetchItems();
   }, [query]);
 
-  const visibleItems = era === 'all' ? items : items.filter((item) => item.era === era);
+  useEffect(() => {
+    api.get('/api/categories')
+      .then((response) => setCategories(response.data))
+      .catch((error) => console.error('Failed to fetch categories', error));
+  }, []);
+
+  const visibleItems = items
+    .filter((item) => era === 'all' || item.era === era)
+    .filter((item) => category === 'all' || item.category_id === category);
   const countFor = (e) => items.filter((item) => item.era === e).length;
+  const countForCategory = (id) =>
+    items.filter((item) => (era === 'all' || item.era === era) && item.category_id === id).length;
 
   return (
     <>
@@ -79,6 +91,24 @@ const ItemList = () => {
                 ))}
               </div>
               {query && <div className="sort">Results for “{query}” · <Link to="/">clear</Link></div>}
+            </div>
+
+            <div className="chips chips-sub">
+              <button
+                className={`chip chip-small ${category === 'all' ? 'active' : ''}`}
+                onClick={() => setCategory('all')}
+              >
+                All categories
+              </button>
+              {categories.map((c) => (
+                <button
+                  key={c.id}
+                  className={`chip chip-small ${category === c.id ? 'active' : ''}`}
+                  onClick={() => setCategory(category === c.id ? 'all' : c.id)}
+                >
+                  {c.category_name} <span className="count">{countForCategory(c.id)}</span>
+                </button>
+              ))}
             </div>
 
             {visibleItems.length === 0 ? (
