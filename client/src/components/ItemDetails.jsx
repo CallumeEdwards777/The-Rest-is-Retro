@@ -2,16 +2,19 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
-import { eraLabel, formatPrice, itemImage } from './ItemCard';
+import ItemCard, { eraLabel, formatPrice, itemImage } from './ItemCard';
+import { useSaved } from '../contexts/SavedContext';
 
 const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [categoryName, setCategoryName] = useState('');
   const [seller, setSeller] = useState(null);
+  const [allItems, setAllItems] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [buyError, setBuyError] = useState('');
+  const { savedIds, toggleSaved } = useSaved();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -19,12 +22,14 @@ const ItemDetails = () => {
         const response = await api.get(`/api/items/${id}`);
         setItem(response.data);
 
-        const [categoryRes, sellerRes] = await Promise.allSettled([
+        const [categoryRes, sellerRes, itemsRes] = await Promise.allSettled([
           api.get(`/api/categories/${response.data.category_id}`),
           api.get(`/api/users/${response.data.seller_id}`),
+          api.get('/api/items'),
         ]);
         if (categoryRes.status === 'fulfilled') setCategoryName(categoryRes.value.data?.category_name || '');
         if (sellerRes.status === 'fulfilled') setSeller(sellerRes.value.data);
+        if (itemsRes.status === 'fulfilled') setAllItems(itemsRes.value.data);
       } catch (error) {
         console.error(`Failed to fetch item with id ${id}`, error);
       }
@@ -62,6 +67,12 @@ const ItemDetails = () => {
   }
 
   const isSold = item.status === 'sold';
+  const saved = savedIds.includes(item.id);
+
+  // "More from this decade": reuses the already-fetched item list — same era, not self, first 3.
+  const sameEra = allItems.filter((i) => i.era === item.era && i.id !== item.id);
+  const moreItems = sameEra.slice(0, 3);
+  const remaining = sameEra.length - moreItems.length;
 
   return (
     <main className="wrap">
@@ -70,21 +81,19 @@ const ItemDetails = () => {
       </div>
 
       <div className="layout">
-        <div className="photo">
+        <div className="photo plate">
           <img src={itemImage(item)} alt={item.title} />
         </div>
 
         <div className="panel">
-          <div className="tags">
-            <span className={`tag era era-${item.era}`}>{eraLabel(item.era)}</span>
-            {categoryName && <span className="tag cat">{categoryName}</span>}
+          <div className="kicker">{eraLabel(item.era)} / {categoryName} / {item.item_id}</div>
+
+          <h1>{item.title}</h1>
+          <div className="price">
+            {formatPrice(item.price)}
             {item.status === 'verified' && <span className="tag check">✓ Verified listing</span>}
             {isSold && <span className="tag sold">Sold</span>}
           </div>
-
-          <h1>{item.title}</h1>
-          <div className="price">{formatPrice(item.price)}</div>
-          <div className="vat">Free UK delivery · 14-day returns</div>
 
           <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={isSold}>
             {isSold ? 'Sold' : 'Buy now'}
@@ -101,24 +110,65 @@ const ItemDetails = () => {
             </div>
           )}
 
-          <div className="desc">
-            <h2>The story</h2>
-            <p>{item.description}</p>
-          </div>
-
-          <div className="facts">
-            <div><span>Item ID</span><span>{item.item_id}</span></div>
-            <div><span>Era</span><span>{item.era}</span></div>
-            {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
-            <div><span>Status</span><span>{item.status}</span></div>
-          </div>
+          {item.status === 'verified' && (
+            <div className="trust">
+              <h3>The TRR guarantee</h3>
+              <ul>
+                <li><span>✓</span> Seller submitted label, barcode or serial evidence</li>
+                <li><span>✓</span> Evidence checked against product records before the listing went live</li>
+                <li><span>✓</span> Full refund if it turns out not to be genuine</li>
+                <li><span>✓</span> Seller identity verified</li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
-      <footer className="site-footer">
-        <span>The Rest is Retro — curated vintage, sold by era.</span>
-        <span>The rest is history.</span>
-      </footer>
+      <div className="rule" />
+
+      <div className="layout bands">
+        <div className="desc">
+          <h2>The story</h2>
+          <p>{item.description}</p>
+        </div>
+
+        <div className="facts">
+          <div><span>Item ID</span><span>{item.item_id}</span></div>
+          <div><span>Era</span><span>{item.era}</span></div>
+          {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
+          <div><span>Status</span><span>{item.status}</span></div>
+        </div>
+      </div>
+
+      {sameEra.length > 0 && (
+        <section className="more">
+          <h2>More from the {eraLabel(item.era)}</h2>
+          <div className="grid">
+            {moreItems.map((i) => (
+              <ItemCard key={i.id} item={i} />
+            ))}
+            {remaining > 0 && (
+              <Link to={`/?era=${item.era}`} className="more-more">
+                {remaining} more relics from the {eraLabel(item.era)} · Browse the decade →
+              </Link>
+            )}
+          </div>
+        </section>
+      )}
+
+      <div className="buybar">
+        <span className="price">{formatPrice(item.price)}</span>
+        <button
+          className={`heart ${saved ? 'on' : ''}`}
+          onClick={() => toggleSaved(item.id)}
+          aria-label="Save item"
+        >
+          {saved ? '♥' : '♡'}
+        </button>
+        <button className="btn btn-primary" onClick={handleBuy} disabled={isSold}>
+          {isSold ? 'Sold' : 'Buy now'}
+        </button>
+      </div>
     </main>
   );
 };

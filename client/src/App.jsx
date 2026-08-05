@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<h1>Not Found</h1>} />
           </Routes>
+          <Footer />
         </SavedProvider>
       </SessionProvider>
     </Router>
