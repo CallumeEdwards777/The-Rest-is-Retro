@@ -25,10 +25,10 @@ const items = await Item.findAll({
     res.status(500).json({ error: "Error searching items" });
   }
 });
-// Route to add a new item (multipart form; optional "image" file)
-app.post("/", upload.single("image"), async (req, res) => {
+// Route to add a new item (multipart form; optional "image" file; seller = logged-in user)
+app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
   try {
-    const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
+    const { item_id, category_id, title, description, era, price, currency, status } = req.body;
 
     if (!title || !description || !era || !price) {
       return res.status(400).json({ message: "Missing required fields: title, description, era, price" });
@@ -38,7 +38,7 @@ app.post("/", upload.single("image"), async (req, res) => {
 
     const item = await Item.create({
       item_id: item_id || `TRR-NEW-${Date.now()}`,
-      seller_id,
+      seller_id: req.user.id,
       category_id,
       title,
       description,
@@ -106,20 +106,25 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
   }
 });
 
-// Route to update an item (multipart form; optional "image" file)
-app.put("/:id", upload.single("image"), async (req, res) => {
+// Route to update an item (multipart form; optional "image" file; owner only)
+app.put("/:id", authMiddleware, upload.single("image"), async (req, res) => {
   try {
-    const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
-    const updateData = { item_id, seller_id, category_id, title, description, era, price, currency, status };
+    const existing = await Item.findByPk(req.params.id);
+    if (!existing) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    if (String(existing.seller_id) !== String(req.user.id)) {
+      return res.status(403).json({ message: "You can only edit your own listings" });
+    }
+
+    const { category_id, title, description, era, price, currency, status } = req.body;
+    const updateData = { category_id, title, description, era, price, currency, status };
 
     if (req.file) {
       updateData.image_url = `http://${req.get("host")}/uploads/${req.file.filename}`;
     }
 
-    const [affectedRows] = await Item.update(updateData, { where: { id: req.params.id } });
-    if (affectedRows === 0) {
-      return res.status(404).json({ message: "Item not found" });
-    }
+    await Item.update(updateData, { where: { id: req.params.id } });
 
     const updatedItem = await Item.findByPk(req.params.id);
     res.json(updatedItem);
@@ -128,13 +133,18 @@ app.put("/:id", upload.single("image"), async (req, res) => {
   }
 });
 
-// Route to delete an item
-app.delete("/:id", async (req, res) => {
+// Route to delete an item (owner only)
+app.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const affectedRows = await Item.destroy({ where: { id: req.params.id } });
-    if (affectedRows === 0) {
+    const existing = await Item.findByPk(req.params.id);
+    if (!existing) {
       return res.status(404).json({ message: "Item not found" });
     }
+    if (String(existing.seller_id) !== String(req.user.id)) {
+      return res.status(403).json({ message: "You can only delete your own listings" });
+    }
+
+    await Item.destroy({ where: { id: req.params.id } });
     res.json({ message: "Item deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting item", error: error.message });

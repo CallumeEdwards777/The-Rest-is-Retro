@@ -48,6 +48,7 @@ const Header = () => {
           {token ? (
             <>
               <Link to="/create-item">Sell an item</Link>
+              <Link to="/my-listings">My listings</Link>
               <span className="avatar" title={user.username}>{getInitials(user.username)}</span>
               <button className="btn btn-ghost btn-compact" onClick={handleLogout}>Log out</button>
             </>

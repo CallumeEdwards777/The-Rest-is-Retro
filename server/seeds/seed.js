@@ -15,10 +15,11 @@ const seedDatabase = async () => {
 
   const categories = await Category.bulkCreate(categoriesData);
 
-    const users = await User.bulkCreate(usersData, {
-    individualHooks: true,
-    returning: true,
-  });
+  // Create users one at a time so ids always match user.json order —
+  // bulkCreate with individualHooks races the bcrypt hooks and shuffles ids
+  for (const userData of usersData) {
+    await User.create(userData);
+  }
 
   const items = await Item.bulkCreate(itemsData);
 
