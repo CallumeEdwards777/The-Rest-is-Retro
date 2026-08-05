@@ -67,7 +67,10 @@ These are facts from `server/seeds/` — designs must match them, not the other 
 
 - No order/purchase model or route — Buy button currently only logs to console.
 - `SavedItems.jsx` has no backing endpoint and is not routed.
-- `User.getOne` doesn't exist on the User model (`GET /api/users/me` and `/:id` 500).
+- Item photo uploads (ported from the teacher's `jason/backup-plan` branch): POST/PUT
+  `/api/items` accept a multipart `image` file; files land in `server/uploads/`
+  (gitignored) and are served at `/uploads/`. Seeded items keep the
+  `/item-images/<item_id>.jpg` convention; `image_url` wins when present.
 - Sequelize associations in `server/models/index.js` use camelCase foreign keys
   (`categoryId`, `userId`) while models declare snake_case columns — works, but creates
   confusing duplicate-ish columns; tidy if it causes trouble.

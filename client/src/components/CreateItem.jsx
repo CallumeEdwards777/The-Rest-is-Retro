@@ -16,6 +16,8 @@ const CreateItem = () => {
   const [era, setEra] = useState(ERAS[0]);
   const [categoryId, setCategoryId] = useState('');
   const [categories, setCategories] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -35,35 +37,35 @@ const CreateItem = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError('');
 
-    const newItem = {
-      item_id: `TRR-NEW-${Date.now()}`,
-      seller_id: user.id || 1,
-      category_id: Number(categoryId),
-      title,
-      description,
-      era,
-      price: Number(price),
-      currency: 'GBP',
-      status: 'available',
-    };
+    // Multipart form so the optional photo travels with the fields
+    const formData = new FormData();
+    formData.append('item_id', `TRR-NEW-${Date.now()}`);
+    formData.append('seller_id', user.id || 1);
+    formData.append('category_id', Number(categoryId));
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('era', era);
+    formData.append('price', Number(price));
+    formData.append('currency', 'GBP');
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
 
     api
-      .post('/api/items', newItem)
+      .post('/api/items', formData)
       .then(() => {
         navigate('/');
       })
-      .catch((error) => {
-        console.log('Error:', error);
-
-        if (error.response) {
-          console.log('Response:', error.response.data);
-        }
+      .catch((err) => {
+        console.log('Error:', err.response?.data || err);
+        setError(err.response?.data?.message || 'Listing failed — please try again.');
       });
   };
 
   return (
-    <div>
+    <div className="plain-page">
       <h1>List an Item</h1>
 
       <form onSubmit={handleSubmit}>
@@ -104,7 +106,17 @@ const CreateItem = () => {
           ))}
         </select>
 
-        <button type="submit">List Item</button>
+        <label htmlFor="photo">Photo (JPEG/PNG/WebP, max 5MB)</label>
+        <input
+          id="photo"
+          type="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          onChange={(event) => setImageFile(event.target.files[0] || null)}
+        />
+
+        <button className="btn btn-primary" type="submit">List Item</button>
+
+        {error && <div className="form-error">{error}</div>}
       </form>
     </div>
   );

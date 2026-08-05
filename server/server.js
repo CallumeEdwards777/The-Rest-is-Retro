@@ -23,6 +23,9 @@ const rebuild = process.argv[2] === "--rebuild";
 // Serve static files (item images) from the client's public directory
 app.use(express.static(path.join(__dirname, "../client/public")));
 
+// Serve uploaded images
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // In development the React client runs on Vite (port 5173); this server only provides the API
 app.get("/", (req, res) => {
   res.json({ message: "The Rest Is Retro API is running. The client runs on Vite in dev (http://localhost:5173)." });

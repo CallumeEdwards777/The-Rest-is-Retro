@@ -4,11 +4,14 @@ export const eraLabel = (era) => (era === '2000s' ? 'Y2K' : era);
 
 export const formatPrice = (price) => `£${Number(price).toFixed(0)}`;
 
+// Uploaded photo wins; seeded items fall back to the item_id image convention
+export const itemImage = (item) => item.image_url || `/item-images/${item.item_id}.jpg`;
+
 const ItemCard = ({ item }) => {
   return (
     <Link className="card" to={`/item/${item.id}`}>
       <div className="imgbox">
-        <img src={`/item-images/${item.item_id}.jpg`} alt={item.title} loading="lazy" />
+        <img src={itemImage(item)} alt={item.title} loading="lazy" />
         <span className={`era-badge era-${item.era}`}>{eraLabel(item.era)}</span>
         {item.status === 'verified' && <span className="verified-dot">✓ Verified</span>}
       </div>

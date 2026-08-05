@@ -1,6 +1,6 @@
 import { Link, Navigate, useLocation } from 'react-router-dom';
 
-import { eraLabel, formatPrice } from './ItemCard';
+import { eraLabel, formatPrice, itemImage } from './ItemCard';
 import { useSession } from '../contexts/SessionContext';
 
 const Confirm = () => {
@@ -24,7 +24,7 @@ const Confirm = () => {
         </div>
 
         <div className="order">
-          <img src={`/item-images/${item.item_id}.jpg`} alt={item.title} />
+          <img src={itemImage(item)} alt={item.title} />
           <div>
             <div className="t">{item.title}</div>
             <div className="s">

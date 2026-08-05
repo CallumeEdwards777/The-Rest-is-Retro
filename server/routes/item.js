@@ -4,6 +4,7 @@ const app = require("express").Router();
 const { Item } = require("../models/index");
 const {Op} = require("sequelize");
 const { authMiddleware } = require("../utils/auth");
+const upload = require("../utils/upload");
 
 app.get("/search", async (req, res) => {
   try {
@@ -24,17 +25,34 @@ const items = await Item.findAll({
     res.status(500).json({ error: "Error searching items" });
   }
 });
-// Route to add a new post
-app.post("/", async (req, res) => {
+// Route to add a new item (multipart form; optional "image" file)
+app.post("/", upload.single("image"), async (req, res) => {
   try {
-    console.log("Adding new item:", req.body);
     const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
-    const item = await Item.create({ item_id, seller_id, category_id, title, description, era, price, currency, status });
+
+    if (!title || !description || !era || !price) {
+      return res.status(400).json({ message: "Missing required fields: title, description, era, price" });
+    }
+
+    const image_url = req.file ? `http://${req.get("host")}/uploads/${req.file.filename}` : null;
+
+    const item = await Item.create({
+      item_id: item_id || `TRR-NEW-${Date.now()}`,
+      seller_id,
+      category_id,
+      title,
+      description,
+      era,
+      price,
+      currency: currency || "GBP",
+      status: status || "pending_verification",
+      image_url,
+    });
 
     res.status(201).json(item);
   } catch (error) {
-    console.error("Error adding post:", error);
-    res.status(500).json({ error: "Error adding post" });
+    console.error("Error creating item:", error);
+    res.status(500).json({ message: "Error creating item", error: error.message });
   }
 });
 
@@ -52,9 +70,12 @@ app.get("/", async (req, res) => {
 app.get("/:id", async (req, res) => {
   try {
     const item = await Item.findByPk(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
     res.json(item);
   } catch (error) {
-    res.status(500).json({ error: "Error retrieving post" });
+    res.status(500).json({ message: "Error retrieving item", error: error.message });
   }
 });
 
@@ -85,27 +106,38 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
   }
 });
 
-// Route to update a post
-app.put("/:id", async (req, res) => {
+// Route to update an item (multipart form; optional "image" file)
+app.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { item_id, seller_id, category_id, title, description, era, price, currency, status } = req.body;
-    const item = await Item.update(
-      { item_id, seller_id, category_id, title, description, era, price, currency, status },
-      { where: { id: req.params.id } },
-    );
-    res.json(item);
+    const updateData = { item_id, seller_id, category_id, title, description, era, price, currency, status };
+
+    if (req.file) {
+      updateData.image_url = `http://${req.get("host")}/uploads/${req.file.filename}`;
+    }
+
+    const [affectedRows] = await Item.update(updateData, { where: { id: req.params.id } });
+    if (affectedRows === 0) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    const updatedItem = await Item.findByPk(req.params.id);
+    res.json(updatedItem);
   } catch (error) {
-    res.status(500).json({ error: "Error updating post" });
+    res.status(500).json({ message: "Error updating item", error: error.message });
   }
 });
 
-// Route to delete a post
+// Route to delete an item
 app.delete("/:id", async (req, res) => {
   try {
-    const item = await Item.destroy({ where: { id: req.params.id } });
-    res.json(item);
+    const affectedRows = await Item.destroy({ where: { id: req.params.id } });
+    if (affectedRows === 0) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    res.json({ message: "Item deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Error deleting post" });
+    res.status(500).json({ message: "Error deleting item", error: error.message });
   }
 });
 

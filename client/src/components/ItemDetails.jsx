@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
-import { eraLabel, formatPrice } from './ItemCard';
+import { eraLabel, formatPrice, itemImage } from './ItemCard';
 
 const ItemDetails = () => {
   const [item, setItem] = useState(null);
@@ -71,7 +71,7 @@ const ItemDetails = () => {
 
       <div className="layout">
         <div className="photo">
-          <img src={`/item-images/${item.item_id}.jpg`} alt={item.title} />
+          <img src={itemImage(item)} alt={item.title} />
         </div>
 
         <div className="panel">
