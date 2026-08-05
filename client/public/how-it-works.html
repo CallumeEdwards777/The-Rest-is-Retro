@@ -65,7 +65,7 @@
   .body .you{color:var(--ink)}
   .body .how{color:var(--muted)}
   .body .how b{color:var(--ink);font-weight:600}
-  code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--cream);border:1px solid var(--line);padding:1px 6px;border-radius:6px;white-space:nowrap}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--cream);border:1px solid var(--line);padding:1px 6px;border-radius:6px;word-break:break-word}
 
   .numbers{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
   .num{background:var(--card);border:1.5px solid var(--ink);border-radius:12px;padding:12px 16px;text-align:center;box-shadow:3px 3px 0 var(--amber)}
@@ -75,6 +75,7 @@
   .say{border-left:4px solid var(--teal);background:var(--card);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin-bottom:10px;font-size:14.5px}
   .say b{color:var(--teal)}
 
+  @media(max-width:720px){#words .cards3{grid-template-columns:1fr !important}}
   footer{margin-top:48px;background:var(--ink);color:rgba(255,251,237,0.75);font-size:13px}
   footer .wrap{padding:18px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </style>
