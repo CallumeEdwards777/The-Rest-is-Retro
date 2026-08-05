@@ -170,6 +170,9 @@ img { display: block; max-width: 100%; }
 .panel .tags { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .tag { font: 700 12px/1 var(--font-body); letter-spacing: 0.04em; padding: 7px 12px; border-radius: 999px; }
 .tag.era { background: var(--orange); color: var(--cream); }
+.tag.era.era-1980s { background: var(--amber); color: var(--ink); }
+.tag.era.era-1990s { background: var(--teal); color: var(--cream); }
+.tag.era.era-2000s { background: var(--ink); color: var(--cream); }
 .tag.cat { background: var(--card); border: 1.5px solid var(--line); }
 .tag.check { background: var(--teal); color: var(--cream); }
 .tag.sold { background: var(--ink); color: var(--cream); }

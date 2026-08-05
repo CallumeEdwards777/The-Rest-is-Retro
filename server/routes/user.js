@@ -6,7 +6,9 @@ const SAFE_USER_ATTRIBUTES = { exclude: ["password"] };
 
 router.get("/me", authMiddleware, async (req, res) => {
   try {
-    const user = await User.getOne(req.user.id, SAFE_USER_ATTRIBUTES);
+    const user = await User.findByPk(req.user.id, {
+      attributes: SAFE_USER_ATTRIBUTES,
+    });
     if (!user) return res.status(401).json({ message: "Token expired" });
     return res.status(200).json({ user });
   } catch (err) {
@@ -18,7 +20,9 @@ router.get("/me", authMiddleware, async (req, res) => {
 router.get("/:id", async (req, res) => {
   console.log("looking for user", req.params.id);
   try {
-    const userData = await User.getOne(req.params.id, SAFE_USER_ATTRIBUTES);
+    const userData = await User.findByPk(req.params.id, {
+      attributes: SAFE_USER_ATTRIBUTES,
+    });
 
     if (!userData) {
       res.status(404).json({ message: "No User found with this id" });
