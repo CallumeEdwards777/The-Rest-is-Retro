@@ -17,11 +17,15 @@ export const itemImage = (item) => {
 
 const ItemCard = ({ item }) => {
   return (
-    <Link className="card" to={`/item/${item.id}`}>
+    <Link className={`card${item.status === 'sold' ? ' sold' : ''}`} to={`/item/${item.id}`}>
       <div className="imgbox">
         <img src={itemImage(item)} alt={item.title} loading="lazy" />
         <span className={`era-badge era-${item.era}`}>{eraLabel(item.era)}</span>
-        {item.status === 'verified' && <span className="verified-dot">✓ Verified</span>}
+        {item.status === 'sold' ? (
+          <span className="sold-dot">Sold</span>
+        ) : (
+          item.status === 'verified' && <span className="verified-dot">✓ Verified</span>
+        )}
       </div>
       <div className="meta">
         <div className="title">{item.title}</div>

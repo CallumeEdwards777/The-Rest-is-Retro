@@ -96,19 +96,50 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "You can't buy your own listing" });
     }
 
-    item.status = "sold";
-    await item.save();
+    const [affected] = await Item.update(
+      { status: "sold" },
+      { where: { id: req.params.id, status: { [Op.ne]: "sold" } } }
+    );
+    if (affected === 0) {
+      return res.status(400).json({ message: "This item has already been sold" });
+    }
+
+    const updatedItem = await Item.findByPk(req.params.id);
 
     res.json({
-      item,
+      item: updatedItem,
       order: {
-        ref: `TRR-ORD-${String(item.id).padStart(4, "0")}`,
+        ref: `TRR-ORD-${String(updatedItem.id).padStart(4, "0")}`,
         buyer_id: req.user.id,
       },
     });
   } catch (error) {
     console.error("Error buying item:", error);
     res.status(500).json({ error: "Error buying item" });
+  }
+});
+
+// Route to relist a sold item — resets it to pending verification (owner only)
+app.post("/:id/relist", authMiddleware, async (req, res) => {
+  try {
+    const item = await Item.findByPk(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    if (String(item.seller_id) !== String(req.user.id)) {
+      return res.status(403).json({ message: "You can only relist your own listings" });
+    }
+    if (item.status !== "sold") {
+      return res.status(400).json({ message: "Only sold items can be relisted" });
+    }
+
+    item.status = "pending_verification";
+    await item.save();
+
+    res.json(item);
+  } catch (error) {
+    console.error("Error relisting item:", error);
+    res.status(500).json({ error: "Error relisting item" });
   }
 });
 
