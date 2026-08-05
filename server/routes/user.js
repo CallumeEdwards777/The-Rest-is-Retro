@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const { User } = require("../models");
 const { signToken, authMiddleware } = require("../utils/auth");
 
@@ -79,7 +80,11 @@ router.put("/:id", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    // Accept either username or email in the "email" field
+    const login = req.body.email;
+    const userData = await User.findOne({
+      where: { [Op.or]: [{ email: login }, { username: login }] },
+    });
     if (!userData) {
       res
         .status(400)

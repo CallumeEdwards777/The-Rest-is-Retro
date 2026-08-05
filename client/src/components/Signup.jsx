@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import api from '../api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSession } from '../contexts/SessionContext';
 
 const Signup = () => {
-  const [email, setEmail] = useState();
-  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState();
+  const [password2, setPassword2] = useState('');
 
   const { setUser } = useSession();
   const [error, setError] = useState('');
@@ -16,25 +16,23 @@ const Signup = () => {
   const displayError = (message) => {
     setError(message);
     setTimeout(() => {
-        setError('');
+      setError('');
     }, 3000);
-};
+  };
 
   const validatePassword = () => {
     if (password !== password2) {
-        displayError('Passwords do not match');
-        return false;
+      displayError('Passwords do not match');
+      return false;
     }
     return true;
-    };
-
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // run any validation checks
     if (!validatePassword()) {
-        return;
+      return;
     }
 
     try {
@@ -44,52 +42,75 @@ const Signup = () => {
       // server responds with { token, userData }
       localStorage.setItem('authToken', data.token);
 
-      // Update the user in the context
       setUser({
         username: data.userData.username,
         id: data.userData.id,
       });
 
       navigate('/');
-    } catch (error) {
-      console.error('Signup failed', error);
+    } catch (err) {
+      console.error('Signup failed', err);
+      displayError('Signup failed — that username or email may already be taken.');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Signup</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Confirm Password"
-        value={password2}
-        onChange={(e) => setPassword2(e.target.value)}
-        required
-      />
-      {error && <p>{error}</p>}
-      <button type="submit">Signup</button>
-    </form>
+    <div className="auth-page">
+      <form className="auth" onSubmit={handleSubmit}>
+        <Link className="logo" to="/">
+          The <span className="rest">Rest</span> is <span className="retro">Retro</span>
+        </Link>
+        <div className="tagline">Where every era lives again.</div>
+
+        <div className="tabs">
+          <Link to="/login">Log in</Link>
+          <button type="button" className="on">Sign up</button>
+        </div>
+
+        <label htmlFor="username">Username</label>
+        <input
+          id="username"
+          placeholder="disco_dan"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+          required
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="••••••••••"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <label htmlFor="password2">Confirm password</label>
+        <input
+          id="password2"
+          type="password"
+          placeholder="••••••••••"
+          value={password2}
+          onChange={(e) => setPassword2(e.target.value)}
+          required
+        />
+
+        <button className="btn btn-primary" type="submit">Join the archive →</button>
+
+        {error && <div className="form-error">{error}</div>}
+      </form>
+    </div>
   );
 };
 
