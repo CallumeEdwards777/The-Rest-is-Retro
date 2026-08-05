@@ -5,6 +5,12 @@ import api from '../api';
 import ItemCard, { eraLabel, formatPrice, itemImage } from './ItemCard';
 import { useSaved } from '../contexts/SavedContext';
 
+const CONDITION_LABELS = {
+  tested_working: 'Tested & working',
+  display_only: 'Display only',
+  age_wear: 'Wear consistent with age',
+};
+
 const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [categoryName, setCategoryName] = useState('');
@@ -93,6 +99,7 @@ const ItemDetails = () => {
             {formatPrice(item.price)}
             {item.status === 'verified' && <span className="tag check">✓ Verified listing</span>}
             {isSold && <span className="tag sold">Sold</span>}
+            {item.condition && <span className="tag cat">{CONDITION_LABELS[item.condition]}</span>}
           </div>
 
           <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={isSold}>
@@ -137,6 +144,7 @@ const ItemDetails = () => {
           <div><span>Era</span><span>{item.era}</span></div>
           {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
           <div><span>Status</span><span>{item.status}</span></div>
+          <div><span>Condition</span><span>{CONDITION_LABELS[item.condition] || '—'}</span></div>
         </div>
       </div>
 

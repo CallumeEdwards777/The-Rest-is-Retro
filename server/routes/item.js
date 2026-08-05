@@ -28,11 +28,13 @@ const items = await Item.findAll({
 // Route to add a new item (multipart form; optional "image" file; seller = logged-in user)
 app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
   try {
-    const { category_id, title, description, era, price, currency } = req.body;
+    const { category_id, title, description, era, price, currency, condition } = req.body;
 
     if (!title || !description || !era || !price) {
       return res.status(400).json({ message: "Missing required fields: title, description, era, price" });
     }
+
+    const safeCondition = ["tested_working", "display_only", "age_wear"].includes(condition) ? condition : null;
 
     // relative, so the photo still loads when the site is opened from another
     // device or a real domain rather than whatever host uploaded it
@@ -49,6 +51,7 @@ app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
       currency: currency || "GBP",
       // "verified" is the shop's trust badge, never the seller's to award
       status: "pending_verification",
+      condition: safeCondition,
       image_url,
     });
 
@@ -154,8 +157,9 @@ app.put("/:id", authMiddleware, upload.single("image"), async (req, res) => {
       return res.status(403).json({ message: "You can only edit your own listings" });
     }
 
-    const { category_id, title, description, era, price, currency } = req.body;
-    const updateData = { category_id, title, description, era, price, currency };
+    const { category_id, title, description, era, price, currency, condition } = req.body;
+    const safeCondition = ["tested_working", "display_only", "age_wear"].includes(condition) ? condition : null;
+    const updateData = { category_id, title, description, era, price, currency, condition: safeCondition };
 
     if (req.file) {
       updateData.image_url = `/uploads/${req.file.filename}`;
