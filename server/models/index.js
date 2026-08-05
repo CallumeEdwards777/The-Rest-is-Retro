@@ -1,29 +1,29 @@
-const Post = require("./item");
 const Category = require("./category");
 const User = require("./user");
 const Item = require("./item");
 
-Post.belongsTo(Category, {
-  foreignKey: "categoryId",
+Item.belongsTo(Category, {
+  foreignKey: "category_id",
   as: "category",
 });
 
-Category.hasMany(Post, {
-  foreignKey: "categoryId",
-  as: "posts",
+Category.hasMany(Item, {
+  foreignKey: "category_id",
+  as: "items",
 });
 
-User.hasMany(Post, {
-  foreignKey: "userId",
+User.hasMany(Item, {
+  foreignKey: "seller_id",
+  as: "sold_items",
   onDelete: "CASCADE",
 });
 
-Post.belongsTo(User, {
-  foreignKey: "userId",
+Item.belongsTo(User, {
+  foreignKey: "seller_id",
+  as: "seller",
 });
 
 module.exports = {
-  Post,
   Category,
   User,
   Item,

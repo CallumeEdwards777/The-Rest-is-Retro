@@ -23,6 +23,9 @@ const rebuild = process.argv[2] === "--rebuild";
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "../client/public")));
 
+// Serve uploaded images
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Handle GET request at the root route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.htm"));

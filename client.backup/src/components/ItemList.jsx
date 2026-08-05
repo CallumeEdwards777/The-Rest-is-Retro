@@ -11,6 +11,8 @@ const ItemList = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
+
+        console.log('Fetching items from API...');
         const response = await api.get('/api/items');
 
         console.log('items', response.data);

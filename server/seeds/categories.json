@@ -1,17 +1,26 @@
 [
     {
-        "category_name": "Clothing"
+        "category_name": "Clothing",
+        "image_url": "http://localhost:3001/uploads/category-clothing.jpg"
     },
     {
-        "category_name": "Electronics"
+        "category_name": "Electronics",
+        "image_url": "http://localhost:3001/uploads/category-electronics.jpg"
     },
     {
-        "category_name": "Furniture"
+        "category_name": "Furniture",
+        "image_url": "http://localhost:3001/uploads/category-furniture.jpg"
     },
     {
-        "category_name": "Vinyl & Music"
+        "category_name": "Vinyl & Music",
+        "image_url": "http://localhost:3001/uploads/category-vinyl-music.jpg"
     },
     {
-        "category_name": "Toys & Games"
+        "category_name": "Toys & Games",
+        "image_url": "http://localhost:3001/uploads/category-toys-games.jpg"
+    },
+    {
+        "category_name": "Computing",
+        "image_url": "http://localhost:3001/uploads/category-computing.jpg"
     }
 ]

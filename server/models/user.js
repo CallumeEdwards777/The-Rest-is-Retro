@@ -7,6 +7,10 @@ class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
+
+  static async getOne(userId, options = {}) {
+    return User.findByPk(userId, options);
+  }
 }
 
 User.init(

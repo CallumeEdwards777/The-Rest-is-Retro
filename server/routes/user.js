@@ -7,27 +7,27 @@ const SAFE_USER_ATTRIBUTES = { exclude: ["password"] };
 router.get("/me", authMiddleware, async (req, res) => {
   try {
     const user = await User.getOne(req.user.id, SAFE_USER_ATTRIBUTES);
-    if (!user) return res.status(401).json({ message: "Token expired" });
-    return res.status(200).json({ user });
+    if (!user) {
+      return res.status(401).json({ message: "Token expired" });
+    }
+    res.status(200).json({ userData: user });
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Error fetching user:", err);
+    res.status(500).json({ message: "Error fetching user", error: err.message });
   }
 });
 
 
 router.get("/:id", async (req, res) => {
-  console.log("looking for user", req.params.id);
   try {
     const userData = await User.getOne(req.params.id, SAFE_USER_ATTRIBUTES);
-
     if (!userData) {
-      res.status(404).json({ message: "No User found with this id" });
-      return;
+      return res.status(404).json({ message: "User not found" });
     }
-
-    res.status(200).json(userData);
+    res.status(200).json({ userData });
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Error fetching user:", err);
+    res.status(500).json({ message: "Error fetching user", error: err.message });
   }
 });
 
@@ -36,60 +36,63 @@ router.get("/", authMiddleware, async (req, res) => {
     const users = await User.findAll({ attributes: SAFE_USER_ATTRIBUTES });
     res.status(200).json(users);
   } catch (err) {
-    res.status(400).json(err);
+    console.error("Error fetching users:", err);
+    res.status(500).json({ message: "Error fetching users", error: err.message });
   }
 });
 
 router.post("/", async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const { username, email, password } = req.body;
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "username, email, and password are required" });
+    }
 
+    const userData = await User.create(req.body);
     const token = signToken(userData);
     const safeUser = userData.toJSON();
     delete safeUser.password;
-    res.status(200).json({ token, userData: safeUser });
+    res.status(201).json({ token, userData: safeUser });
   } catch (err) {
-    res.status(400).json(err);
+    console.error("Error creating user:", err);
+    res.status(400).json({ message: "Error creating user", error: err.message });
   }
 });
 
 
 router.put("/:id", async (req, res) => {
   try {
-    const userData = await User.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
+    const [affectedRows] = await User.update(req.body, {
+      where: { id: req.params.id },
     });
 
-    if (!userData) {
-      res.status(404).json({ message: "No User found with this id" });
-      return;
+    if (affectedRows === 0) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json(userData);
+    const updatedUser = await User.getOne(req.params.id, SAFE_USER_ATTRIBUTES);
+    res.status(200).json({ userData: updatedUser });
   } catch (err) {
-    res.status(500).json(err);
+    console.error("Error updating user:", err);
+    res.status(500).json({ message: "Error updating user", error: err.message });
   }
 });
 
 router.post("/login", async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
-      return;
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: "email and password are required" });
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const userData = await User.findOne({ where: { email } });
+    if (!userData) {
+      return res.status(401).json({ message: "Incorrect email or password" });
+    }
 
+    const validPassword = await userData.checkPassword(password);
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: "Incorrect email or password, please try again" });
-      return;
+      return res.status(401).json({ message: "Incorrect email or password" });
     }
 
     const token = signToken(userData);
@@ -97,8 +100,8 @@ router.post("/login", async (req, res) => {
     delete safeUser.password;
     res.status(200).json({ token, userData: safeUser });
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    console.error("Error during login:", err);
+    res.status(500).json({ message: "Error during login", error: err.message });
   }
 });
 

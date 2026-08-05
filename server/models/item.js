@@ -6,33 +6,54 @@ class Item extends Model {}
 
 Item.init(
   {
+    item_id: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: true,
+    },
     title: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-     description: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    content: {
-      type: DataTypes.TEXT,
+    era: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    postedBy: {
-      type: DataTypes.TEXT,
+    price_cents: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    createdOn: {
-      type: DataTypes.DATE,
+    status: {
+      type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: Sequelize.NOW,
+      defaultValue: "verified",
     },
-   itemId: {
+    seller_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+    category_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "category",
         key: "id",
       },
+    },
+    image_url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.NOW,
     },
   },
   {
