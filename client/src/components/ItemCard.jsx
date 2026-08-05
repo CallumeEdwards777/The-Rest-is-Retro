@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom'
 
+export const eraLabel = (era) => (era === '2000s' ? 'Y2K' : era);
+
+export const formatPrice = (price) => `£${Number(price).toFixed(0)}`;
+
 const ItemCard = ({ item }) => {
   return (
-    <div className="card">
-        <img
-          className="card-image"
-          src={`/item-images/${item.item_id}.jpg`}
-          alt={item.title}
-        />
-        <div className="card-title">{item.title}</div>
-        <div className="card-meta">{item.era} · {item.price} {item.currency}</div>
-        <div className="card-options">
-          <Link className="button" to={`/item/${item.id}`}>View Details</Link>
-        </div>
-    </div>
+    <Link className="card" to={`/item/${item.id}`}>
+      <div className="imgbox">
+        <img src={`/item-images/${item.item_id}.jpg`} alt={item.title} loading="lazy" />
+        <span className={`era-badge era-${item.era}`}>{eraLabel(item.era)}</span>
+        {item.status === 'verified' && <span className="verified-dot">✓ Verified</span>}
+      </div>
+      <div className="meta">
+        <div className="title">{item.title}</div>
+        <div className="price">{formatPrice(item.price)}</div>
+      </div>
+    </Link>
   )
 }
 

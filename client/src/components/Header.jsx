@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
@@ -5,6 +6,7 @@ import { useSession } from '../contexts/SessionContext';
 const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('authToken');
+  const [query, setQuery] = useState('');
 
   const { user, setUser } = useSession();
 
@@ -14,6 +16,12 @@ const Header = () => {
     navigate('/login');
   };
 
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && query.trim()) {
+      navigate(`/?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   const getInitials = (username) => {
     if (!username) return '';
     return username.slice(0, 2).toUpperCase();
@@ -21,23 +29,36 @@ const Header = () => {
 
   return (
     <header className="site-header">
-      <Link to="/" className="brand">The Rest Is Retro</Link>
+      <div className="wrap">
+        <Link to="/" className="logo">
+          The <span className="rest">Rest</span> is <span className="retro">Retro</span>
+        </Link>
 
-      <nav>
-        <Link to="/">Shop</Link>
-        {token ? (
-          <>
-            <span className="avatar" title={user.username}>{getInitials(user.username)}</span>
-            <Link to="/create-item">List an Item</Link>
-            <button onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </>
-        )}
-      </nav>
+        <div className="search">
+          <span>⌕</span>
+          <input
+            placeholder="Search 48 verified relics…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleSearch}
+          />
+        </div>
+
+        <nav className="nav">
+          {token ? (
+            <>
+              <Link to="/create-item">Sell an item</Link>
+              <span className="avatar" title={user.username}>{getInitials(user.username)}</span>
+              <button className="btn btn-ghost btn-compact" onClick={handleLogout}>Log out</button>
+            </>
+          ) : (
+            <>
+              <Link to="/signup">Sign up</Link>
+              <Link className="btn btn-ghost btn-compact" to="/login">Log in</Link>
+            </>
+          )}
+        </nav>
+      </div>
     </header>
   );
 };
