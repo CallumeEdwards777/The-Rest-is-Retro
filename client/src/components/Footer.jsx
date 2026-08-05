@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const ERAS = [
   ['All decades', '/'],
@@ -9,6 +9,10 @@ const ERAS = [
 ];
 
 const Footer = () => {
+  // Card-flow screens (quiz, login, signup) are centered rituals — no footer there.
+  const { pathname } = useLocation();
+  if (['/welcome', '/login', '/signup'].includes(pathname)) return null;
+
   return (
     <footer className="site-footer">
       <div className="rule" aria-hidden="true" />
