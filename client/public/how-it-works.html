@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How The Rest is Retro works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#FFFBED; --ink:#211B12; --teal:#3C7F72; --amber:#FFC107;
+    --orange:#D34A24; --orange-deep:#992800; --card:#FFFFFF;
+    --line:rgba(33,27,18,0.12); --muted:rgba(33,27,18,0.62);
+    --font-display:"Fraunces",Georgia,serif; --font-body:"Inter",sans-serif;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+  .rule{height:6px;background:linear-gradient(to right,var(--orange) 0 25%,var(--amber) 25% 50%,var(--teal) 50% 75%,var(--ink) 75% 100%)}
+
+  header.hero{padding:56px 0 36px;text-align:left}
+  .hero h1{font-family:var(--font-display);font-weight:900;font-size:clamp(38px,7vw,64px);line-height:1;letter-spacing:-0.02em;color:var(--orange);text-shadow:2px 2px 0 var(--amber)}
+  .hero h1 .alt{color:var(--teal)}
+  .hero p{margin-top:16px;color:var(--muted);max-width:56ch}
+  .stamp{display:inline-block;margin-top:20px;font:700 12px/1.4 var(--font-body);letter-spacing:0.1em;text-transform:uppercase;background:var(--amber);padding:10px 14px;border-radius:10px;border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);rotate:-2deg}
+
+  nav.toc{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--cream) 94%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 0}
+  nav.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
+  nav.toc a{font:600 13px/1 var(--font-body);color:var(--ink);text-decoration:none;padding:8px 13px;border-radius:999px;border:1.5px solid var(--line);background:var(--card)}
+  nav.toc a:hover{border-color:var(--ink)}
+
+  section{padding:40px 0 8px}
+  h2{font-family:var(--font-display);font-weight:900;font-size:clamp(26px,4vw,36px);letter-spacing:-0.01em;margin-bottom:6px}
+  .kicker{font:600 11.5px/1 var(--font-body);letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+  .lead{color:var(--muted);max-width:62ch;margin-bottom:20px}
+
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 16px}
+  @media(max-width:720px){.cards3{grid-template-columns:1fr}}
+  .box{background:var(--card);border:1.5px solid var(--ink);border-radius:var(--radius);padding:18px;box-shadow:5px 5px 0 rgba(33,27,18,0.12)}
+  .box h3{font-family:var(--font-display);font-size:19px;margin-bottom:6px}
+  .box .tagchip{display:inline-block;font:700 10.5px/1 var(--font-body);letter-spacing:0.06em;padding:5px 9px;border-radius:999px;margin-bottom:10px;color:var(--cream)}
+  .box p{font-size:14px;color:var(--muted)}
+  .arrowline{text-align:center;color:var(--muted);font-size:13px;margin:2px 0 18px}
+
+  ol.journey{list-style:none;counter-reset:step}
+  ol.journey>li{counter-increment:step;position:relative;padding:14px 16px 14px 58px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px}
+  ol.journey>li::before{content:counter(step);position:absolute;left:14px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--cream);font:700 14px/30px var(--font-body);text-align:center}
+  ol.journey b{font-weight:600}
+  ol.journey .side{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+  ol.journey>li.j70::before{background:var(--orange)}
+  ol.journey>li.j80::before{background:var(--amber);color:var(--ink)}
+  ol.journey>li.j90::before{background:var(--teal)}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+  details[open]{border-color:var(--ink)}
+  summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:flex;align-items:center;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary .pill{flex:none;font:700 10.5px/1 var(--font-body);letter-spacing:0.05em;text-transform:uppercase;padding:5px 9px;border-radius:999px;color:var(--cream)}
+  .p-buy{background:var(--orange)} .p-sell{background:var(--teal)} .p-trust{background:var(--ink)} .p-glue{background:var(--amber);color:var(--ink)}
+  summary::after{content:"+";margin-left:auto;font-family:var(--font-display);font-size:20px;color:var(--muted)}
+  details[open] summary::after{content:"–"}
+  .body{padding:0 16px 16px;font-size:14.5px}
+  .body p{margin-bottom:8px}
+  .body .you{color:var(--ink)}
+  .body .how{color:var(--muted)}
+  .body .how b{color:var(--ink);font-weight:600}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--cream);border:1px solid var(--line);padding:1px 6px;border-radius:6px;white-space:nowrap}
+
+  .numbers{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+  .num{background:var(--card);border:1.5px solid var(--ink);border-radius:12px;padding:12px 16px;text-align:center;box-shadow:3px 3px 0 var(--amber)}
+  .num b{display:block;font-family:var(--font-display);font-size:26px;color:var(--orange)}
+  .num span{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+
+  .say{border-left:4px solid var(--teal);background:var(--card);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin-bottom:10px;font-size:14.5px}
+  .say b{color:var(--teal)}
+
+  footer{margin-top:48px;background:var(--ink);color:rgba(255,251,237,0.75);font-size:13px}
+  footer .wrap{padding:18px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<div class="rule"></div>
+<header class="hero"><div class="wrap">
+  <h1>Every feature,<br><span class="alt">explained.</span></h1>
+  <p>The plain-language map of how The Rest is Retro works: what a visitor experiences, and what the code quietly does each time. Click any card to open it. Nothing here needs you to read code.</p>
+  <span class="stamp">The Rest is Retro · field guide</span>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#big">The big picture</a>
+  <a href="#buyer">Buying</a>
+  <a href="#seller">Selling</a>
+  <a href="#features">Feature by feature</a>
+  <a href="#words">Tech words</a>
+  <a href="#story">Saying it out loud</a>
+</div></nav>
+
+<section id="big"><div class="wrap">
+  <div class="kicker">Part 1</div>
+  <h2>The big picture: three machines</h2>
+  <p class="lead">The whole site is three programs talking to each other. Every feature below is just a different conversation between them.</p>
+  <div class="cards3">
+    <div class="box"><span class="tagchip" style="background:var(--orange)">THE FACE</span>
+      <h3>React app</h3>
+      <p>Everything you see and click. Runs in the browser at <code>localhost:5173</code>. It holds no real data; it asks for it.</p></div>
+    <div class="box"><span class="tagchip" style="background:var(--teal)">THE RULES</span>
+      <h3>Express API</h3>
+      <p>A program at <code>localhost:3001</code> that answers requests: "give me the items", "buy this", "save that". It enforces every rule: who owns what, what can be bought, who you are.</p></div>
+    <div class="box"><span class="tagchip" style="background:var(--ink)">THE MEMORY</span>
+      <h3>MySQL database</h3>
+      <p>Where everything lives when the tab closes: users, the 48 items, saved hearts. Named <code>vintage_db</code>. Only the API talks to it, never the browser.</p></div>
+  </div>
+  <p class="arrowline">browser ⇄ asks the API ⇄ reads and writes the database</p>
+  <p class="lead">One real example: you press <b>Buy now</b>. React sends "buy item 2" plus your identity token to the API. The API checks the item exists, is verified, isn't yours, isn't sold, then writes "sold" into the database and answers with an order reference. React takes you to the confirmation screen. Total time: a blink.</p>
+</div></section>
+
+<section id="buyer"><div class="wrap">
+  <div class="kicker">Part 2</div>
+  <h2>A buyer's journey</h2>
+  <p class="lead">This is the demo path, in order. Each step is a feature we built.</p>
+  <ol class="journey">
+    <li class="j70"><b>First visit: the quiz.</b> A brand-new visitor is redirected to two questions: which decades, which categories, each choice a photo tile.<span class="side">Answers are stored in the browser under the name <code>onboarding</code>. Anyone with an account skips this gate. Deep links like <code>/?era=1990s</code> skip it too.</span></li>
+    <li class="j80"><b>Save your picks.</b> A third panel offers signup or login ("Awesome! Create an account to save your preferences"), with a quiet "just browse" escape.<span class="side">On signup the answers are also written onto your account in the database, so they follow you to any device.</span></li>
+    <li class="j90"><b>A shop that's already yours.</b> The browse page opens with your decades and categories pre-selected and the headline switches to "Your favourites, back on sale."</span><span class="side">The filter chips are real buttons: everything stays adjustable.</span></li>
+    <li class="j70"><b>Finding things.</b> Search in the header (searches everything, ignoring your filters on purpose), decade and category chips with live counts, and decade links in the footer that deep-link the shop.</li>
+    <li class="j80"><b>The item page.</b> Big photo on an amber plate, price, condition label, the seller (clickable, goes to their shop), the TRR guarantee box, the story, the facts, and three more finds from the same decade.</li>
+    <li class="j90"><b>Buying.</b> Buy now works only on verified items; pending ones say so and refuse. Two people can't buy the same thing: the database flips it to sold exactly once.<span class="side">You land on a confirmation with an order reference like <code>TRR-ORD-0002</code>, and back on the grid the item now wears a Sold badge.</span></li>
+    <li class="j70"><b>Hearts.</b> The ♡ on every card saves an item to your account; the Saved page collects them. Logged out? A tap sends you to login first.</li>
+  </ol>
+</div></section>
+
+<section id="seller"><div class="wrap">
+  <div class="kicker">Part 3</div>
+  <h2>A seller's journey</h2>
+  <ol class="journey">
+    <li class="j90"><b>List an item.</b> Title, story, price, decade, category, condition, and a photo (checked to really be an image, capped at 5MB).<span class="side">The photo is stored by the API in an uploads folder; the listing points at it.</span></li>
+    <li class="j80"><b>Pending verification.</b> Every new listing starts here. It can be browsed and hearted, but not bought. Sellers cannot award themselves the Verified badge: the server decides status, never the form.</li>
+    <li class="j70"><b>My listings.</b> Your items with status pills: Verified, Pending, Sold. Edit and Delete exist only for the owner: the server checks that the person asking is the seller before touching anything.</li>
+    <li class="j90"><b>Sold, and back again.</b> When something sells it flips to Sold everywhere. A Relist button puts it back to pending, so a stray demo purchase is a one-click recovery.</li>
+  </ol>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <div class="kicker">Part 4</div>
+  <h2>Feature by feature, under the hood</h2>
+  <p class="lead">Each card: what you see, then what actually happens. File names are where the code lives, in case anyone asks.</p>
+
+  <details><summary><span class="pill p-glue">Glue</span>Accounts and staying logged in</summary><div class="body">
+    <p class="you">You sign up or log in once; the site remembers you across refreshes, and greets you with your initials in the header.</p>
+    <p class="how">Passwords are stored <b>scrambled</b> (bcrypt hashing): even the database never holds the real one. On login the API hands back a <b>token</b>, a signed note saying "this is vera, valid 2 hours". The browser keeps it and attaches it to every request that needs identity. Usernames and emails are unique, so login can accept either. Files: <code>server/routes/user.js</code>, <code>client/src/components/Login.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-buy">Buy</span>The welcome quiz and the personalised shop</summary><div class="body">
+    <p class="you">Two photo-tile questions, an account nudge, then a shop pre-filtered to your taste.</p>
+    <p class="how">Answers live in the browser (<code>localStorage</code>) and, once you have an account, also on your user row in the database, in a <code>preferences</code> column. On any login they're pulled back down, which is why a wiped browser still knows your decades. The browse page reads them as its starting filter. Files: <code>client/src/components/Welcome.jsx</code>, <code>client/src/onboarding.js</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-buy">Buy</span>Search, chips and decade deep links</summary><div class="body">
+    <p class="you">Type "walkman", press enter, get the Walkman, whatever filters were on. Chips narrow by decade and category with live counts. Footer decade links open the shop already filtered.</p>
+    <p class="how">Search asks the API to look through titles and descriptions in the database (<code>GET /api/items/search</code>). The chips filter in the browser: all 48 items are already loaded, so filtering is instant. A link like <code>/?era=1980s</code> is read from the address bar and applied as the filter. Files: <code>client/src/components/ItemList.jsx</code>, <code>server/routes/item.js</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-trust">Trust</span>The Verified badge and the TRR guarantee</summary><div class="body">
+    <p class="you">Verified items carry a teal tick and a guarantee box: evidence checked, full refund if it's not genuine.</p>
+    <p class="how">This is the shop's honest C2C story: we never touch the items. Sellers submit label, barcode or serial evidence; it's checked before the listing goes live; the badge means "you're covered", not "we inspected it in a studio". In code, it's simply a <code>status</code> field the <b>server controls</b>: new listings are always pending, and only verified ones can be bought, enforced at the API so no clever browser can bypass it. Files: <code>server/routes/item.js</code>, FAQ copy in <code>client/src/components/Faq.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-trust">Trust</span>Condition labels</summary><div class="body">
+    <p class="you">Every item states its condition: Tested &amp; working, Display only, or Wear consistent with age.</p>
+    <p class="how">One extra column on the item table with exactly three allowed values; the server rejects anything else. The 48 seeded items were labelled by reading each description: only genuinely untestable things (a sealed Tamagotchi, a boxed doll set, an untested Sega) got Display only. Sellers pick a label when listing; editing without picking changes nothing. Files: <code>server/models/item.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-buy">Buy</span>Buying, exactly once</summary><div class="body">
+    <p class="you">Buy now gives you a confirmation and an order reference; the item shows Sold everywhere immediately.</p>
+    <p class="how">The API refuses to sell what is unverified, already sold, or your own listing. The actual flip to "sold" is a single conditional database write: "set sold where this item is still verified". If two buyers race, the database lets exactly one through, and the loser gets a polite no. There's no payment: money is out of scope, the order reference stands in for it. Files: <code>server/routes/item.js</code> (the buy route), <code>client/src/components/Confirm.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-buy">Buy</span>Hearts and the Saved page</summary><div class="body">
+    <p class="you">Tap ♡ anywhere, it fills; the Saved page collects your finds; unsaving removes them live.</p>
+    <p class="how">A tiny table in the database pairs your user id with an item id, one row per heart. Three API endpoints: list mine, save one, unsave one, all requiring your token, all scoped to <b>you</b> (no way to read anyone else's). The browser keeps the list in shared memory so every heart on every page agrees, updates optimistically, and double-taps can't race. Files: <code>server/routes/savedItem.js</code>, <code>client/src/contexts/SavedContext.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-sell">Sell</span>Listing with a photo</summary><div class="body">
+    <p class="you">Fill the form, attach a photo, done: your item appears with its picture.</p>
+    <p class="how">The photo travels to the API, which checks it's genuinely an image type, caps it at 5MB, renames it randomly, and gives it an extension based on what it <b>is</b>, not what it was called (so a web page pretending to be a photo can't sneak in). The 48 seeded items use pre-shot photos matched by item code instead. Files: <code>server/utils/upload.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-sell">Sell</span>Ownership: edit, delete, relist</summary><div class="body">
+    <p class="you">You can manage your listings; you can't touch anyone else's, and they can't touch yours.</p>
+    <p class="how">Every changing request carries your token; the API compares the item's <code>seller_id</code> with the id inside the token and answers 403 if they differ. Relist is the same check plus one rule: only sold items go back to pending. Files: <code>server/routes/item.js</code>, <code>client/src/components/MyListings.jsx</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-sell">Sell</span>Seller shops</summary><div class="body">
+    <p class="you">Tap a seller's name on any item and you get their whole shop: "16 relics listed".</p>
+    <p class="how">The page asks the API who the seller is (id and username only: emails are never exposed publicly) and filters the item list to theirs. Files: <code>client/src/components/SellerPage.jsx</code>, <code>server/routes/user.js</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-glue">Glue</span>The design system</summary><div class="body">
+    <p class="you">Cream paper, burnt orange and teal, chunky serif headlines, a sunburst hero, cards that print an ink block when you hover.</p>
+    <p class="how">One palette (cream, ink, orange, amber, teal) and two typefaces (Fraunces for display, Inter for text) defined once as variables in a single stylesheet; every screen reuses them, which is why everything matches, this page included. The hero's sunburst and grain are pure CSS, no images. Decade badges are colour-coded: orange '70s, amber '80s, teal '90s, ink Y2K. File: <code>client/src/index.css</code>, decisions in <code>markdowns/DESIGN.md</code>.</p>
+  </div></details>
+
+  <details><summary><span class="pill p-glue">Glue</span>Demo data and the reset button</summary><div class="body">
+    <p class="you">The shop always has 48 believable items across 4 decades and 5 categories, with three ready-made users.</p>
+    <p class="how">A seed script wipes and rebuilds the database from JSON files: same 48 items, same photos, same three users (<code>vintage_vera</code>, <code>disco_dan</code>, <code>y2k_yasmin</code>, password <code>password123</code>) every time. If a demo ever goes sideways, <code>npm run seed</code> is a five-second undo for the whole world. Files: <code>server/seeds/</code>.</p>
+  </div></details>
+</div></section>
+
+<section id="words"><div class="wrap">
+  <div class="kicker">Part 5</div>
+  <h2>Six tech words, translated</h2>
+  <div class="cards3" style="grid-template-columns:repeat(2,1fr)">
+    <div class="box"><h3>API</h3><p>A program you talk to with requests instead of clicks. Ours answers at <code>localhost:3001</code> and every answer is data, not pages.</p></div>
+    <div class="box"><h3>Endpoint</h3><p>One address on the API for one job. <code>POST /api/items/2/buy</code> means "buy item 2". The site uses about twenty.</p></div>
+    <div class="box"><h3>Token (JWT)</h3><p>A tamper-proof note the API signs at login: "this is vera, for 2 hours". Sent with every request that needs to know who's asking.</p></div>
+    <div class="box"><h3>localStorage</h3><p>A small notebook inside your browser. We keep the token, your session name, and your quiz answers there so refreshing doesn't forget you.</p></div>
+    <div class="box"><h3>Component</h3><p>A reusable piece of screen. The item card is one component used in five different places, which is why cards look identical everywhere.</p></div>
+    <div class="box"><h3>Seed</h3><p>A script that fills an empty database with known starting data. Ours plants the 48 relics and 3 users, identically every run.</p></div>
+  </div>
+</div></section>
+
+<section id="story"><div class="wrap">
+  <div class="kicker">Part 6</div>
+  <h2>Saying it out loud</h2>
+  <p class="lead">Five true sentences for the presentation, each backed by something in this page.</p>
+  <div class="say"><b>The pitch.</b> "Depop and eBay do scale; nobody does trust-for-old-things. We answer 'why not just eBay it?' with three layers: a money-back guarantee on authenticity, honest condition labels, and decade-first curation."</div>
+  <div class="say"><b>The shape.</b> "It's a classic three-part app: a React front end, an Express API that enforces every rule, and a MySQL database. The browser never touches the database directly."</div>
+  <div class="say"><b>The trust story.</b> "We stayed honest about being C2C: the Verified badge means the buyer is covered by evidence checks and refunds, not that we handled the item. The server enforces it: pending items literally cannot be bought."</div>
+  <div class="say"><b>The personal touch.</b> "First-time visitors answer two questions and the shop rearranges around them, like a mobile app onboarding. The answers live on the account, so they follow you across devices."</div>
+  <div class="say"><b>The build.</b> "We rebuilt from a half-migrated template: repaired the client-server contract, designed the brand as a token system, then shipped buying, selling, photo uploads, hearts and onboarding, each verified in a real browser before commit."</div>
+  <div class="numbers">
+    <div class="num"><b>48</b><span>relics</span></div>
+    <div class="num"><b>4</b><span>decades</span></div>
+    <div class="num"><b>5</b><span>categories</span></div>
+    <div class="num"><b>~20</b><span>endpoints</span></div>
+    <div class="num"><b>3</b><span>seeded users</span></div>
+    <div class="num"><b>2</b><span>build days</span></div>
+  </div>
+</div></section>
+
+<footer><div class="rule" style="margin:0"></div><div class="wrap">
+  <span>The Rest is Retro · field guide for the team</span>
+  <span>open the app at localhost:5173 and click along</span>
+</div></footer>
+
+</body>
+</html>
