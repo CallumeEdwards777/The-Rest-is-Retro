@@ -79,7 +79,7 @@ img { display: block; max-width: 100%; }
    let the header run to a second row instead of pushing the page sideways */
 @media (max-width: 560px) {
   .site-header .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; gap: 10px; }
-  .nav { margin-left: 0; width: 100%; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+  .nav { gap: 14px; font-size: 13.5px; }
 }
 
 /* ---------- buttons ---------- */
@@ -253,6 +253,17 @@ img { display: block; max-width: 100%; }
   font: inherit;
 }
 .opt img { flex: none; width: 78px; height: 78px; border-radius: 10px; object-fit: cover; background: #EFE9DA; }
+
+/* decade question: 2x2 photo tiles, the pictures carry the screen */
+.opts.tiles { grid-template-columns: 1fr 1fr; gap: 12px; }
+.opt.tile { display: block; padding: 0; overflow: hidden; }
+.opt.tile img { width: 100%; height: auto; aspect-ratio: 1; border-radius: 0; }
+.opt.tile .opt-text { display: block; padding: 10px 12px 12px; }
+.opt.tile .opt-tick {
+  top: 12px; right: 12px; transform: none;
+  background: rgba(255, 251, 237, 0.92); border-color: transparent;
+  box-shadow: 0 1px 4px rgba(33, 27, 18, 0.25);
+}
 .opt:hover { border-color: var(--ink); }
 .opt.on { border-color: var(--orange); background: rgba(211, 74, 36, 0.07); }
 .opt-label { display: block; font-weight: 700; font-size: 15.5px; }

@@ -6,12 +6,11 @@ import AccountStep from './AccountStep';
 import { readOnboarding, saveOnboarding } from '../onboarding';
 
 // value = the era stored in the database; label = what the shopper reads.
-// pic = a real listing photo that reads instantly at thumbnail size.
 const ERAS = [
-  { value: '1970s', label: '’70s', blurb: 'Disco, denim, warm wood', pic: 'TRR-70S-FUR-1003' },
-  { value: '1980s', label: '’80s', blurb: 'Neon, chrome, big sound', pic: 'TRR-80S-TOY-2005' },
-  { value: '1990s', label: '’90s', blurb: 'Grunge, plastic, first tech', pic: 'TRR-90S-ELE-3012' },
-  { value: '2000s', label: 'Y2K', blurb: 'Shine, flip phones, gadgets', pic: 'TRR-Y2K-CLO-4006' },
+  { value: '1970s', label: '’70s', blurb: 'Disco, denim, warm wood' },
+  { value: '1980s', label: '’80s', blurb: 'Neon, chrome, big sound' },
+  { value: '1990s', label: '’90s', blurb: 'Grunge, plastic, first tech' },
+  { value: '2000s', label: 'Y2K', blurb: 'Shine, flip phones, gadgets' },
 ];
 
 // Categories come from the API, so the picture is looked up by name and
@@ -52,11 +51,12 @@ const Welcome = () => {
   const questions = [
     {
       title: 'Which decades speak to you?',
+      tiles: true,
       options: ERAS.map((e) => ({
         key: e.value,
         label: e.label,
         blurb: e.blurb,
-        pic: e.pic,
+        src: `/onboarding/${e.value}.jpg`,
         on: eras.includes(e.value),
         toggle: () => toggle(setEras, e.value),
       })),
@@ -64,11 +64,12 @@ const Welcome = () => {
     },
     {
       title: 'What do you hunt for?',
+      tiles: false,
       options: categories.map((c) => ({
         key: c.id,
         label: c.category_name,
         blurb: null,
-        pic: CATEGORY_PICS[c.category_name],
+        src: CATEGORY_PICS[c.category_name] && `/item-images/${CATEGORY_PICS[c.category_name]}.jpg`,
         on: categoryIds.includes(c.id),
         toggle: () => toggle(setCategoryIds, c.id),
       })),
@@ -108,15 +109,15 @@ const Welcome = () => {
           <>
             <h1>{q.title}</h1>
 
-            <div className="opts">
+            <div className={`opts ${q.tiles ? 'tiles' : ''}`}>
               {q.options.map((o) => (
                 <button
                   key={o.key}
                   type="button"
-                  className={`opt ${o.on ? 'on' : ''}`}
+                  className={`opt ${q.tiles ? 'tile' : ''} ${o.on ? 'on' : ''}`}
                   onClick={o.toggle}
                 >
-                  {o.pic && <img src={`/item-images/${o.pic}.jpg`} alt="" />}
+                  {o.src && <img src={o.src} alt="" />}
                   <span className="opt-text">
                     <span className="opt-label">{o.label}</span>
                     {o.blurb && <span className="opt-blurb">{o.blurb}</span>}
