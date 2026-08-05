@@ -28,11 +28,13 @@ const items = await Item.findAll({
 // Route to add a new item (multipart form; optional "image" file; seller = logged-in user)
 app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
   try {
-    const { category_id, title, description, era, price, currency } = req.body;
+    const { category_id, title, description, era, price, currency, condition } = req.body;
 
     if (!title || !description || !era || !price) {
       return res.status(400).json({ message: "Missing required fields: title, description, era, price" });
     }
+
+    const safeCondition = ["tested_working", "display_only", "age_wear"].includes(condition) ? condition : null;
 
     // relative, so the photo still loads when the site is opened from another
     // device or a real domain rather than whatever host uploaded it
@@ -49,6 +51,7 @@ app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
       currency: currency || "GBP",
       // "verified" is the shop's trust badge, never the seller's to award
       status: "pending_verification",
+      condition: safeCondition,
       image_url,
     });
 
@@ -92,23 +95,60 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
     if (item.status === "sold") {
       return res.status(400).json({ message: "This item has already been sold" });
     }
+    if (item.status !== "verified") {
+      // FAQ promise: pending items can be browsed and saved, not bought
+      return res.status(400).json({ message: "This item is still pending verification" });
+    }
     if (String(item.seller_id) === String(req.user.id)) {
       return res.status(400).json({ message: "You can't buy your own listing" });
     }
 
-    item.status = "sold";
-    await item.save();
+    // atomic: only a currently-verified item can flip to sold, so two
+    // simultaneous buyers (or a buy racing a status change) can't both win
+    const [affected] = await Item.update(
+      { status: "sold" },
+      { where: { id: req.params.id, status: "verified" } }
+    );
+    if (affected === 0) {
+      return res.status(400).json({ message: "This item can't be bought right now" });
+    }
+
+    const updatedItem = await Item.findByPk(req.params.id);
 
     res.json({
-      item,
+      item: updatedItem,
       order: {
-        ref: `TRR-ORD-${String(item.id).padStart(4, "0")}`,
+        ref: `TRR-ORD-${String(updatedItem.id).padStart(4, "0")}`,
         buyer_id: req.user.id,
       },
     });
   } catch (error) {
     console.error("Error buying item:", error);
     res.status(500).json({ error: "Error buying item" });
+  }
+});
+
+// Route to relist a sold item — resets it to pending verification (owner only)
+app.post("/:id/relist", authMiddleware, async (req, res) => {
+  try {
+    const item = await Item.findByPk(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    if (String(item.seller_id) !== String(req.user.id)) {
+      return res.status(403).json({ message: "You can only relist your own listings" });
+    }
+    if (item.status !== "sold") {
+      return res.status(400).json({ message: "Only sold items can be relisted" });
+    }
+
+    item.status = "pending_verification";
+    await item.save();
+
+    res.json(item);
+  } catch (error) {
+    console.error("Error relisting item:", error);
+    res.status(500).json({ error: "Error relisting item" });
   }
 });
 
@@ -123,8 +163,9 @@ app.put("/:id", authMiddleware, upload.single("image"), async (req, res) => {
       return res.status(403).json({ message: "You can only edit your own listings" });
     }
 
-    const { category_id, title, description, era, price, currency } = req.body;
-    const updateData = { category_id, title, description, era, price, currency };
+    const { category_id, title, description, era, price, currency, condition } = req.body;
+    const safeCondition = ["tested_working", "display_only", "age_wear"].includes(condition) ? condition : null;
+    const updateData = { category_id, title, description, era, price, currency, condition: safeCondition };
 
     if (req.file) {
       updateData.image_url = `/uploads/${req.file.filename}`;

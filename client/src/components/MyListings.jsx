@@ -42,6 +42,15 @@ const MyListings = () => {
     }
   };
 
+  const handleRelist = async (id) => {
+    try {
+      await api.post(`/api/items/${id}/relist`);
+      fetchListings();
+    } catch (error) {
+      console.error('Failed to relist item', error);
+    }
+  };
+
   return (
     <main className="wrap listings-page">
       <h1 className="page-title">My listings</h1>
@@ -69,6 +78,11 @@ const MyListings = () => {
               </span>
               <div className="listing-actions">
                 <Link className="btn btn-ghost btn-compact" to={`/edit-item/${item.id}`}>Edit</Link>
+                {item.status === 'sold' && (
+                  <button className="btn btn-ghost btn-compact" onClick={() => handleRelist(item.id)}>
+                    Relist
+                  </button>
+                )}
                 <button className="btn btn-ghost btn-compact" onClick={() => handleDelete(item.id)}>
                   Delete
                 </button>

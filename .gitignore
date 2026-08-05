@@ -7,3 +7,4 @@ node_modules/
 # browser-test screenshots, never part of the app
 /*.png
 /server/*.png
+client/dist/

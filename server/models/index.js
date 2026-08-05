@@ -2,6 +2,7 @@ const Post = require("./item");
 const Category = require("./category");
 const User = require("./user");
 const Item = require("./item");
+const SavedItem = require("./savedItem");
 
 Post.belongsTo(Category, {
   foreignKey: "categoryId",
@@ -27,4 +28,5 @@ module.exports = {
   Category,
   User,
   Item,
+  SavedItem,
 };

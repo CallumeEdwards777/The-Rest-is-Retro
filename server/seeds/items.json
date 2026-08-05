@@ -8,7 +8,8 @@
     "era": "1970s",
     "price": 38.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-ELE-1002",
@@ -19,7 +20,8 @@
     "era": "1970s",
     "price": 220.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-70S-FUR-1003",
@@ -30,7 +32,8 @@
     "era": "1970s",
     "price": 285.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-VIN-1004",
@@ -41,7 +44,8 @@
     "era": "1970s",
     "price": 28.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-70S-TOY-1005",
@@ -52,7 +56,8 @@
     "era": "1970s",
     "price": 45.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-70S-CLO-1006",
@@ -63,7 +68,8 @@
     "era": "1970s",
     "price": 42.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-ELE-1007",
@@ -74,7 +80,8 @@
     "era": "1970s",
     "price": 32.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-70S-FUR-1008",
@@ -85,7 +92,8 @@
     "era": "1970s",
     "price": 175.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-VIN-1009",
@@ -96,7 +104,8 @@
     "era": "1970s",
     "price": 65.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-TOY-1010",
@@ -107,7 +116,8 @@
     "era": "1970s",
     "price": 55.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-70S-CLO-1011",
@@ -118,7 +128,8 @@
     "era": "1970s",
     "price": 48.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-70S-ELE-1012",
@@ -129,7 +140,8 @@
     "era": "1970s",
     "price": 60.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-80S-CLO-2001",
@@ -140,7 +152,8 @@
     "era": "1980s",
     "price": 55.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-ELE-2002",
@@ -151,7 +164,8 @@
     "era": "1980s",
     "price": 145.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-80S-FUR-2003",
@@ -162,7 +176,8 @@
     "era": "1980s",
     "price": 320.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-VIN-2004",
@@ -173,7 +188,8 @@
     "era": "1980s",
     "price": 35.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-TOY-2005",
@@ -184,7 +200,8 @@
     "era": "1980s",
     "price": 25.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-80S-CLO-2006",
@@ -195,7 +212,8 @@
     "era": "1980s",
     "price": 58.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-ELE-2007",
@@ -206,7 +224,8 @@
     "era": "1980s",
     "price": 210.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-80S-FUR-2008",
@@ -217,7 +236,8 @@
     "era": "1980s",
     "price": 165.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-VIN-2009",
@@ -228,7 +248,8 @@
     "era": "1980s",
     "price": 30.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-TOY-2010",
@@ -239,7 +260,8 @@
     "era": "1980s",
     "price": 240.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-80S-CLO-2011",
@@ -250,7 +272,8 @@
     "era": "1980s",
     "price": 40.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-80S-ELE-2012",
@@ -261,7 +284,8 @@
     "era": "1980s",
     "price": 190.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-90S-CLO-3001",
@@ -272,7 +296,8 @@
     "era": "1990s",
     "price": 26.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-ELE-3002",
@@ -283,7 +308,8 @@
     "era": "1990s",
     "price": 95.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "display_only"
   },
   {
     "item_id": "TRR-90S-FUR-3003",
@@ -294,7 +320,8 @@
     "era": "1990s",
     "price": 48.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-VIN-3004",
@@ -305,7 +332,8 @@
     "era": "1990s",
     "price": 18.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-TOY-3005",
@@ -316,7 +344,8 @@
     "era": "1990s",
     "price": 32.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-90S-CLO-3006",
@@ -327,7 +356,8 @@
     "era": "1990s",
     "price": 65.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-ELE-3007",
@@ -338,7 +368,8 @@
     "era": "1990s",
     "price": 175.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-90S-FUR-3008",
@@ -349,7 +380,8 @@
     "era": "1990s",
     "price": 35.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-VIN-3009",
@@ -360,7 +392,8 @@
     "era": "1990s",
     "price": 15.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-90S-TOY-3010",
@@ -371,7 +404,8 @@
     "era": "1990s",
     "price": 75.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "display_only"
   },
   {
     "item_id": "TRR-90S-CLO-3011",
@@ -382,7 +416,8 @@
     "era": "1990s",
     "price": 34.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-90S-ELE-3012",
@@ -393,7 +428,8 @@
     "era": "1990s",
     "price": 58.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-Y2K-CLO-4001",
@@ -404,7 +440,8 @@
     "era": "2000s",
     "price": 28.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-ELE-4002",
@@ -415,7 +452,8 @@
     "era": "2000s",
     "price": 135.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-Y2K-FUR-4003",
@@ -426,7 +464,8 @@
     "era": "2000s",
     "price": 380.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-VIN-4004",
@@ -437,7 +476,8 @@
     "era": "2000s",
     "price": 12.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-TOY-4005",
@@ -448,7 +488,8 @@
     "era": "2000s",
     "price": 40.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "display_only"
   },
   {
     "item_id": "TRR-Y2K-CLO-4006",
@@ -459,7 +500,8 @@
     "era": "2000s",
     "price": 85.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-ELE-4007",
@@ -470,7 +512,8 @@
     "era": "2000s",
     "price": 45.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-Y2K-FUR-4008",
@@ -481,7 +524,8 @@
     "era": "2000s",
     "price": 65.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-VIN-4009",
@@ -492,7 +536,8 @@
     "era": "2000s",
     "price": 9.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "tested_working"
   },
   {
     "item_id": "TRR-Y2K-TOY-4010",
@@ -503,7 +548,8 @@
     "era": "2000s",
     "price": 60.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "display_only"
   },
   {
     "item_id": "TRR-Y2K-CLO-4011",
@@ -514,7 +560,8 @@
     "era": "2000s",
     "price": 15.00,
     "currency": "GBP",
-    "status": "verified"
+    "status": "verified",
+    "condition": "age_wear"
   },
   {
     "item_id": "TRR-Y2K-ELE-4012",
@@ -525,6 +572,7 @@
     "era": "2000s",
     "price": 55.00,
     "currency": "GBP",
-    "status": "pending_verification"
+    "status": "pending_verification",
+    "condition": "tested_working"
   }
 ]

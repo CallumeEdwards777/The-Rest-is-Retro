@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import api from '../api';
 
 import ItemCard from './ItemCard';
-import { eraLabel } from './ItemCard';
 import { readOnboarding } from '../onboarding';
 
 const ERAS = ['1970s', '1980s', '1990s', '2000s'];
@@ -12,14 +11,32 @@ const ItemList = () => {
   // Answers from the welcome quiz become the starting filters. Empty = show everything.
   const prefs = readOnboarding();
 
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('q') || '';
+  // Footer era links (?era=1970s etc.) override the onboarding prefs on first load.
+  const eraParam = searchParams.get('era');
+  const validEraParam = ERAS.includes(eraParam) ? eraParam : null;
+
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [pickedEras, setPickedEras] = useState(prefs?.eras || []);
+  const [pickedEras, setPickedEras] = useState(validEraParam ? [validEraParam] : (prefs?.eras || []));
   const [pickedCategories, setPickedCategories] = useState(prefs?.categoryIds || []);
   const [requiresLogin, setRequiresLogin] = useState(false);
 
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('q') || '';
+  // The component stays mounted between footer-driven era navigations, so the
+  // initial-state computation above only fires once. Every NAVIGATION gets a
+  // fresh location.key (even to the same URL), so keying the sync on it means
+  // re-clicking the same footer link still applies. The initial key is skipped:
+  // the useState initialiser already handled it, and skipping by key (not by a
+  // boolean ref) keeps StrictMode's double effect-run from stomping the
+  // onboarding prefs on a plain "/" visit.
+  const { key: locationKey } = useLocation();
+  const initialLocationKey = useRef(locationKey);
+  useEffect(() => {
+    if (locationKey === initialLocationKey.current) return;
+    setPickedEras(validEraParam ? [validEraParam] : []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locationKey]);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -70,6 +87,7 @@ const ItemList = () => {
   return (
     <>
       <section className="hero">
+        <span className="rings" aria-hidden="true"><i /><i /></span>
         <div className="wrap row">
           <div>
             <h1>
@@ -79,11 +97,11 @@ const ItemList = () => {
                 <>Every era,<br /><span className="alt">still for sale.</span></>
               )}
             </h1>
-            <p>Curated vintage sold by decade, not by drawer. Every listing checked and verified before it goes live.</p>
           </div>
           <div className="stamp">Est. 2026 · London<br />{items.length} relics in stock</div>
         </div>
       </section>
+      <div className="rule" aria-hidden="true" />
 
       <main className="wrap">
         {requiresLogin ? (
@@ -142,11 +160,6 @@ const ItemList = () => {
             )}
           </>
         )}
-
-        <footer className="site-footer">
-          <span>The Rest is Retro — curated vintage, sold by era.</span>
-          <span>Eras: {ERAS.map(eraLabel).join(' · ')}</span>
-        </footer>
       </main>
     </>
   );

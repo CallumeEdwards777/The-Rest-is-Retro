@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
 import { pullPreferences } from '../onboarding';
+import { useSaved } from '../contexts/SavedContext';
 
 const Login = () => {
   const [login, setLogin] = useState('');
@@ -12,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { setUser } = useSession();
+  const { refreshSaved } = useSaved();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ const Login = () => {
 
       // bring this account's saved decade/category picks into the browser
       await pullPreferences(api);
+      refreshSaved();
 
       navigate('/');
     } catch (err) {

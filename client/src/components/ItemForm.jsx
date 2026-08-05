@@ -4,6 +4,12 @@ import api from '../api';
 
 const ERAS = ['1970s', '1980s', '1990s', '2000s'];
 
+const CONDITIONS = [
+  { value: 'tested_working', label: 'Tested & working' },
+  { value: 'display_only', label: 'Display only' },
+  { value: 'age_wear', label: 'Wear consistent with age' },
+];
+
 // Shared listing form: CreateItem uses it empty, EditItem passes `initial`
 const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }) => {
   const [title, setTitle] = useState(initial?.title || '');
@@ -12,6 +18,7 @@ const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }
   const [era, setEra] = useState(initial?.era || ERAS[0]);
   const [categoryId, setCategoryId] = useState(initial?.category_id || '');
   const [categories, setCategories] = useState([]);
+  const [condition, setCondition] = useState(initial?.condition || '');
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
@@ -39,6 +46,7 @@ const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }
     formData.append('era', era);
     formData.append('price', Number(price));
     formData.append('category_id', Number(categoryId));
+    if (condition) formData.append('condition', condition);
     if (imageFile) {
       formData.append('image', imageFile);
     }
@@ -82,6 +90,13 @@ const ItemForm = ({ initial = null, submitLabel = 'List Item', onSubmit, error }
       <select value={categoryId} onChange={(event) => setCategoryId(event.target.value)}>
         {categories.map((category) => (
           <option key={category.id} value={category.id}>{category.category_name}</option>
+        ))}
+      </select>
+
+      <select value={condition} onChange={(event) => setCondition(event.target.value)}>
+        <option value="" disabled>Condition…</option>
+        {CONDITIONS.map((c) => (
+          <option key={c.value} value={c.value}>{c.label}</option>
         ))}
       </select>
 

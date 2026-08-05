@@ -2,35 +2,59 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
-import { eraLabel, formatPrice, itemImage } from './ItemCard';
+import ItemCard, { eraLabel, formatPrice, itemImage } from './ItemCard';
+import { useSaved } from '../contexts/SavedContext';
+
+const CONDITION_LABELS = {
+  tested_working: 'Tested & working',
+  display_only: 'Display only',
+  age_wear: 'Wear consistent with age',
+};
 
 const ItemDetails = () => {
   const [item, setItem] = useState(null);
   const [categoryName, setCategoryName] = useState('');
   const [seller, setSeller] = useState(null);
+  const [allItems, setAllItems] = useState([]);
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [buyError, setBuyError] = useState('');
+  const { savedIds, toggleSaved } = useSaved();
 
   useEffect(() => {
+    // Navigating card → card keeps this component mounted: clear the old
+    // item so a slow fetch can't leave the previous item's Buy button live
+    // under the new URL, and start the new page at the top.
+    let cancelled = false;
+    setItem(null);
+    setCategoryName('');
+    setSeller(null);
+    setBuyError('');
+    window.scrollTo(0, 0);
+
     const fetchItem = async () => {
       try {
         const response = await api.get(`/api/items/${id}`);
+        if (cancelled) return;
         setItem(response.data);
 
-        const [categoryRes, sellerRes] = await Promise.allSettled([
+        const [categoryRes, sellerRes, itemsRes] = await Promise.allSettled([
           api.get(`/api/categories/${response.data.category_id}`),
           api.get(`/api/users/${response.data.seller_id}`),
+          api.get('/api/items'),
         ]);
+        if (cancelled) return;
         if (categoryRes.status === 'fulfilled') setCategoryName(categoryRes.value.data?.category_name || '');
         if (sellerRes.status === 'fulfilled') setSeller(sellerRes.value.data);
+        if (itemsRes.status === 'fulfilled') setAllItems(itemsRes.value.data);
       } catch (error) {
         console.error(`Failed to fetch item with id ${id}`, error);
       }
     };
 
     fetchItem();
+    return () => { cancelled = true; };
   }, [id]);
 
   const handleBuy = async () => {
@@ -62,6 +86,15 @@ const ItemDetails = () => {
   }
 
   const isSold = item.status === 'sold';
+  // FAQ promise: only verified items can be bought — pending ones wait.
+  const buyable = item.status === 'verified';
+  const buyLabel = isSold ? 'Sold' : buyable ? 'Buy now' : 'Pending verification';
+  const saved = savedIds.includes(item.id);
+
+  // "More from this decade": reuses the already-fetched item list — same era, not self, first 3.
+  const sameEra = allItems.filter((i) => i.era === item.era && i.id !== item.id);
+  const moreItems = sameEra.slice(0, 3);
+  const remaining = sameEra.length - moreItems.length;
 
   return (
     <main className="wrap">
@@ -70,55 +103,105 @@ const ItemDetails = () => {
       </div>
 
       <div className="layout">
-        <div className="photo">
+        <div className="photo plate">
           <img src={itemImage(item)} alt={item.title} />
         </div>
 
         <div className="panel">
-          <div className="tags">
-            <span className={`tag era era-${item.era}`}>{eraLabel(item.era)}</span>
-            {categoryName && <span className="tag cat">{categoryName}</span>}
-            {item.status === 'verified' && <span className="tag check">✓ Verified listing</span>}
-            {isSold && <span className="tag sold">Sold</span>}
-          </div>
+          <div className="kicker">{eraLabel(item.era)} / {categoryName} / {item.item_id}</div>
 
           <h1>{item.title}</h1>
-          <div className="price">{formatPrice(item.price)}</div>
-          <div className="vat">Free UK delivery · 14-day returns</div>
+          <div className="price">
+            {formatPrice(item.price)}
+            {item.status === 'verified' && <span className="tag check">✓ Verified listing</span>}
+            {isSold && <span className="tag sold">Sold</span>}
+            {item.condition && <span className="tag cat">{CONDITION_LABELS[item.condition]}</span>}
+          </div>
 
-          <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={isSold}>
-            {isSold ? 'Sold' : 'Buy now'}
-          </button>
+          <div className="buyrow">
+            <button className="btn btn-primary btn-big" onClick={handleBuy} disabled={!buyable}>
+              {buyLabel}
+            </button>
+            <button
+              className={`heart ${saved ? 'on' : ''}`}
+              onClick={() => toggleSaved(item.id)}
+              aria-label="Save item"
+            >
+              {saved ? '♥' : '♡'}
+            </button>
+          </div>
           {buyError && <div className="form-error">{buyError}</div>}
 
           {seller && (
-            <div className="seller">
+            <Link to={'/seller/' + item.seller_id} className="seller">
               <div className="avatar">{getInitials(seller.username)}</div>
               <div>
                 <div className="who">{seller.username}</div>
                 <div className="sub">Seller on The Rest is Retro since 2026</div>
               </div>
-            </div>
+            </Link>
           )}
 
-          <div className="desc">
-            <h2>The story</h2>
-            <p>{item.description}</p>
-          </div>
-
-          <div className="facts">
-            <div><span>Item ID</span><span>{item.item_id}</span></div>
-            <div><span>Era</span><span>{item.era}</span></div>
-            {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
-            <div><span>Status</span><span>{item.status}</span></div>
-          </div>
+          {item.status === 'verified' && (
+            <div className="trust">
+              <h3>The TRR guarantee</h3>
+              <ul>
+                <li><span>✓</span> Seller submitted label, barcode or serial evidence</li>
+                <li><span>✓</span> Evidence checked against product records before the listing went live</li>
+                <li><span>✓</span> Full refund if it turns out not to be genuine</li>
+                <li><span>✓</span> Seller identity verified</li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
-      <footer className="site-footer">
-        <span>The Rest is Retro — curated vintage, sold by era.</span>
-        <span>The rest is history.</span>
-      </footer>
+      <div className="rule" />
+
+      <div className="layout bands">
+        <div className="desc">
+          <h2>The story</h2>
+          <p>{item.description}</p>
+        </div>
+
+        <div className="facts">
+          <div><span>Item ID</span><span>{item.item_id}</span></div>
+          <div><span>Era</span><span>{item.era}</span></div>
+          {categoryName && <div><span>Category</span><span>{categoryName}</span></div>}
+          <div><span>Status</span><span>{item.status}</span></div>
+          <div><span>Condition</span><span>{CONDITION_LABELS[item.condition] || '—'}</span></div>
+        </div>
+      </div>
+
+      {sameEra.length > 0 && (
+        <section className="more">
+          <h2>More from the {eraLabel(item.era)}</h2>
+          <div className="grid">
+            {moreItems.map((i) => (
+              <ItemCard key={i.id} item={i} />
+            ))}
+            {remaining > 0 && (
+              <Link to={`/?era=${item.era}`} className="more-more">
+                {remaining} more relics from the {eraLabel(item.era)} · Browse the decade →
+              </Link>
+            )}
+          </div>
+        </section>
+      )}
+
+      <div className="buybar">
+        <span className="price">{formatPrice(item.price)}</span>
+        <button
+          className={`heart ${saved ? 'on' : ''}`}
+          onClick={() => toggleSaved(item.id)}
+          aria-label="Save item"
+        >
+          {saved ? '♥' : '♡'}
+        </button>
+        <button className="btn btn-primary" onClick={handleBuy} disabled={!buyable}>
+          {buyLabel}
+        </button>
+      </div>
     </main>
   );
 };
