@@ -11,6 +11,11 @@ Palette confirmed by Martim 2026-08-05 (taken from the presentation deck, so sli
 and app match). Mockups applying all of this live in `concepts/mockups/` — open
 `concepts/mockups/index.html` for the gallery.
 
+The four decided screens (browse in Direction B, item detail, login, confirm) plus
+`tokens.css` and sample item photos are synced to the Claude Design project
+**"The Rest Is Retro"** at claude.ai/design — iterate on them there; implementation
+pulls from that project.
+
 | Name | Hex | Use |
 | --- | --- | --- |
 | Cream | `#FFFBED` | Page background |
