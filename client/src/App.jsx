@@ -5,6 +5,7 @@ import Signup from './components/Signup';
 import ItemList from './components/ItemList';
 import ItemDetails from './components/ItemDetails';
 import CreateItem from './components/CreateItem';
+import Confirm from './components/Confirm';
 
 import { SessionProvider } from './contexts/SessionContext';
 
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/" element={<ItemList />} />
           <Route path="/item/:id" element={<ItemDetails />} />
           <Route path="/create-item" element={<CreateItem />} />
+          <Route path="/confirm" element={<Confirm />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<h1>Not Found</h1>} />

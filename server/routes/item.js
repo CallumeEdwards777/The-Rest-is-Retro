@@ -3,6 +3,7 @@ const app = require("express").Router();
 // import the models
 const { Item } = require("../models/index");
 const {Op} = require("sequelize");
+const { authMiddleware } = require("../utils/auth");
 
 app.get("/search", async (req, res) => {
   try {
@@ -54,6 +55,33 @@ app.get("/:id", async (req, res) => {
     res.json(item);
   } catch (error) {
     res.status(500).json({ error: "Error retrieving post" });
+  }
+});
+
+// Route to buy an item — marks it sold and returns an order reference
+app.post("/:id/buy", authMiddleware, async (req, res) => {
+  try {
+    const item = await Item.findByPk(req.params.id);
+    if (!item) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    if (item.status === "sold") {
+      return res.status(400).json({ message: "This item has already been sold" });
+    }
+
+    item.status = "sold";
+    await item.save();
+
+    res.json({
+      item,
+      order: {
+        ref: `TRR-ORD-${String(item.id).padStart(4, "0")}`,
+        buyer_id: req.user.id,
+      },
+    });
+  } catch (error) {
+    console.error("Error buying item:", error);
+    res.status(500).json({ error: "Error buying item" });
   }
 });
 
