@@ -37,7 +37,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="footer-bottom">
         <div className="container">
-          <p>© 2026 Retro Co. — All rights reserved.</p>
+          <p>© 2026 The Rest is Retro — All rights reserved.</p>
         </div>
       </div>
     </footer>

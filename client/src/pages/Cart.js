@@ -78,9 +78,9 @@ export default function Cart() {
               <span>£{(cartTotal / 100).toFixed(2)}</span>
             </div>
 
-            <button className="btn btn-primary btn-full">
+            <Link to="/checkout" className="btn btn-primary btn-full">
               Proceed to Checkout
-            </button>
+            </Link>
 
             <button className="btn btn-outline btn-full" onClick={clearCart}>
               Clear Cart

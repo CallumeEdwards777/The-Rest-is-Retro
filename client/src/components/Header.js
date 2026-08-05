@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useTheme } from "../contexts/ThemeContext";
 import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
+import { FiShoppingCart, FiUser, FiSun, FiMoon } from "react-icons/fi";
 import "../styles/components/header.css";
 
 export default function Header() {
@@ -34,12 +35,14 @@ export default function Header() {
         <div className="header-right">
           {/* Theme Toggle */}
           <button className="icon-btn" onClick={toggleTheme} title="Toggle theme">
-            {isDark ? "☀️" : "🌙"}
+            {isDark ? <FiSun size={20} /> : <FiMoon size={20} />}
           </button>
 
           {/* Account */}
           <div className="account-dropdown">
-            <button className="icon-btn">👤</button>
+            <button className="icon-btn">
+              <FiUser size={20} />
+            </button>
             <div className="dropdown-menu">
               {isAuthenticated ? (
                 <>
@@ -61,7 +64,7 @@ export default function Header() {
 
           {/* Cart */}
           <Link to="/cart" className="cart-btn">
-            🛒
+            <FiShoppingCart size={20} />
             {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
           </Link>
         </div>

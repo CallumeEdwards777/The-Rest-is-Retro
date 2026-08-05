@@ -10,6 +10,7 @@ import ProductDetail from "./pages/ProductDetail";
 import CategoryPage from "./pages/CategoryPage";
 import Eras from "./pages/Eras";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyListings from "./pages/MyListings";
@@ -30,6 +31,7 @@ function AppContent() {
           <Route path="/category/:id" element={<CategoryPage />} />
           <Route path="/eras" element={<Eras />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/my-listings" element={<MyListings />} />
