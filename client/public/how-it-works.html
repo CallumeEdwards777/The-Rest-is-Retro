@@ -29,6 +29,7 @@
   nav.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
   nav.toc a{font:600 13px/1 var(--font-body);color:var(--ink);text-decoration:none;padding:8px 13px;border-radius:999px;border:1.5px solid var(--line);background:var(--card)}
   nav.toc a:hover{border-color:var(--ink)}
+  nav.toc a.hot{background:var(--ink);color:var(--cream);border-color:var(--ink)}
 
   section{padding:40px 0 8px}
   h2{font-family:var(--font-display);font-weight:900;font-size:clamp(26px,4vw,36px);letter-spacing:-0.01em;margin-bottom:6px}
@@ -67,13 +68,23 @@
   .body .how b{color:var(--ink);font-weight:600}
   code{font-family:ui-monospace,Menlo,monospace;font-size:12.5px;background:var(--cream);border:1px solid var(--line);padding:1px 6px;border-radius:6px;word-break:break-word}
 
+  .openall{font:600 13px var(--font-body);background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer;margin-bottom:14px}
+  .openall:hover{background:var(--ink);color:var(--cream)}
+
   .numbers{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
   .num{background:var(--card);border:1.5px solid var(--ink);border-radius:12px;padding:12px 16px;text-align:center;box-shadow:3px 3px 0 var(--amber)}
   .num b{display:block;font-family:var(--font-display);font-size:26px;color:var(--orange)}
   .num span{font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+  .numnote{font-size:13.5px;color:var(--muted);margin-bottom:8px;max-width:64ch}
 
   .say{border-left:4px solid var(--teal);background:var(--card);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin-bottom:10px;font-size:14.5px}
   .say b{color:var(--teal)}
+  .warn{border-left:4px solid var(--orange);background:var(--card);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin-bottom:10px;font-size:14.5px}
+  .warn b{color:var(--orange-deep)}
+
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+  .faq-item h3{font-family:var(--font-display);font-size:18px;margin-bottom:6px}
+  .faq-item p{font-size:14px;color:var(--muted)}
 
   @media(max-width:720px){#words .cards3{grid-template-columns:1fr !important}}
   footer{margin-top:48px;background:var(--ink);color:rgba(255,251,237,0.75);font-size:13px}
@@ -90,12 +101,13 @@
 </div></header>
 
 <nav class="toc"><div class="wrap">
+  <a href="#story" class="hot">🎤 Start here for the presentation</a>
   <a href="#big">The big picture</a>
   <a href="#buyer">Buying</a>
   <a href="#seller">Selling</a>
   <a href="#features">Feature by feature</a>
   <a href="#words">Tech words</a>
-  <a href="#story">Saying it out loud</a>
+  <a href="#hard">Hard questions</a>
 </div></nav>
 
 <section id="big"><div class="wrap">
@@ -115,28 +127,53 @@
   </div>
   <p class="arrowline">browser ⇄ asks the API ⇄ reads and writes the database</p>
   <p class="lead">One real example: you press <b>Buy now</b>. React sends "buy item 2" plus your identity token to the API. The API checks the item exists, is verified, isn't yours, isn't sold, then writes "sold" into the database and answers with an order reference. React takes you to the confirmation screen. Total time: a blink.</p>
+  <div class="numbers">
+    <div class="num"><b>48</b><span>relics</span></div>
+    <div class="num"><b>39 + 9</b><span>verified + pending</span></div>
+    <div class="num"><b>4</b><span>decades</span></div>
+    <div class="num"><b>5</b><span>categories</span></div>
+    <div class="num"><b>24</b><span>endpoints</span></div>
+    <div class="num"><b>80</b><span>commits</span></div>
+  </div>
+  <p class="numnote">Three sellers with exactly 16 items each, twelve per decade, priced from £9 to £380. Nine of the 48 are deliberately left pending, which is why Buy now reads "Pending verification" on the Motorola RAZR.</p>
+</div></section>
+
+<section id="story"><div class="wrap">
+  <div class="kicker">Part 2 · learn these five</div>
+  <h2>Saying it out loud</h2>
+  <p class="lead">Five true sentences for the presentation, each backed by something on this page.</p>
+  <div class="say"><b>The pitch.</b> "Here you buy items that made a dent in history. Every listing leads with its story, and you browse by decade, not by keyword. eBay and Depop authenticate sneakers and handbags, because that's where the money is; nobody does it for a Walkman or a lava lamp, where the buyer's real questions are 'is this really from 1979, and does it still work?'. We answer both: evidence-based verification and honest condition labels."</div>
+  <div class="say"><b>The shape.</b> "It's a classic three-part app: a React front end, an Express API that enforces every rule, and a MySQL database. The browser never touches the database directly."</div>
+  <div class="say"><b>The trust story.</b> "We stayed honest about being C2C: the Verified badge means the buyer is covered by evidence checks, not that we handled the item. The server enforces it: pending items literally cannot be bought. Try it on the Motorola RAZR, the button refuses." <span style="color:var(--muted)">(If refunds come up: that's the policy the product needs, stated in the FAQ, not something we coded.)</span></div>
+  <div class="say"><b>The personal touch.</b> "First-time visitors answer two questions and the shop rearranges around them, like a mobile app onboarding. The answers are saved on the account, so they follow you across devices."</div>
+  <div class="say"><b>The build.</b> "We rebuilt from a half-migrated template: repaired the client-server contract, designed the brand as a token system, then shipped buying, selling, photo uploads, hearts and onboarding, each verified in a real browser before commit. Eighty commits."</div>
+
+  <p class="lead" style="margin-top:22px;margin-bottom:10px"><b>Before you go on stage:</b></p>
+  <div class="warn"><b>Log out and back in first.</b> Login notes expire after two hours, but the header keeps showing your initials. Stale note plus Buy now equals a red error mid-demo. A fresh login resets the clock.</div>
+  <div class="warn"><b>Demo the cross-device trick with an account you create live in the quiz.</b> The three seeded users have no saved preferences, so logging in as vintage_vera on a second browser personalises nothing. A quiz-born account proves it perfectly.</div>
+  <div class="warn"><b>Don't buy your own listing.</b> If you list an item during the demo, buy something seeded instead: new listings are pending (not buyable) and the API refuses self-purchases anyway.</div>
 </div></section>
 
 <section id="buyer"><div class="wrap">
-  <div class="kicker">Part 2</div>
+  <div class="kicker">Part 3</div>
   <h2>A buyer's journey</h2>
   <p class="lead">This is the demo path, in order. Each step is a feature we built.</p>
   <ol class="journey">
-    <li class="j70"><b>First visit: the quiz.</b> A brand-new visitor is redirected to two questions: which decades, which categories, each choice a photo tile.<span class="side">Answers are stored in the browser under the name <code>onboarding</code>. Anyone with an account skips this gate. Deep links like <code>/?era=1990s</code> skip it too.</span></li>
-    <li class="j80"><b>Save your picks.</b> A third panel offers signup or login ("Awesome! Create an account to save your preferences"), with a quiet "just browse" escape.<span class="side">On signup the answers are also written onto your account in the database, so they follow you to any device.</span></li>
-    <li class="j90"><b>A shop that's already yours.</b> The browse page opens with your decades and categories pre-selected and the headline switches to "Your favourites, back on sale."</span><span class="side">The filter chips are real buttons: everything stays adjustable.</span></li>
+    <li class="j70"><b>First visit: the quiz.</b> A brand-new visitor is redirected to two questions: which decades, which categories, each choice a photo tile.<span class="side">Answers are stored in the browser under the name <code>onboarding</code>. Anyone already logged in on that browser skips this gate. Deep links like <code>/?era=1990s</code> skip it too.</span></li>
+    <li class="j80"><b>Save your picks.</b> A third panel offers signup or login ("Awesome! Create an account to save your preferences"), with a quiet "just browse" escape.<span class="side">Signing up from inside the quiz also writes the answers onto your account in the database, so they follow you to any device.</span></li>
+    <li class="j90"><b>A shop that's already yours.</b> The browse page opens with your decades and categories pre-selected and the headline switches to "Your favourites, back on sale."<span class="side">The filter chips are real buttons: everything stays adjustable.</span></li>
     <li class="j70"><b>Finding things.</b> Search in the header (searches everything, ignoring your filters on purpose), decade and category chips with live counts, and decade links in the footer that deep-link the shop.</li>
-    <li class="j80"><b>The item page.</b> Big photo on an amber plate, price, condition label, the seller (clickable, goes to their shop), the TRR guarantee box, the story, the facts, and three more finds from the same decade.</li>
+    <li class="j80"><b>The item page.</b> Big photo on an amber plate, price, condition label, the seller (clickable, goes to their shop), the TRR guarantee box, the story, the facts, and three more finds from the same decade.<span class="side">"The story" is each item's own history in its seller's words: it's what makes a listing here feel like an artefact, not an ad.</span></li>
     <li class="j90"><b>Buying.</b> Buy now works only on verified items; pending ones say so and refuse. Two people can't buy the same thing: the database flips it to sold exactly once.<span class="side">You land on a confirmation with an order reference like <code>TRR-ORD-0002</code>, and back on the grid the item now wears a Sold badge.</span></li>
     <li class="j70"><b>Hearts.</b> The ♡ on every card saves an item to your account; the Saved page collects them. Logged out? A tap sends you to login first.</li>
   </ol>
 </div></section>
 
 <section id="seller"><div class="wrap">
-  <div class="kicker">Part 3</div>
+  <div class="kicker">Part 4</div>
   <h2>A seller's journey</h2>
   <ol class="journey">
-    <li class="j90"><b>List an item.</b> Title, story, price, decade, category, condition, and a photo (checked to really be an image, capped at 5MB).<span class="side">The photo is stored by the API in an uploads folder; the listing points at it.</span></li>
+    <li class="j90"><b>List an item.</b> Title, story, price, decade, category, condition, and a photo (checked to be an image type, capped at 5MB).<span class="side">The photo is stored by the API in an uploads folder; the listing points at it.</span></li>
     <li class="j80"><b>Pending verification.</b> Every new listing starts here. It can be browsed and hearted, but not bought. Sellers cannot award themselves the Verified badge: the server decides status, never the form.</li>
     <li class="j70"><b>My listings.</b> Your items with status pills: Verified, Pending, Sold. Edit and Delete exist only for the owner: the server checks that the person asking is the seller before touching anything.</li>
     <li class="j90"><b>Sold, and back again.</b> When something sells it flips to Sold everywhere. A Relist button puts it back to pending, so a stray demo purchase is a one-click recovery.</li>
@@ -144,18 +181,19 @@
 </div></section>
 
 <section id="features"><div class="wrap">
-  <div class="kicker">Part 4</div>
+  <div class="kicker">Part 5</div>
   <h2>Feature by feature, under the hood</h2>
   <p class="lead">Each card: what you see, then what actually happens. File names are where the code lives, in case anyone asks.</p>
+  <button class="openall" onclick="const d=[...document.querySelectorAll('#features details')];const o=d.some(x=>!x.open);d.forEach(x=>x.open=o);this.textContent=o?'Close everything':'Open everything'">Open everything</button>
 
   <details><summary><span class="pill p-glue">Glue</span>Accounts and staying logged in</summary><div class="body">
     <p class="you">You sign up or log in once; the site remembers you across refreshes, and greets you with your initials in the header.</p>
-    <p class="how">Passwords are stored <b>scrambled</b> (bcrypt hashing): even the database never holds the real one. On login the API hands back a <b>token</b>, a signed note saying "this is vera, valid 2 hours". The browser keeps it and attaches it to every request that needs identity. Usernames and emails are unique, so login can accept either. Files: <code>server/routes/user.js</code>, <code>client/src/components/Login.jsx</code>.</p>
+    <p class="how">Passwords go through <b>bcrypt</b> before they touch the database: <code>password123</code> is stored as a 60-character scramble starting <code>$2b$10$</code>, and there is no way back from it. The 10 is a deliberate slowness setting: each check costs a fraction of a second, unnoticeable at login, ruinous for someone guessing millions. Login never compares passwords; it rehashes what you typed and compares scrambles. On success the API hands back a <b>token</b>: a note saying "this is user 1, expires in two hours", carrying a signature the server can check and nobody can forge. The note is readable, not secret, so it holds an id and never a password. Usernames and emails are unique, so login accepts either. Files: <code>server/routes/user.js</code>, <code>server/models/user.js</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-buy">Buy</span>The welcome quiz and the personalised shop</summary><div class="body">
     <p class="you">Two photo-tile questions, an account nudge, then a shop pre-filtered to your taste.</p>
-    <p class="how">Answers live in the browser (<code>localStorage</code>) and, once you have an account, also on your user row in the database, in a <code>preferences</code> column. On any login they're pulled back down, which is why a wiped browser still knows your decades. The browse page reads them as its starting filter. Files: <code>client/src/components/Welcome.jsx</code>, <code>client/src/onboarding.js</code>.</p>
+    <p class="how">Answers live in the browser (<code>localStorage</code>) and, if you sign up or log in from inside the quiz, also on your user row in the database, in a <code>preferences</code> column. On any later login they're pulled back down, which is why a wiped browser still knows your decades. The browse page reads them as its starting filter. Files: <code>client/src/components/Welcome.jsx</code>, <code>client/src/onboarding.js</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-buy">Buy</span>Search, chips and decade deep links</summary><div class="body">
@@ -165,17 +203,17 @@
 
   <details><summary><span class="pill p-trust">Trust</span>The Verified badge and the TRR guarantee</summary><div class="body">
     <p class="you">Verified items carry a teal tick and a guarantee box: evidence checked, full refund if it's not genuine.</p>
-    <p class="how">This is the shop's honest C2C story: we never touch the items. Sellers submit label, barcode or serial evidence; it's checked before the listing goes live; the badge means "you're covered", not "we inspected it in a studio". In code, it's simply a <code>status</code> field the <b>server controls</b>: new listings are always pending, and only verified ones can be bought, enforced at the API so no clever browser can bypass it. Files: <code>server/routes/item.js</code>, FAQ copy in <code>client/src/components/Faq.jsx</code>.</p>
+    <p class="how">This is the shop's honest C2C story: we never touch the items. Sellers submit label, barcode or serial evidence; it's checked before the listing goes live; the badge means "you're covered", not "we inspected it in a studio". In code, it's a <code>status</code> field the <b>server controls</b>: new listings are always pending, and only verified ones can be bought, enforced at the API so no clever browser can bypass it. Files: <code>server/routes/item.js</code>, FAQ copy in <code>client/src/components/Faq.jsx</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-trust">Trust</span>Condition labels</summary><div class="body">
     <p class="you">Every item states its condition: Tested &amp; working, Display only, or Wear consistent with age.</p>
-    <p class="how">One extra column on the item table with exactly three allowed values; the server rejects anything else. The 48 seeded items were labelled by reading each description: only genuinely untestable things (a sealed Tamagotchi, a boxed doll set, an untested Sega) got Display only. Sellers pick a label when listing; editing without picking changes nothing. Files: <code>server/models/item.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
+    <p class="how">One extra column on the item table. The API keeps the label only if it is one of the three known values and silently drops anything else, so a hand-crafted request can't invent a condition (the check lives in <code>server/routes/item.js</code>, on both create and edit). The 48 seeded items were labelled by reading each description: only genuinely untestable things got Display only, and there are exactly four (an untested Sega Genesis, mint boxed Beanie Babies, a sealed Tamagotchi, a boxed Bratz set). Sellers pick a label when listing; editing without picking changes nothing. Files: <code>server/routes/item.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-buy">Buy</span>Buying, exactly once</summary><div class="body">
     <p class="you">Buy now gives you a confirmation and an order reference; the item shows Sold everywhere immediately.</p>
-    <p class="how">The API refuses to sell what is unverified, already sold, or your own listing. The actual flip to "sold" is a single conditional database write: "set sold where this item is still verified". If two buyers race, the database lets exactly one through, and the loser gets a polite no. There's no payment: money is out of scope, the order reference stands in for it. Files: <code>server/routes/item.js</code> (the buy route), <code>client/src/components/Confirm.jsx</code>.</p>
+    <p class="how">The API refuses to sell what is unverified, already sold, or your own listing. The flip itself works like the last seat on a flight: two people click in the same second, both requests reach the database, and the write says "mark this sold <b>only if it is still verified</b>". The first request changes one row; the second changes zero rows, and zero is how the API knows to answer with a polite no. One conditional write is the entire defence against selling the same Walkman twice. There's no payment: money is out of scope, the order reference stands in for it. Files: <code>server/routes/item.js</code>, <code>client/src/components/Confirm.jsx</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-buy">Buy</span>Hearts and the Saved page</summary><div class="body">
@@ -185,7 +223,7 @@
 
   <details><summary><span class="pill p-sell">Sell</span>Listing with a photo</summary><div class="body">
     <p class="you">Fill the form, attach a photo, done: your item appears with its picture.</p>
-    <p class="how">The photo travels to the API, which checks it's genuinely an image type, caps it at 5MB, renames it randomly, and gives it an extension based on what it <b>is</b>, not what it was called (so a web page pretending to be a photo can't sneak in). The 48 seeded items use pre-shot photos matched by item code instead. Files: <code>server/utils/upload.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
+    <p class="how">The photo travels to the API, which accepts only image types, caps the size at 5MB, renames the file randomly, and derives the extension from the declared type rather than the filename, which blocks the easy trick of naming a web page "photo.png". Honest limit: the API trusts the type the browser declares rather than reading the file's actual bytes; byte-checking is on the next-steps list. The 48 seeded items use pre-shot photos matched by item code. Files: <code>server/utils/upload.js</code>, <code>client/src/components/ItemForm.jsx</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-sell">Sell</span>Ownership: edit, delete, relist</summary><div class="body">
@@ -195,7 +233,7 @@
 
   <details><summary><span class="pill p-sell">Sell</span>Seller shops</summary><div class="body">
     <p class="you">Tap a seller's name on any item and you get their whole shop: "16 relics listed".</p>
-    <p class="how">The page asks the API who the seller is (id and username only: emails are never exposed publicly) and filters the item list to theirs. Files: <code>client/src/components/SellerPage.jsx</code>, <code>server/routes/user.js</code>.</p>
+    <p class="how">The page asks the API who the seller is (id and username only: emails are never exposed to logged-out visitors) and filters the item list to theirs. Files: <code>client/src/components/SellerPage.jsx</code>, <code>server/routes/user.js</code>.</p>
   </div></details>
 
   <details><summary><span class="pill p-glue">Glue</span>The design system</summary><div class="body">
@@ -205,40 +243,54 @@
 
   <details><summary><span class="pill p-glue">Glue</span>Demo data and the reset button</summary><div class="body">
     <p class="you">The shop always has 48 believable items across 4 decades and 5 categories, with three ready-made users.</p>
-    <p class="how">A seed script wipes and rebuilds the database from JSON files: same 48 items, same photos, same three users (<code>vintage_vera</code>, <code>disco_dan</code>, <code>y2k_yasmin</code>, password <code>password123</code>) every time. If a demo ever goes sideways, <code>npm run seed</code> is a five-second undo for the whole world. Files: <code>server/seeds/</code>.</p>
+    <p class="how"><code>npm run seed</code> drops every table and rebuilds them in dependency order: 5 categories, then 3 users, then 48 items, because an item can't point at a seller who doesn't exist yet. Users are created one at a time on purpose: creating them in a batch races the password scrambler and shuffles their ids, which would silently hand every item to the wrong seller. Same 48 items, same photos, same three users (<code>vintage_vera</code>, <code>disco_dan</code>, <code>y2k_yasmin</code>, password <code>password123</code>) every run: a five-second undo for the whole world. Files: <code>server/seeds/</code>.</p>
   </div></details>
 </div></section>
 
 <section id="words"><div class="wrap">
-  <div class="kicker">Part 5</div>
+  <div class="kicker">Part 6</div>
   <h2>Six tech words, translated</h2>
   <div class="cards3" style="grid-template-columns:repeat(2,1fr)">
     <div class="box"><h3>API</h3><p>A program you talk to with requests instead of clicks. Ours answers at <code>localhost:3001</code> and every answer is data, not pages.</p></div>
-    <div class="box"><h3>Endpoint</h3><p>One address on the API for one job. <code>POST /api/items/2/buy</code> means "buy item 2". The site uses about twenty.</p></div>
-    <div class="box"><h3>Token (JWT)</h3><p>A tamper-proof note the API signs at login: "this is vera, for 2 hours". Sent with every request that needs to know who's asking.</p></div>
+    <div class="box"><h3>Endpoint</h3><p>One address on the API for one job. <code>POST /api/items/2/buy</code> means "buy item 2". The site uses two dozen.</p></div>
+    <div class="box"><h3>Token (JWT)</h3><p>A tamper-proof note the API signs at login: "this is user 1, for 2 hours". Sent with every request that needs to know who's asking. Readable but unforgeable, so it never carries a password.</p></div>
     <div class="box"><h3>localStorage</h3><p>A small notebook inside your browser. We keep the token, your session name, and your quiz answers there so refreshing doesn't forget you.</p></div>
-    <div class="box"><h3>Component</h3><p>A reusable piece of screen. The item card is one component used in five different places, which is why cards look identical everywhere.</p></div>
+    <div class="box"><h3>Component</h3><p>A reusable piece of screen. The item card is one component drawn on four screens (browse, item page, Saved, seller shops), and two more screens borrow its price and photo helpers.</p></div>
     <div class="box"><h3>Seed</h3><p>A script that fills an empty database with known starting data. Ours plants the 48 relics and 3 users, identically every run.</p></div>
   </div>
 </div></section>
 
-<section id="story"><div class="wrap">
-  <div class="kicker">Part 6</div>
-  <h2>Saying it out loud</h2>
-  <p class="lead">Five true sentences for the presentation, each backed by something in this page.</p>
-  <div class="say"><b>The pitch.</b> "Depop and eBay do scale; nobody does trust-for-old-things. We answer 'why not just eBay it?' with three layers: a money-back guarantee on authenticity, honest condition labels, and decade-first curation."</div>
-  <div class="say"><b>The shape.</b> "It's a classic three-part app: a React front end, an Express API that enforces every rule, and a MySQL database. The browser never touches the database directly."</div>
-  <div class="say"><b>The trust story.</b> "We stayed honest about being C2C: the Verified badge means the buyer is covered by evidence checks and refunds, not that we handled the item. The server enforces it: pending items literally cannot be bought."</div>
-  <div class="say"><b>The personal touch.</b> "First-time visitors answer two questions and the shop rearranges around them, like a mobile app onboarding. The answers live on the account, so they follow you across devices."</div>
-  <div class="say"><b>The build.</b> "We rebuilt from a half-migrated template: repaired the client-server contract, designed the brand as a token system, then shipped buying, selling, photo uploads, hearts and onboarding, each verified in a real browser before commit."</div>
-  <div class="numbers">
-    <div class="num"><b>48</b><span>relics</span></div>
-    <div class="num"><b>4</b><span>decades</span></div>
-    <div class="num"><b>5</b><span>categories</span></div>
-    <div class="num"><b>~20</b><span>endpoints</span></div>
-    <div class="num"><b>3</b><span>seeded users</span></div>
-    <div class="num"><b>2</b><span>build days</span></div>
-  </div>
+<section id="hard"><div class="wrap">
+  <div class="kicker">Part 7 · the defence layer</div>
+  <h2>If they ask the hard question</h2>
+  <p class="lead">Nine questions a sharp marker might ask, with the honest answers. Knowing the limits is what makes the rest credible.</p>
+
+  <div class="faq-item"><h3>"Who moves an item from pending to verified?"</h3>
+    <p>Nobody can, yet: verification is a staff action and this build has no staff role. The server creates every listing as pending, and only a reseed promotes anything. That was a deliberate cut: an admin role means a second user type, a queue screen and an audit trail, a bigger feature than buying itself. What we did build is the half that protects the buyer: the API refuses to sell a pending item no matter what the browser sends. The admin queue is first on the next-steps list.</p></div>
+
+  <div class="faq-item"><h3>"I just bought something. Where's the order? Does the seller know?"</h3>
+    <p>The sale is recorded as one fact: the item's status becomes sold, which is what stops anyone else buying it. There is no orders table, no buyer stored, and no email: the confirmation screen's "seller has been notified" shows what the product would do, not what the code does. The order reference is honestly just the item's own id dressed up. The first table I'd add tomorrow is <code>orders</code>: buyer, item, price paid, timestamp. That one table also buys order history and makes the reference real.</p></div>
+
+  <div class="faq-item"><h3>"What breaks at 50,000 items?"</h3>
+    <p>Loading everything. At 48 items, fetching the whole catalogue makes filtering instant, a feature. At fifty thousand it's the bug: browse, the item page, My Listings and seller shops each pull the full list, and search scans every row. The fixes are all standard and all server-side: paginate the list, move decade and category filters into the database query, add a per-seller query, and give search a proper text index.</p></div>
+
+  <div class="faq-item"><h3>"What's the weakest part of the design?"</h3>
+    <p>Three things, in honesty order. Trust is asserted, not administered: there's no one to do the verifying. A sale leaves no record beyond a flag. And server-side validation is thin: required fields are checked, but nothing stops a negative price. All three are top of the next-steps list, and none of them undermine what is enforced: ownership, uniqueness, the buy rules.</p></div>
+
+  <div class="faq-item"><h3>"What stops someone stealing the login token?"</h3>
+    <p>On localhost, nothing needs to. In production three things would change: the token would move from localStorage into a cookie scripts can't read, login would get rate limiting so passwords can't be guessed at network speed, and the server would refuse to start without its signing secret instead of falling back to a development one. Naming these is the point: the token design is standard, the hardening is deployment work we haven't needed yet.</p></div>
+
+  <div class="faq-item"><h3>"Why MySQL?"</h3>
+    <p>The data is rows all the way down: every item has the same fields, belongs to exactly one seller and one category, and a heart is nothing but a pair of ids. That's a relational shape. Buying also leans on the one thing relational databases are great at: a single conditional write that only lands if the row is still verified, which is what makes double-selling impossible. And it's the stack the whole team can read.</p></div>
+
+  <div class="faq-item"><h3>"What would you build next?"</h3>
+    <p>In order: the admin verification queue (unblocks the whole trust story), an orders table, server-side paging and filtering, real byte-level image checking, and automated tests around the buy route, because two users colliding there is the one thing clicking can't test. Then the fun one: Retro Curators, taste-maker shelves in the spirit of Steam Curators.</p></div>
+
+  <div class="faq-item"><h3>"Any automated tests?"</h3>
+    <p>No. We verified in a real browser, screenshotting each state before each commit, and the API's rules were exercised with direct requests. If I added tests I'd start with the buy route: the race between two simultaneous buyers is the one behaviour a human can't check by hand.</p></div>
+
+  <div class="faq-item"><h3>"Is it live?"</h3>
+    <p>Local only, by choice: presenting from localhost removes a whole category of demo risk. It's deployment-shaped though: the client reads its API address from one environment variable, so going live is a host for the API, a managed MySQL, and one seed run.</p></div>
 </div></section>
 
 <footer><div class="rule" style="margin:0"></div><div class="wrap">
