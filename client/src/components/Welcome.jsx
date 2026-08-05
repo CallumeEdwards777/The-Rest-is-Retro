@@ -5,12 +5,23 @@ import api from '../api';
 import { readOnboarding, saveOnboarding } from '../onboarding';
 
 // value = the era stored in the database; label = what the shopper reads.
+// pic = a real listing photo that reads instantly at thumbnail size.
 const ERAS = [
-  { value: '1970s', label: '’70s', blurb: 'Disco, denim, warm wood' },
-  { value: '1980s', label: '’80s', blurb: 'Neon, chrome, big sound' },
-  { value: '1990s', label: '’90s', blurb: 'Grunge, plastic, first tech' },
-  { value: '2000s', label: 'Y2K', blurb: 'Shine, flip phones, gadgets' },
+  { value: '1970s', label: '’70s', blurb: 'Disco, denim, warm wood', pic: 'TRR-70S-FUR-1003' },
+  { value: '1980s', label: '’80s', blurb: 'Neon, chrome, big sound', pic: 'TRR-80S-TOY-2005' },
+  { value: '1990s', label: '’90s', blurb: 'Grunge, plastic, first tech', pic: 'TRR-90S-ELE-3012' },
+  { value: '2000s', label: 'Y2K', blurb: 'Shine, flip phones, gadgets', pic: 'TRR-Y2K-CLO-4006' },
 ];
+
+// Categories come from the API, so the picture is looked up by name and
+// simply omitted if the team adds a category we have no photo for.
+const CATEGORY_PICS = {
+  Clothing: 'TRR-80S-CLO-2001',
+  Electronics: 'TRR-90S-ELE-3007',
+  Furniture: 'TRR-80S-FUR-2008',
+  'Vinyl & Music': 'TRR-70S-VIN-1004',
+  'Toys & Games': 'TRR-80S-TOY-2010',
+};
 
 const Welcome = () => {
   const navigate = useNavigate();
@@ -40,28 +51,26 @@ const Welcome = () => {
   const questions = [
     {
       title: 'Which decades speak to you?',
-      sub: 'Pick as many as you like — this shapes what you see first.',
       options: ERAS.map((e) => ({
         key: e.value,
         label: e.label,
         blurb: e.blurb,
+        pic: e.pic,
         on: eras.includes(e.value),
         toggle: () => toggle(setEras, e.value),
       })),
-      twoUp: true,
       chosen: eras.length,
     },
     {
       title: 'What do you hunt for?',
-      sub: 'We’ll put your kind of relics at the top.',
       options: categories.map((c) => ({
         key: c.id,
         label: c.category_name,
         blurb: null,
+        pic: CATEGORY_PICS[c.category_name],
         on: categoryIds.includes(c.id),
         toggle: () => toggle(setCategoryIds, c.id),
       })),
-      twoUp: false,
       chosen: categoryIds.length,
     },
   ];
@@ -84,9 +93,8 @@ const Welcome = () => {
         </div>
 
         <h1>{q.title}</h1>
-        <p className="q-sub">{q.sub}</p>
 
-        <div className={`opts ${q.twoUp ? 'two' : ''}`}>
+        <div className="opts">
           {q.options.map((o) => (
             <button
               key={o.key}
@@ -94,8 +102,11 @@ const Welcome = () => {
               className={`opt ${o.on ? 'on' : ''}`}
               onClick={o.toggle}
             >
-              <span className="opt-label">{o.label}</span>
-              {o.blurb && <span className="opt-blurb">{o.blurb}</span>}
+              {o.pic && <img src={`/item-images/${o.pic}.jpg`} alt="" />}
+              <span className="opt-text">
+                <span className="opt-label">{o.label}</span>
+                {o.blurb && <span className="opt-blurb">{o.blurb}</span>}
+              </span>
               <span className="opt-tick">✓</span>
             </button>
           ))}
