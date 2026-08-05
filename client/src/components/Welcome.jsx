@@ -7,10 +7,11 @@ import { readOnboarding, saveOnboarding } from '../onboarding';
 
 // value = the era stored in the database; label = what the shopper reads.
 const ERAS = [
-  { value: '1970s', label: '’70s', blurb: 'Disco, denim, warm wood' },
-  { value: '1980s', label: '’80s', blurb: 'Neon, chrome, big sound' },
-  { value: '1990s', label: '’90s', blurb: 'Grunge, plastic, first tech' },
-  { value: '2000s', label: 'Y2K', blurb: 'Shine, flip phones, gadgets' },
+  // blurbs name things actually visible in each photo
+  { value: '1970s', label: '’70s', blurb: 'Flares, shag pile, reel-to-reel' },
+  { value: '1980s', label: '’80s', blurb: 'Boomboxes, blazers, bold shapes' },
+  { value: '1990s', label: '’90s', blurb: 'Bombers, CD players, beige tech' },
+  { value: '2000s', label: 'Y2K', blurb: 'Metallics, iMacs, inflatables' },
 ];
 
 // Categories come from the API, so the picture is looked up by name and
