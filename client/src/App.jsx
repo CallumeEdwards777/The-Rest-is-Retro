@@ -11,6 +11,9 @@ import EditItem from './components/EditItem';
 import MyListings from './components/MyListings';
 import SavedItems from './components/SavedItems';
 import Confirm from './components/Confirm';
+import Faq from './components/Faq';
+import Verification from './components/Verification';
+import SellerPage from './components/SellerPage';
 
 import { SessionProvider } from './contexts/SessionContext';
 import { SavedProvider } from './contexts/SavedContext';
@@ -34,6 +37,9 @@ const App = () => {
             <Route path="/my-listings" element={<MyListings />} />
             <Route path="/saved" element={<SavedItems />} />
             <Route path="/confirm" element={<Confirm />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/verification" element={<Verification />} />
+            <Route path="/seller/:id" element={<SellerPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<h1>Not Found</h1>} />

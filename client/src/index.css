@@ -267,6 +267,7 @@ img { display: block; max-width: 100%; }
 .seller .avatar { width: 42px; height: 42px; }
 .seller .who { font-size: 14.5px; font-weight: 600; }
 .seller .sub { font-size: 12.5px; color: var(--muted); }
+.seller:hover .who { color: var(--orange); }
 .desc { margin-top: 26px; color: var(--ink); }
 .desc h2 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
 .facts { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; font-size: 14px; }
@@ -460,6 +461,12 @@ img { display: block; max-width: 100%; }
   .listing-row { flex-wrap: wrap; }
   .listing-status { margin-left: 0; }
 }
+
+/* ---------- faq / verification ---------- */
+.faq-item { max-width: 720px; padding: 22px 0; border-bottom: 1px dashed var(--line); }
+.faq-item h2 { font-family: var(--font-display); font-size: 22px; margin-bottom: 8px; }
+.faq-item p { color: var(--muted); line-height: 1.6; }
+.faq-item p + p { margin-top: 8px; }
 
 /* ---------- footer ---------- */
 .site-footer {

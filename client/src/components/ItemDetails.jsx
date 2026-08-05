@@ -101,13 +101,13 @@ const ItemDetails = () => {
           {buyError && <div className="form-error">{buyError}</div>}
 
           {seller && (
-            <div className="seller">
+            <Link to={'/seller/' + item.seller_id} className="seller">
               <div className="avatar">{getInitials(seller.username)}</div>
               <div>
                 <div className="who">{seller.username}</div>
                 <div className="sub">Seller on The Rest is Retro since 2026</div>
               </div>
-            </div>
+            </Link>
           )}
 
           {item.status === 'verified' && (
