@@ -478,5 +478,125 @@
     "era": "2000s",
     "price_cents": 5200,
     "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-COM-5001",
+    "seller_id": 1,
+    "category_id": 6,
+    "title": "Commodore VIC-20",
+    "description": "1980 Commodore VIC-20, fully functional, original power supply, works perfectly.",
+    "era": "1980s",
+    "price_cents": 24500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5002",
+    "seller_id": 2,
+    "category_id": 6,
+    "title": "Sinclair QL (Quantum Leap)",
+    "description": "1985 Sinclair QL computer, rare British computing machine, includes ROM cartridges.",
+    "era": "1980s",
+    "price_cents": 18900,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-COM-5003",
+    "seller_id": 3,
+    "category_id": 6,
+    "title": "Dragon 32",
+    "description": "1982 Dragon 32 home computer, includes power supply and controllers, great condition.",
+    "era": "1980s",
+    "price_cents": 15600,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5004",
+    "seller_id": 1,
+    "category_id": 6,
+    "title": "Sinclair ZX81",
+    "description": "1981 ZX81 personal computer, the first sub-£100 computer, includes cassette player.",
+    "era": "1980s",
+    "price_cents": 12800,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5005",
+    "seller_id": 2,
+    "category_id": 6,
+    "title": "DEC PDP-11",
+    "description": "Rare minicomputer from early 1980s, legendary in computing history, partially functional.",
+    "era": "1980s",
+    "price_cents": 45000,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-COM-5006",
+    "seller_id": 3,
+    "category_id": 6,
+    "title": "Sinclair ZX Spectrum",
+    "description": "1982 ZX Spectrum 48K, iconic British computer, includes original box and documentation.",
+    "era": "1980s",
+    "price_cents": 22000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5007",
+    "seller_id": 1,
+    "category_id": 6,
+    "title": "Commodore 64",
+    "description": "1982 Commodore 64, the best-selling computer of all time, works great, includes peripherals.",
+    "era": "1980s",
+    "price_cents": 28500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5008",
+    "seller_id": 2,
+    "category_id": 6,
+    "title": "BBC Model B",
+    "description": "1981 BBC Micro Model B, used in British schools, includes disk drive and monitor.",
+    "era": "1980s",
+    "price_cents": 32000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-90S-COM-5009",
+    "seller_id": 3,
+    "category_id": 6,
+    "title": "1995 Windows 95 PC",
+    "description": "Original Pentium-based PC from 1995, shipped with Windows 95, fully functional.",
+    "era": "1990s",
+    "price_cents": 19900,
+    "status": "pending_verification"
+  },
+  {
+    "item_id": "TRR-80S-COM-5010",
+    "seller_id": 1,
+    "category_id": 6,
+    "title": "Apple Macintosh",
+    "description": "1984 original Macintosh, 128K RAM, black and white screen, the computer for the rest of us.",
+    "era": "1980s",
+    "price_cents": 35000,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5011",
+    "seller_id": 2,
+    "category_id": 6,
+    "title": "Atari 800XL",
+    "description": "1982 Atari 800XL home computer, 64K RAM, includes joystick and game cartridges.",
+    "era": "1980s",
+    "price_cents": 16500,
+    "status": "verified"
+  },
+  {
+    "item_id": "TRR-80S-COM-5012",
+    "seller_id": 3,
+    "category_id": 6,
+    "title": "IBM PC XT",
+    "description": "1983 IBM PC XT, 256K RAM, dual 5.25 inch floppy drives, includes keyboard and monitor.",
+    "era": "1980s",
+    "price_cents": 29500,
+    "status": "pending_verification"
   }
 ]
