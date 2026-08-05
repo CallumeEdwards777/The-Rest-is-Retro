@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { API_BASE_URL } from '../api';
+import { useSaved } from '../contexts/SavedContext';
 
 export const eraLabel = (era) => (era === '2000s' ? 'Y2K' : era);
 
@@ -16,6 +17,15 @@ export const itemImage = (item) => {
 };
 
 const ItemCard = ({ item }) => {
+  const { savedIds, toggleSaved } = useSaved();
+  const saved = savedIds.includes(item.id);
+
+  const handleToggleSaved = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleSaved(item.id);
+  };
+
   return (
     <Link className={`card${item.status === 'sold' ? ' sold' : ''}`} to={`/item/${item.id}`}>
       <div className="imgbox">
@@ -26,6 +36,13 @@ const ItemCard = ({ item }) => {
         ) : (
           item.status === 'verified' && <span className="verified-dot">✓ Verified</span>
         )}
+        <button
+          className={`heart ${saved ? 'on' : ''}`}
+          onClick={handleToggleSaved}
+          aria-label="Save item"
+        >
+          {saved ? '♥' : '♡'}
+        </button>
       </div>
       <div className="meta">
         <div className="title">{item.title}</div>

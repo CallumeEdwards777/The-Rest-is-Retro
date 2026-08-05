@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
+import { useSaved } from '../contexts/SavedContext';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -9,10 +10,12 @@ const Header = () => {
   const [query, setQuery] = useState('');
 
   const { user, setUser } = useSession();
+  const { refreshSaved } = useSaved();
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     setUser({});
+    refreshSaved();
     navigate('/login');
   };
 
@@ -48,6 +51,7 @@ const Header = () => {
           {token ? (
             <>
               <Link to="/create-item">Sell an item</Link>
+              <Link to="/saved">Saved</Link>
               <Link to="/my-listings">My listings</Link>
               <span className="avatar" title={user.username}>{getInitials(user.username)}</span>
               <button className="btn btn-ghost btn-compact" onClick={handleLogout}>Log out</button>
