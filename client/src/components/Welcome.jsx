@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api';
 
+import AccountStep from './AccountStep';
 import { readOnboarding, saveOnboarding } from '../onboarding';
 
 // value = the era stored in the database; label = what the shopper reads.
@@ -75,8 +76,10 @@ const Welcome = () => {
     },
   ];
 
+  // Last panel is the account step, so there is one dot more than there are questions.
+  const accountStep = questions.length;
+  const onAccountStep = step === accountStep;
   const q = questions[step];
-  const isLast = step === questions.length - 1;
 
   return (
     <div className="auth-page">
@@ -87,48 +90,64 @@ const Welcome = () => {
         <p className="tagline">Two quick questions and your feed is ready.</p>
 
         <div className="dots">
-          {questions.map((_, i) => (
+          {[...questions, 'account'].map((_, i) => (
             <i key={i} className={i <= step ? 'on' : ''} />
           ))}
         </div>
 
-        <h1>{q.title}</h1>
+        {onAccountStep ? (
+          <>
+            <AccountStep onDone={() => finish({ eras, categoryIds })} />
+            <div className="quiz-nav">
+              <button className="btn btn-ghost" onClick={() => setStep(step - 1)}>
+                Back
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1>{q.title}</h1>
 
-        <div className="opts">
-          {q.options.map((o) => (
-            <button
-              key={o.key}
-              type="button"
-              className={`opt ${o.on ? 'on' : ''}`}
-              onClick={o.toggle}
-            >
-              {o.pic && <img src={`/item-images/${o.pic}.jpg`} alt="" />}
-              <span className="opt-text">
-                <span className="opt-label">{o.label}</span>
-                {o.blurb && <span className="opt-blurb">{o.blurb}</span>}
-              </span>
-              <span className="opt-tick">✓</span>
-            </button>
-          ))}
-        </div>
+            <div className="opts">
+              {q.options.map((o) => (
+                <button
+                  key={o.key}
+                  type="button"
+                  className={`opt ${o.on ? 'on' : ''}`}
+                  onClick={o.toggle}
+                >
+                  {o.pic && <img src={`/item-images/${o.pic}.jpg`} alt="" />}
+                  <span className="opt-text">
+                    <span className="opt-label">{o.label}</span>
+                    {o.blurb && <span className="opt-blurb">{o.blurb}</span>}
+                  </span>
+                  <span className="opt-tick">✓</span>
+                </button>
+              ))}
+            </div>
 
-        <div className="quiz-nav">
-          {step > 0 && (
-            <button className="btn btn-ghost" onClick={() => setStep(step - 1)}>
-              Back
-            </button>
-          )}
-          <button
-            className="btn btn-primary"
-            disabled={q.chosen === 0}
-            onClick={() => (isLast ? finish({ eras, categoryIds }) : setStep(step + 1))}
-          >
-            {isLast ? 'Show me my finds' : 'Next'}
-          </button>
-        </div>
+            <div className="quiz-nav">
+              {step > 0 && (
+                <button className="btn btn-ghost" onClick={() => setStep(step - 1)}>
+                  Back
+                </button>
+              )}
+              <button
+                className="btn btn-primary"
+                disabled={q.chosen === 0}
+                onClick={() => setStep(step + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
 
-        <button className="skip" onClick={() => finish({ eras: [], categoryIds: [] })}>
-          Skip for now
+        <button
+          className="skip"
+          onClick={() => finish(onAccountStep ? { eras, categoryIds } : { eras: [], categoryIds: [] })}
+        >
+          {onAccountStep ? 'Just browse for now' : 'Skip for now'}
         </button>
       </div>
     </div>
