@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom'
 
+import { API_BASE_URL } from '../api';
+
 export const eraLabel = (era) => (era === '2000s' ? 'Y2K' : era);
 
 export const formatPrice = (price) => `£${Number(price).toFixed(0)}`;
 
-// Uploaded photo wins; seeded items fall back to the item_id image convention
-export const itemImage = (item) => item.image_url || `/item-images/${item.item_id}.jpg`;
+// Uploaded photo wins; seeded items fall back to the item_id image convention.
+// Uploads are stored as a relative path and served by the API, not by Vite.
+export const itemImage = (item) => {
+  if (!item.image_url) return `/item-images/${item.item_id}.jpg`;
+  return item.image_url.startsWith('/uploads/')
+    ? `${API_BASE_URL}${item.image_url}`
+    : item.image_url;
+};
 
 const ItemCard = ({ item }) => {
   return (

@@ -28,16 +28,18 @@ const items = await Item.findAll({
 // Route to add a new item (multipart form; optional "image" file; seller = logged-in user)
 app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
   try {
-    const { item_id, category_id, title, description, era, price, currency, status } = req.body;
+    const { category_id, title, description, era, price, currency } = req.body;
 
     if (!title || !description || !era || !price) {
       return res.status(400).json({ message: "Missing required fields: title, description, era, price" });
     }
 
-    const image_url = req.file ? `http://${req.get("host")}/uploads/${req.file.filename}` : null;
+    // relative, so the photo still loads when the site is opened from another
+    // device or a real domain rather than whatever host uploaded it
+    const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 
     const item = await Item.create({
-      item_id: item_id || `TRR-NEW-${Date.now()}`,
+      item_id: `TRR-NEW-${Date.now()}`,
       seller_id: req.user.id,
       category_id,
       title,
@@ -45,7 +47,8 @@ app.post("/", authMiddleware, upload.single("image"), async (req, res) => {
       era,
       price,
       currency: currency || "GBP",
-      status: status || "pending_verification",
+      // "verified" is the shop's trust badge, never the seller's to award
+      status: "pending_verification",
       image_url,
     });
 
@@ -89,6 +92,9 @@ app.post("/:id/buy", authMiddleware, async (req, res) => {
     if (item.status === "sold") {
       return res.status(400).json({ message: "This item has already been sold" });
     }
+    if (String(item.seller_id) === String(req.user.id)) {
+      return res.status(400).json({ message: "You can't buy your own listing" });
+    }
 
     item.status = "sold";
     await item.save();
@@ -117,11 +123,11 @@ app.put("/:id", authMiddleware, upload.single("image"), async (req, res) => {
       return res.status(403).json({ message: "You can only edit your own listings" });
     }
 
-    const { category_id, title, description, era, price, currency, status } = req.body;
-    const updateData = { category_id, title, description, era, price, currency, status };
+    const { category_id, title, description, era, price, currency } = req.body;
+    const updateData = { category_id, title, description, era, price, currency };
 
     if (req.file) {
-      updateData.image_url = `http://${req.get("host")}/uploads/${req.file.filename}`;
+      updateData.image_url = `/uploads/${req.file.filename}`;
     }
 
     await Item.update(updateData, { where: { id: req.params.id } });

@@ -40,11 +40,12 @@ router.put("/me/preferences", authMiddleware, async (req, res) => {
   }
 });
 
+// Public lookup used by the item page to name the seller — id and username
+// only, so an anonymous visitor can't walk the ids and harvest emails.
 router.get("/:id", async (req, res) => {
-  console.log("looking for user", req.params.id);
   try {
     const userData = await User.findByPk(req.params.id, {
-      attributes: SAFE_USER_ATTRIBUTES,
+      attributes: ["id", "username"],
     });
 
     if (!userData) {
@@ -81,9 +82,21 @@ router.post("/", async (req, res) => {
 });
 
 
-router.put("/:id", async (req, res) => {
+// Only the account holder may edit their own account, and only these fields —
+// passing req.body straight through would let anyone rewrite any user, and a
+// password written this way skips the hashing hook and lands in plain text.
+router.put("/:id", authMiddleware, async (req, res) => {
   try {
-    const userData = await User.update(req.body, {
+    if (String(req.user.id) !== String(req.params.id)) {
+      return res.status(403).json({ message: "You can only edit your own account" });
+    }
+
+    const { username, email } = req.body;
+    const updates = {};
+    if (username !== undefined) updates.username = username;
+    if (email !== undefined) updates.email = email;
+
+    const userData = await User.update(updates, {
       where: {
         id: req.params.id,
       },

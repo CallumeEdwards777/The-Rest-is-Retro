@@ -54,7 +54,9 @@ const ItemList = () => {
   const matchesCategory = (item) =>
     pickedCategories.length === 0 || pickedCategories.includes(item.category_id);
 
-  const visibleItems = items.filter(matchesEra).filter(matchesCategory);
+  // A search searches the whole shop — hiding results behind the quiz answers
+  // would report "nothing found" for items that plainly exist.
+  const visibleItems = query ? items : items.filter(matchesEra).filter(matchesCategory);
   const countFor = (e) => items.filter(matchesCategory).filter((item) => item.era === e).length;
   const countForCategory = (id) =>
     items.filter(matchesEra).filter((item) => item.category_id === id).length;
@@ -79,7 +81,7 @@ const ItemList = () => {
             </h1>
             <p>Curated vintage sold by decade, not by drawer. Every listing checked and verified before it goes live.</p>
           </div>
-          <div className="stamp">Est. 2026 · London<br />{items.length || 48} relics in stock</div>
+          <div className="stamp">Est. 2026 · London<br />{items.length} relics in stock</div>
         </div>
       </section>
 

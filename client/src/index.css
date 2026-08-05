@@ -243,6 +243,7 @@ img { display: block; max-width: 100%; }
 .quiz .q-lead { text-align: center; color: var(--muted); font-size: 14.5px; margin-top: 8px; }
 .quiz .tabs { margin: 22px 0 4px; }
 .quiz label { margin-top: 14px; }
+.quiz label .req { font-weight: 400; color: var(--muted); }
 .opts { display: grid; gap: 10px; margin-top: 22px; }
 .opt {
   position: relative; text-align: left; cursor: pointer;

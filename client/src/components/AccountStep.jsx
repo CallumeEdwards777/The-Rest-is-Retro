@@ -35,10 +35,15 @@ const AccountStep = ({ picks, onDone }) => {
       onDone();
     } catch (err) {
       console.error(`${mode} failed`, err);
+      // Sequelize validation errors come back under `errors`, not `message`,
+      // so without this a short password gets reported as a taken username.
+      const data = err.response?.data;
       setError(
-        isSignup
-          ? 'That username or email is already taken.'
-          : err.response?.data?.message || 'Check your details and try again.',
+        data?.errors?.[0]?.message ||
+          data?.message ||
+          (isSignup
+            ? 'That username or email is already taken.'
+            : 'Check your details and try again.'),
       );
       setBusy(false);
     }
@@ -82,12 +87,13 @@ const AccountStep = ({ picks, onDone }) => {
         </>
       )}
 
-      <label htmlFor="acc-password">Password</label>
+      <label htmlFor="acc-password">Password{isSignup && <span className="req"> — at least 8 characters</span>}</label>
       <input
         id="acc-password"
         type="password"
         placeholder="••••••••••"
         autoComplete={isSignup ? 'new-password' : 'current-password'}
+        minLength={isSignup ? 8 : undefined}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required

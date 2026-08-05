@@ -150,7 +150,7 @@ const Welcome = () => {
 
         <button
           className="skip"
-          onClick={() => finish(onAccountStep ? { eras, categoryIds } : { eras: [], categoryIds: [] })}
+          onClick={() => finish(step === 0 ? { eras: [], categoryIds: [] } : { eras, categoryIds })}
         >
           {onAccountStep ? 'Just browse for now' : 'Skip for now'}
         </button>

@@ -50,7 +50,13 @@ const Signup = () => {
       navigate('/');
     } catch (err) {
       console.error('Signup failed', err);
-      displayError('Signup failed — that username or email may already be taken.');
+      // Sequelize validation errors arrive under `errors`, not `message`
+      const data = err.response?.data;
+      displayError(
+        data?.errors?.[0]?.message ||
+          data?.message ||
+          'Signup failed — that username or email may already be taken.',
+      );
     }
   };
 
@@ -91,6 +97,7 @@ const Signup = () => {
           id="password"
           type="password"
           placeholder="••••••••••"
+          minLength={8}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
