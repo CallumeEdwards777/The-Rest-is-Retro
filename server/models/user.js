@@ -33,6 +33,11 @@ User.init(
         len: [8],
       },
     },
+    // onboarding quiz answers as JSON, so picks follow the account across devices
+    preferences: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     hooks: {

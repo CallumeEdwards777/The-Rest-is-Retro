@@ -3,6 +3,7 @@ import api from '../api';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSession } from '../contexts/SessionContext';
+import { pullPreferences } from '../onboarding';
 
 const Login = () => {
   const [login, setLogin] = useState('');
@@ -26,6 +27,9 @@ const Login = () => {
         username: data.userData.username,
         id: data.userData.id,
       });
+
+      // bring this account's saved decade/category picks into the browser
+      await pullPreferences(api);
 
       navigate('/');
     } catch (err) {

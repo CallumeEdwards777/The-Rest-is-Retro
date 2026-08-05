@@ -7,11 +7,11 @@ import { readOnboarding, saveOnboarding } from '../onboarding';
 
 // value = the era stored in the database; label = what the shopper reads.
 const ERAS = [
-  // blurbs name things actually visible in each photo
-  { value: '1970s', label: '’70s', blurb: 'Flares, shag pile, reel-to-reel' },
-  { value: '1980s', label: '’80s', blurb: 'Boomboxes, blazers, bold shapes' },
-  { value: '1990s', label: '’90s', blurb: 'Bombers, CD players, beige tech' },
-  { value: '2000s', label: 'Y2K', blurb: 'Metallics, iMacs, inflatables' },
+  // blurbs name things visible in each photo that the shop actually sells
+  { value: '1970s', label: '’70s', blurb: 'Flares, vinyl, turntables' },
+  { value: '1980s', label: '’80s', blurb: 'Boomboxes, blazers, high-tops' },
+  { value: '1990s', label: '’90s', blurb: 'Bombers, CD players, beige PCs' },
+  { value: '2000s', label: 'Y2K', blurb: 'Metallics, iMacs, low-rise jeans' },
 ];
 
 // Categories come from the API, so the picture is looked up by name and
@@ -99,7 +99,10 @@ const Welcome = () => {
 
         {onAccountStep ? (
           <>
-            <AccountStep onDone={() => finish({ eras, categoryIds })} />
+            <AccountStep
+              picks={{ eras, categoryIds }}
+              onDone={() => finish({ eras, categoryIds })}
+            />
             <div className="quiz-nav">
               <button className="btn btn-ghost" onClick={() => setStep(step - 1)}>
                 Back

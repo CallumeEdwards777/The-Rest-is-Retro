@@ -2,10 +2,11 @@ import { useState } from 'react';
 import api from '../api';
 
 import { useSession } from '../contexts/SessionContext';
+import { pushPreferences } from '../onboarding';
 
 // Final panel of the welcome quiz: turn the answers into an account.
 // onDone() runs after a successful signup/login and stores the picks.
-const AccountStep = ({ onDone }) => {
+const AccountStep = ({ picks, onDone }) => {
   const { setUser } = useSession();
 
   const [mode, setMode] = useState('signup');
@@ -30,6 +31,7 @@ const AccountStep = ({ onDone }) => {
       const data = response.data;
       localStorage.setItem('authToken', data.token);
       setUser({ username: data.userData.username, id: data.userData.id });
+      await pushPreferences(api, picks);
       onDone();
     } catch (err) {
       console.error(`${mode} failed`, err);

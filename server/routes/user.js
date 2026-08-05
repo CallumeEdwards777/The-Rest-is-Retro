@@ -18,6 +18,28 @@ router.get("/me", authMiddleware, async (req, res) => {
 });
 
 
+// Store the welcome-quiz answers on the signed-in account.
+router.put("/me/preferences", authMiddleware, async (req, res) => {
+  try {
+    const { eras, categoryIds } = req.body;
+
+    if (!Array.isArray(eras) || !Array.isArray(categoryIds)) {
+      return res
+        .status(400)
+        .json({ message: "eras and categoryIds must both be arrays" });
+    }
+
+    await User.update(
+      { preferences: JSON.stringify({ eras, categoryIds }) },
+      { where: { id: req.user.id } }
+    );
+
+    return res.status(200).json({ eras, categoryIds });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   console.log("looking for user", req.params.id);
   try {
