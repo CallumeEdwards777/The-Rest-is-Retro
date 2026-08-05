@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 .playwright-cli/
 .shots/
+# browser-test screenshots, never part of the app
+/*.png
+/server/*.png
