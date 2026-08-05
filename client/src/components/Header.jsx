@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSession } from "../contexts/SessionContext";
 import { useSaved } from "../contexts/SavedContext";
 
+import wordmark from "../assets/wordmark.png";
+import badge from "../assets/badge.png";
+
 const Header = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
@@ -34,8 +37,8 @@ const Header = () => {
     <header className="site-header">
       <div className="wrap">
         <Link to="/" className="logo">
-          The <span className="rest">Rest</span> is{" "}
-          <span className="retro">Retro</span>
+          <img className="logo-word" src={wordmark} alt="The Rest is Retro" />
+          <img className="logo-badge" src={badge} alt="The Rest is Retro" />
         </Link>
 
         <div className="search">
