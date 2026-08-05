@@ -75,6 +75,12 @@ img { display: block; max-width: 100%; }
   font-size: 12.5px; font-weight: 700;
 }
 @media (max-width: 900px) { .search { display: none; } }
+/* logged-in nav (sell / listings / avatar / log out) is wider than a phone:
+   let the header run to a second row instead of pushing the page sideways */
+@media (max-width: 560px) {
+  .site-header .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; padding-bottom: 10px; gap: 10px; }
+  .nav { margin-left: 0; width: 100%; justify-content: space-between; gap: 12px; font-size: 13.5px; }
+}
 
 /* ---------- buttons ---------- */
 .btn {

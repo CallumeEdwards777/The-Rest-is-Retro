@@ -4,14 +4,18 @@ import api from '../api';
 
 import ItemCard from './ItemCard';
 import { eraLabel } from './ItemCard';
+import { readOnboarding } from '../onboarding';
 
 const ERAS = ['1970s', '1980s', '1990s', '2000s'];
 
 const ItemList = () => {
+  // Answers from the welcome quiz become the starting filters. Empty = show everything.
+  const prefs = readOnboarding();
+
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [era, setEra] = useState('all');
-  const [category, setCategory] = useState('all');
+  const [pickedEras, setPickedEras] = useState(prefs?.eras || []);
+  const [pickedCategories, setPickedCategories] = useState(prefs?.categoryIds || []);
   const [requiresLogin, setRequiresLogin] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -46,19 +50,33 @@ const ItemList = () => {
       .catch((error) => console.error('Failed to fetch categories', error));
   }, []);
 
-  const visibleItems = items
-    .filter((item) => era === 'all' || item.era === era)
-    .filter((item) => category === 'all' || item.category_id === category);
-  const countFor = (e) => items.filter((item) => item.era === e).length;
+  const matchesEra = (item) => pickedEras.length === 0 || pickedEras.includes(item.era);
+  const matchesCategory = (item) =>
+    pickedCategories.length === 0 || pickedCategories.includes(item.category_id);
+
+  const visibleItems = items.filter(matchesEra).filter(matchesCategory);
+  const countFor = (e) => items.filter(matchesCategory).filter((item) => item.era === e).length;
   const countForCategory = (id) =>
-    items.filter((item) => (era === 'all' || item.era === era) && item.category_id === id).length;
+    items.filter(matchesEra).filter((item) => item.category_id === id).length;
+
+  const toggle = (setList, value) => {
+    setList((prev) => (prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]));
+  };
+
+  const personalised = pickedEras.length > 0 || pickedCategories.length > 0;
 
   return (
     <>
       <section className="hero">
         <div className="wrap row">
           <div>
-            <h1>Every era,<br /><span className="alt">still for sale.</span></h1>
+            <h1>
+              {personalised ? (
+                <>Your favourites,<br /><span className="alt">back on sale.</span></>
+              ) : (
+                <>Every era,<br /><span className="alt">still for sale.</span></>
+              )}
+            </h1>
             <p>Curated vintage sold by decade, not by drawer. Every listing checked and verified before it goes live.</p>
           </div>
           <div className="stamp">Est. 2026 · London<br />{items.length || 48} relics in stock</div>
@@ -75,16 +93,16 @@ const ItemList = () => {
             <div className="toolbar">
               <div className="chips">
                 <button
-                  className={`chip ${era === 'all' ? 'active' : ''}`}
-                  onClick={() => setEra('all')}
+                  className={`chip ${pickedEras.length === 0 ? 'active' : ''}`}
+                  onClick={() => setPickedEras([])}
                 >
-                  All decades <span className="count">{items.length}</span>
+                  All decades <span className="count">{items.filter(matchesCategory).length}</span>
                 </button>
                 {ERAS.map((e) => (
                   <button
                     key={e}
-                    className={`chip ${era === e ? 'active' : ''}`}
-                    onClick={() => setEra(e)}
+                    className={`chip ${pickedEras.includes(e) ? 'active' : ''}`}
+                    onClick={() => toggle(setPickedEras, e)}
                   >
                     {e === '2000s' ? 'Y2K' : `’${e.slice(2, 4)}s`} <span className="count">{countFor(e)}</span>
                   </button>
@@ -95,16 +113,16 @@ const ItemList = () => {
 
             <div className="chips chips-sub">
               <button
-                className={`chip chip-small ${category === 'all' ? 'active' : ''}`}
-                onClick={() => setCategory('all')}
+                className={`chip chip-small ${pickedCategories.length === 0 ? 'active' : ''}`}
+                onClick={() => setPickedCategories([])}
               >
                 All categories
               </button>
               {categories.map((c) => (
                 <button
                   key={c.id}
-                  className={`chip chip-small ${category === c.id ? 'active' : ''}`}
-                  onClick={() => setCategory(category === c.id ? 'all' : c.id)}
+                  className={`chip chip-small ${pickedCategories.includes(c.id) ? 'active' : ''}`}
+                  onClick={() => toggle(setPickedCategories, c.id)}
                 >
                   {c.category_name} <span className="count">{countForCategory(c.id)}</span>
                 </button>
