@@ -1,4 +1,13 @@
+import { useEffect } from 'react';
+
 const Faq = () => {
+  // React Router doesn't scroll to #anchors — do it on mount
+  useEffect(() => {
+    if (window.location.hash === '#contact') {
+      document.getElementById('contact')?.scrollIntoView({ block: 'start' });
+    }
+  }, []);
+
   return (
     <main className="wrap listings-page">
       <h1 className="page-title">Questions, answered</h1>
